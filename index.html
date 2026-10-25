@@ -1,0 +1,1023 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Engineering Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one continuous dark page. The background is a horizon: the colour is identical across the full width and changes only top to bottom. Its hue drifts with scroll progress inside each project (and the glow rises as you go), then blends into the next project's colour between sections. Projects 1 and 2 are long chapter-by-chapter build logs with a sticky progress rail. Every row of boxes spans the full column width. */
+:root {
+  color-scheme: dark;
+  --fg: #eeedf4;
+  --muted: #bcbac9;
+  --faint: #9d9bad;
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-line: rgba(255, 255, 255, 0.14);
+  --bar: rgba(6, 6, 10, 0.66);
+  --accent: #eeedf4;
+  --base: 0 0 0;
+  --g1: 34 50 78;
+  --g2: 18 28 46;
+  --hz: 72%;
+  --font-display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  background: #000;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 0;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bar); z-index: 30; }
+.sky {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg,
+    rgb(var(--base)) 0%,
+    rgb(var(--base)) calc(var(--hz) - 36%),
+    rgb(var(--g2) / 0.55) var(--hz),
+    rgb(var(--g1) / 0.55) 100%);
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; margin: 0; line-height: 1.08; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visible, video:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* sticky bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bar); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--glass-line); }
+.top .inner { max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding: 10px 0; }
+.top .who { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin-right: auto; }
+.top nav { display: flex; flex-wrap: wrap; gap: 0 20px; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 14px; padding: 6px 0; border-bottom: 2px solid transparent; }
+.top nav a:hover { color: var(--fg); }
+.top nav a[aria-current="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+
+.sec { padding-block: 88px 40px; }
+.gap { height: 140px; }
+.s-home { --accent: #eeedf4; }
+.s-p1 { --accent: #cdb4ff; }
+.s-p2 { --accent: #9fcbff; }
+.s-p3 { --accent: #92f0c6; }
+.s-about { --accent: #eeedf4; }
+
+.eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); }
+.pill { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 11px; border-radius: 999px; border: 1px solid var(--glass-line); color: var(--fg); background: var(--glass); white-space: nowrap; }
+.pill.live { color: var(--accent); border-color: var(--accent); }
+
+/* home */
+.s-home h1 { font-size: clamp(38px, 6.4vw, 66px); margin-top: 14px; max-width: 17ch; }
+.s-home .lede { font-size: 19px; color: var(--muted); max-width: 54ch; margin-top: 22px; }
+.index { margin-top: 56px; border-top: 1px solid var(--glass-line); }
+.index a { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--glass-line); color: var(--fg); text-decoration: none; }
+.index a:hover .t { color: var(--c); }
+.index .n { font-family: var(--font-mono); font-size: 13px; color: var(--faint); }
+.index .t { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+.index .d { grid-column: 2; color: var(--muted); font-size: 15px; }
+.index .pill { grid-column: 3; grid-row: 1; }
+.index a:nth-child(1) { --c: #cdb4ff; }
+.index a:nth-child(2) { --c: #9fcbff; }
+.index a:nth-child(3) { --c: #92f0c6; }
+
+/* project heads */
+.head h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
+.head .sub { color: var(--muted); font-size: 18px; max-width: 62ch; margin-top: 16px; }
+.head .pill { margin-left: 12px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px 28px; margin: 36px 0 0; padding: 20px 0; border-block: 1px solid var(--glass-line); }
+.facts dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
+.facts dd { margin: 4px 0 0; font-size: 15px; }
+
+.label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin: 48px 0 16px; }
+
+/* equal-width boxes: every row fills the full column, whatever the count */
+.row { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.row.first { margin-top: 0; }
+.panel, .callout { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 18px 20px; width: 100%; }
+.panel h4, .callout b { font-family: var(--font-display); font-size: 17px; margin: 0 0 10px; display: block; font-weight: 700; }
+.panel p, .callout p { color: var(--muted); }
+.callout { margin-top: 24px; }
+.slot { margin: 0; display: grid; place-items: center; text-align: center; aspect-ratio: 4 / 3; width: 100%; border: 1px solid var(--glass-line); border-radius: 10px; background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); color: var(--faint); font-size: 14px; padding: 16px; }
+.slot.wide { aspect-ratio: 16 / 9; }
+.slot span { max-width: 36ch; }
+.figure { margin: 24px 0 0; width: 100%; }
+.figure figcaption { font-size: 14px; color: var(--faint); margin-top: 8px; }
+.diagram { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 16px; width: 100%; }
+.diagram svg { display: block; width: 100%; height: auto; max-height: 300px; }
+.diagram .ln { stroke: var(--fg); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.diagram .rail-l { stroke: var(--accent); fill: none; stroke-width: 2.6; stroke-linecap: round; }
+.diagram .dash { stroke: var(--faint); fill: none; stroke-width: 1.2; stroke-dasharray: 4 5; stroke-linecap: round; }
+.diagram .mag { fill: var(--accent); }
+.diagram .tray { fill: rgba(255, 255, 255, 0.05); }
+.diagram text { font-family: var(--font-body); font-size: 14px; fill: var(--muted); }
+.video { display: block; width: 100%; aspect-ratio: 2550 / 1238; border: 1px solid var(--glass-line); border-radius: 10px; background: #05050a; }
+
+.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--muted); }
+.list li { padding-left: 18px; position: relative; }
+.list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 1px; background: var(--accent); }
+.reqs { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; color: var(--muted); }
+.reqs li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; }
+.reqs .id { font-family: var(--font-mono); font-size: 12px; color: var(--accent); padding-top: .25em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li { font-family: var(--font-mono); font-size: 13px; padding: 4px 12px; border: 1px solid var(--glass-line); border-radius: 999px; color: var(--muted); background: var(--glass); }
+.links-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+
+.code { font-family: var(--font-mono); font-size: 13px; line-height: 1.6; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--glass-line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; white-space: pre; color: var(--fg); margin: 0; width: 100%; }
+.code .c { color: var(--faint); }
+.specs { width: 100%; border-collapse: collapse; font-size: 15px; }
+.specs th, .specs td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--glass-line); font-weight: 400; vertical-align: top; }
+.specs th { color: var(--faint); width: 34%; padding-right: 16px; }
+.specs td { color: var(--muted); }
+.scroll-x { overflow-x: auto; width: 100%; }
+
+/* chapters */
+.chapters { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 56px; margin-top: 56px; }
+.rail { position: sticky; top: 96px; align-self: start; font-size: 14px; }
+.rail .rt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px; }
+.rail ol { list-style: none; margin: 0; padding: 0 0 0 20px; display: grid; gap: 12px; border-left: 1px solid var(--glass-line); }
+.rail li { position: relative; }
+.rail li::before { content: ""; position: absolute; left: -24px; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: #0b0b10; border: 1px solid var(--glass-line); }
+.rail li.done::before { background: var(--accent); border-color: var(--accent); }
+.rail li.active::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12); }
+.rail a { color: var(--faint); text-decoration: none; display: block; line-height: 1.35; }
+.rail li.done a { color: var(--muted); }
+.rail li.active a { color: var(--fg); font-weight: 500; }
+.chapter { padding-top: 8px; margin-top: 88px; scroll-margin-top: 88px; min-width: 0; }
+.chapter:first-child { margin-top: 0; }
+.chapter > h3 { font-size: clamp(26px, 3.6vw, 36px); margin: 10px 0 18px; }
+.chapter .lead { color: var(--muted); font-size: 18px; max-width: 62ch; }
+
+.bom { margin-top: 24px; border-top: 1px solid var(--glass-line); width: 100%; }
+.bom .brow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 20px; padding: 14px 0; border-bottom: 1px solid var(--glass-line); }
+.bom .nm { font-weight: 500; }
+.bom .nt { color: var(--faint); font-size: 14px; grid-column: 1; }
+.bom .cost { font-family: var(--font-mono); font-size: 15px; grid-column: 2; grid-row: 1; text-align: right; }
+.bom .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.08); margin-top: 8px; overflow: hidden; }
+.bom .bar i { display: block; height: 100%; background: var(--accent); border-radius: 2px; }
+.bom .src { font-size: 13px; }
+.bom .total { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+
+.log { list-style: none; margin: 0; padding: 0; position: relative; }
+.log::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; border-left: 1px solid var(--glass-line); }
+.step { position: relative; padding: 0 0 26px 44px; }
+.step:last-child { padding-bottom: 0; }
+.dot { position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--glass-line); background: #0b0b10; display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+.step.done .dot { background: var(--accent); border-color: var(--accent); color: #0b0b10; }
+.step.now .dot { border: 2px solid var(--accent); color: var(--accent); box-shadow: 0 0 0 4px rgba(255,255,255,0.1); }
+.step h3 { font-size: 19px; }
+.step p { margin-top: 5px; color: var(--muted); max-width: 62ch; }
+.step.next h3 { color: var(--muted); }
+.step.next p { color: var(--faint); }
+
+.next { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--glass-line); font-size: 15px; }
+.next a { text-decoration: none; }
+.next a:hover { text-decoration: underline; }
+
+/* about */
+.s-about h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
+.about-text { display: grid; gap: 16px; margin-top: 24px; max-width: 60ch; color: var(--muted); font-size: 18px; }
+.gallery { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; margin-top: 40px; }
+.gallery .slot { flex: 0 0 min(78%, 420px); aspect-ratio: 4 / 5; scroll-snap-align: start; width: auto; }
+.gallery .slot.w { flex-basis: min(88%, 560px); aspect-ratio: 16 / 10; }
+footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(--glass-line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 960px) {
+  .chapters { grid-template-columns: minmax(0, 1fr); }
+  .rail { display: none; }
+}
+@media (max-width: 720px) {
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .row.keep2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .sec { padding-top: 64px; }
+  .gap { height: 100px; }
+  .chapter { margin-top: 64px; }
+  .index a { grid-template-columns: 34px minmax(0, 1fr); }
+  .index .pill { grid-column: 2; grid-row: 2; justify-self: start; margin: 6px 0; }
+  .index .d { grid-row: 3; }
+  .head .pill { margin: 8px 0 0; display: table; }
+  .step { padding-left: 38px; }
+  .top .who { width: 100%; }
+  .specs th { width: 42%; }
+}
+</style>
+
+<div class="sky" id="sky" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="inner">
+      <span class="who">Amir Rahmani</span>
+      <nav aria-label="Sections">
+        <a href="#home" data-nav="home">Overview</a>
+        <a href="#razr" data-nav="razr">Slide Razr</a>
+        <a href="#beamng" data-nav="beamng">BeamNG Map</a>
+        <a href="#project3" data-nav="project3">Project 3</a>
+        <a href="#about" data-nav="about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section class="sec s-home" id="home" data-section data-pal="0">
+      <span class="eyebrow">Engineering portfolio</span>
+      <h1>Engineering projects, from first idea to current status.</h1>
+      <p class="lede">A mix of finished and in-progress work. Each project shows the requirements, how they were approached, and what comes next. Scroll to read them in order or jump to one below.</p>
+      <div class="index">
+        <a href="#razr"><span class="n">01</span><span class="t">Slide Razr with Keyboard</span><span class="pill live">In progress</span><span class="d">A slide-out phone with a BlackBerry keyboard, built on a donor Motorola Razr.</span></a>
+        <a href="#beamng"><span class="n">02</span><span class="t">BeamNG Map and Driver-in-the-Loop</span><span class="pill live">In progress</span><span class="d">A custom driving simulation map, built toward a driver-in-the-loop test setup.</span></a>
+        <a href="#project3"><span class="n">03</span><span class="t">Project 3</span><span class="pill">Coming soon</span><span class="d">Third project to be added.</span></a>
+      </div>
+    </section>
+
+    <div class="gap" aria-hidden="true"></div>
+
+    <!-- PROJECT 1 -->
+    <section class="sec s-p1" id="razr" data-section data-pal="1">
+      <div class="head">
+        <span class="eyebrow">Project 01</span><span class="pill live">In progress</span>
+        <h2>Slide Razr with Keyboard</h2>
+        <p class="sub">A modern phone with a BlackBerry Q10 keyboard that slides out, built on a donor Motorola Razr Plus. The page follows the build in order, from the first sketches to requirements, parts, software and the body design.</p>
+      </div>
+
+      <div class="label">Initial designs</div>
+      <div class="row first" style="--n:2">
+        <figure class="slot"><span>Sketch page to add: initial design, from the BOOX notes</span></figure>
+        <figure class="slot"><span>Sketch page to add: initial design, from the BOOX notes</span></figure>
+      </div>
+
+      <dl class="facts">
+        <div><dt>Donor phone</dt><dd>Motorola RAZR Plus 5G (2025), bought with a broken inner screen</dd></div>
+        <div><dt>Keyboard</dt><dd>BlackBerry Q10</dd></div>
+        <div><dt>Parts cost so far</dt><dd>$135.80</dd></div>
+        <div><dt>Status</dt><dd>Body design V3 in progress</dd></div>
+      </dl>
+
+      <div class="chapters">
+        <aside class="rail" aria-label="Project 1 chapters">
+          <div class="rt">Process</div>
+          <ol>
+            <li data-rail="c1-idea"><a href="#c1-idea">The idea</a></li>
+            <li data-rail="c1-req"><a href="#c1-req">Requirements</a></li>
+            <li data-rail="c1-mule"><a href="#c1-mule">The donor phone</a></li>
+            <li data-rail="c1-teardown"><a href="#c1-teardown">Teardown</a></li>
+            <li data-rail="c1-software"><a href="#c1-software">Outer screen software</a></li>
+            <li data-rail="c1-body"><a href="#c1-body">Body design</a></li>
+            <li data-rail="c1-parts"><a href="#c1-parts">Parts and cost</a></li>
+            <li data-rail="c1-recovery"><a href="#c1-recovery">Recovery and references</a></li>
+            <li data-rail="c1-next"><a href="#c1-next">What is next</a></li>
+          </ol>
+        </aside>
+
+        <div class="content">
+          <article class="chapter" id="c1-idea" data-chapter>
+            <span class="eyebrow">Chapter 1</span>
+            <h3>The idea</h3>
+            <p class="lead">Make a modern QWERTY keyboard device that slides out. It keeps a small screen and modern hardware, and uses BlackBerry keyboards because they felt good to type on.</p>
+            <ul class="list" style="margin-top: 20px">
+              <li>Small screen, modern internals.</li>
+              <li>BlackBerry keyboard feel.</li>
+              <li>3D printed for now, with a walnut and green aluminum finish under consideration.</li>
+            </ul>
+
+            <div class="label">The reference: BlackBerry Priv</div>
+            <div class="row first" style="--n:2">
+              <div class="panel">
+                <h4>What it gets right</h4>
+                <ul class="list">
+                  <li>The screen simply slides up, with no complex hinge.</li>
+                  <li>The body stays compact, close to the thickness of a normal phone.</li>
+                  <li>A lip under the screen makes it easy to flick open.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Mechanism concept</h4>
+                <ul class="list">
+                  <li>A large tray slides down, so the outer part is essentially just the screen.</li>
+                  <li>Two guide rails run along the outer edges, with the inner tray riding inside the limits the outer tray sets.</li>
+                  <li>Magnetic stop points give a clean click at each end of travel.</li>
+                </ul>
+              </div>
+            </div>
+            <figure class="figure">
+              <div class="diagram">
+                <svg viewBox="0 0 640 250" role="img" aria-label="Top-down diagram of a sliding phone: an outer tray with two guide rails and an inner tray sliding within it, with magnetic stop points at each end">
+                  <rect class="tray ln" x="70" y="50" width="330" height="150" rx="10"/>
+                  <path class="rail-l" d="M84 66 H386 M84 184 H386"/>
+                  <rect class="tray ln" x="190" y="78" width="330" height="94" rx="8"/>
+                  <circle class="mag" cx="102" cy="66" r="5"/>
+                  <circle class="mag" cx="368" cy="66" r="5"/>
+                  <circle class="mag" cx="102" cy="184" r="5"/>
+                  <circle class="mag" cx="368" cy="184" r="5"/>
+                  <path class="dash" d="M430 125 H590 M578 115 l12 10 l-12 10"/>
+                  <text x="76" y="36">Outer tray (screen)</text>
+                  <text x="196" y="228">Inner tray</text>
+                  <text x="440" y="108">Slide direction</text>
+                  <text x="440" y="158">Guide rails and magnetic stops</text>
+                </svg>
+              </div>
+              <figcaption>Simplified concept diagram of the slide mechanism.</figcaption>
+            </figure>
+            <p style="margin-top: 20px; color: var(--muted)">The full sketches and notes are in the BOOX file: <a href="https://drive.google.com/file/d/1E1YdGZxQlou4Xevd5c7-vfD_76FqWapn/view?usp=sharing">sketches and notes</a>.</p>
+          </article>
+
+          <article class="chapter" id="c1-req" data-chapter>
+            <span class="eyebrow">Chapter 2</span>
+            <h3>Requirements</h3>
+            <p class="lead">Two design requirements drive the build. The constraints below come from the donor phone and shape how each requirement can be met.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Requirements</h4>
+                <ul class="reqs">
+                  <li><span class="id">R1</span><span>Test the Razr as a main phone in the flipped orientation, to confirm it works well.</span></li>
+                  <li><span class="id">R2</span><span>Keep the total thickness of the outer screen plus keyboard below the original flip's width.</span></li>
+                  <li><span class="id">R3</span><span>Use the BlackBerry Q10 keyboard, whose width fits the Razr. Extra buttons and the mouse roller wait for revision 2.</span></li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Constraints</h4>
+                <ul class="reqs">
+                  <li><span class="id">C1</span><span>The SIM card holder is built into the main board with all buttons (volume, power), so these stay together.</span></li>
+                  <li><span class="id">C2</span><span>The camera pop-out is tied to the screen, so it faces forward for the first iteration.</span></li>
+                  <li><span class="id">C3</span><span>The screen's rounded edges are on the bottom, so there is no clean edge for the lip.</span></li>
+                  <li><span class="id">C4</span><span>The keyboard passes USB-C through, so the extra connector can be routed anywhere. The speaker and charging board do not constrain the layout.</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="callout">
+              <b>Open questions against the requirements</b>
+              <ul class="list">
+                <li>Can the screen be flipped as the default orientation using the SDK? (R1)</li>
+                <li>Can the original screen be sourced without the camera humps? (C2)</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="chapter" id="c1-mule" data-chapter>
+            <span class="eyebrow">Chapter 3</span>
+            <h3>The donor phone</h3>
+            <p class="lead">The development phone is a test unit, called the mule. It was bought broken on purpose to keep cost down.</p>
+            <div class="row" style="--n:3">
+              <div class="panel">
+                <h4>Sourcing requirements</h4>
+                <ul class="list">
+                  <li>Inner screen broken but still technically functional.</li>
+                  <li>The largest screen possible.</li>
+                  <li>A budget under $100.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>What I got</h4>
+                <ul class="list">
+                  <li>Motorola RAZR Plus 5G (2025), XT2557-3, 256 GB, black, AT&amp;T unlocked.</li>
+                  <li>$79.50 total.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Current condition</h4>
+                <ul class="list">
+                  <li>Inner screen working but broken.</li>
+                  <li>Outer screen delaminating.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c1-teardown" data-chapter>
+            <span class="eyebrow">Chapter 4</span>
+            <h3>Teardown</h3>
+            <p class="lead">Before drawing anything, the phone was taken apart and photographed in sections to understand the stack and the ribbon routing.</p>
+            <div class="row" style="--n:3">
+              <figure class="slot"><span>Photo to add: upper half</span></figure>
+              <figure class="slot"><span>Photo to add: lower half</span></figure>
+              <figure class="slot"><span>Photo to add: main board</span></figure>
+              <figure class="slot"><span>Photo to add: case and folding screen</span></figure>
+              <figure class="slot"><span>Photo to add: ribbons and hinge pieces</span></figure>
+              <figure class="slot"><span>Photo to add: the phone, sectioned</span></figure>
+            </div>
+            <div class="label">References used</div>
+            <ul class="links-list">
+              <li><a href="https://drive.google.com/file/d/1UWBxRvUtxYydVfmQ5FQzPe_Jqismes1x/view?usp=sharing">Service and repair manual</a></li>
+              <li><a href="https://www.youtube.com/watch?v=m-cCTeQG814">Teardown video 1</a></li>
+              <li><a href="https://www.youtube.com/watch?v=8VKDCjBO2k0">Teardown video 2</a></li>
+              <li><a href="https://drive.google.com/drive/folders/1h7Ko4w_jTH2l9OD9yN8HZ1M8j7sgBpr1?usp=drive_link">Internals: screenshots from teardown videos and online references</a></li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c1-software" data-chapter>
+            <span class="eyebrow">Chapter 5</span>
+            <h3>Outer screen software</h3>
+            <p class="lead">With the inner screen removed, the phone has to run entirely on the outer screen. By default, Android on the Razr blocks many apps there.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>The restriction</h4>
+                <p>Some system apps and options, such as Settings, do not run on the outer screen. There is no native option to disable this and let every app use the outer screen only.</p>
+              </div>
+              <div class="panel">
+                <h4>The approach</h4>
+                <p>The CLI manager (Cover Layer Interface) is how Motorola defines what can and cannot run on the outer screen. A few apps are forced to stay blocked, but this looked like the easiest route.</p>
+              </div>
+            </div>
+
+            <div class="label">Steps, in order</div>
+            <ol class="log">
+              <li class="step done"><span class="dot">1</span>
+                <h3>Connect over ADB</h3>
+                <p>Install Android Platform Tools and the Motorola USB driver, then confirm the phone shows up as a device from the command prompt.</p>
+              </li>
+              <li class="step done"><span class="dot">2</span>
+                <h3>Check the current state</h3>
+                <p>Ask the CLI manager whether all apps are allowed on the outer screen. It reports false, and lists the packages on the deny list and the allow list.</p>
+              </li>
+              <li class="step done"><span class="dot">3</span>
+                <h3>Allow everything</h3>
+                <p>Set allow-all to true, then check it. The command reports true.</p>
+              </li>
+              <li class="step done"><span class="dot">4</span>
+                <h3>Allow specific system apps</h3>
+                <p>Allow individual packages that need it, including Settings, the dialer, phone, contacts, Play Store, Chrome, Files, Maps, Photos and Messages.</p>
+              </li>
+              <li class="step done"><span class="dot">5</span>
+                <h3>Allow every user-installed app</h3>
+                <p>Loop over the list of third-party packages and allow each. The user-set allow list grew from about 12 packages to about 45.</p>
+              </li>
+              <li class="step done"><span class="dot">6</span>
+                <h3>Check it survives a restart</h3>
+                <p>The concern was that the changes would reset on reboot. A restart did not require reflashing, so the settings held.</p>
+              </li>
+              <li class="step done"><span class="dot">7</span>
+                <h3>Package it as a script</h3>
+                <p>All commands are compiled into a .bat file that runs directly in the command prompt, so everything can be reapplied quickly after a reset.</p>
+              </li>
+            </ol>
+
+            <div class="label">Key commands</div>
+            <pre class="code" tabindex="0"><span class="c">:: check, then allow all apps on the outer screen</span>
+adb shell cmd climanager is-allow-all-oncli
+adb shell cmd climanager set-allow-all-oncli true
+
+<span class="c">:: allow one system app by package name</span>
+adb shell cmd climanager set-pkg-allowed-oncli com.android.settings true
+
+<span class="c">:: allow every user-installed app</span>
+for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell cmd climanager set-pkg-allowed-oncli %P true</pre>
+
+            <div class="callout">
+              <b>Result</b>
+              <p>The outer screen limitations are removed, apart from a few that cannot be changed.</p>
+            </div>
+            <div class="label">Tools</div>
+            <ul class="links-list">
+              <li><a href="https://drive.google.com/file/d/1EFIaADu6Tdesgyj3nOWoJATM1ahWKN8z/view?usp=drive_link">The .bat file to rerun the setup</a></li>
+              <li><a href="https://developer.android.com/tools/releases/platform-tools">Android Platform Tools</a></li>
+              <li><a href="https://en-us.support.motorola.com/app/usb-drivers">Motorola USB drivers</a></li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c1-body" data-chapter>
+            <span class="eyebrow">Chapter 6</span>
+            <h3>Body design</h3>
+            <p class="lead">The body is modeled in CAD and printed. Version 3 is in progress. The recording below walks around the current assembly in Onshape.</p>
+            <figure class="figure">
+              <video class="video" id="cad-video" src="demo.mp4" poster="poster.jpg" controls muted loop playsinline preload="metadata" aria-label="Screen recording of the V3 body assembly in Onshape, viewed from the side, front and top"></video>
+              <figcaption>Screen recording of the V3 assembly in Onshape, shown from the side, front and top. The slider mate joins the two halves.</figcaption>
+            </figure>
+            <p style="margin-top: 16px"><a href="https://cad.onshape.com/documents/51dd4e57e4c8c3349e2b81be/w/5f7d954e8cba4436397dca66/e/ce9da926a45f0d3afeef535f">Open the CAD model in Onshape</a></p>
+            <div class="callout">
+              <b>Fixes needed against the requirements</b>
+              <ul class="list">
+                <li>Keyboard spacing is off.</li>
+                <li>Not enough room for the internals yet. The body needs to be lengthened by about 6 mm, which affects R2.</li>
+                <li>Move the charging port to the top of the bottom piece.</li>
+                <li>The design assumes the screen orientation can be flipped by default. This needs to be confirmed with the SDK (R1).</li>
+                <li>The main board is clipped under the screen, but its CAD was drawn from an image and is not a good representation. It needs to be printed to check fit.</li>
+                <li>Space is made for the screen ribbon, but this ribbon style is hard to move and a replacement may be needed.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="chapter" id="c1-parts" data-chapter>
+            <span class="eyebrow">Chapter 7</span>
+            <h3>Parts and cost</h3>
+            <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
+            <div class="bom" role="table" aria-label="Bill of materials">
+              <div class="brow" role="row"><span class="nm">Motorola Razr 2025+</span><span class="cost">$79.50</span><span class="nt">Main phone · <a class="src" href="https://www.ebay.com/itm/267690048563">listing</a></span><div class="bar"><i style="width: 100%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">BlackBerry Q10 keyboard</span><span class="cost">$21.27</span><div class="bar"><i style="width: 26.8%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">Hirose BM14B(0.8)-24DS-0.4V(53)</span><span class="cost">$11.21</span><span class="nt">Keyboard breakout board · <a class="src" href="https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/BM14B-0-8-60DS-0-4V-53/4552386">source</a></span><div class="bar"><i style="width: 14.1%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">Arduino Pro Micro</span><span class="cost">$10.59</span><span class="nt"><a class="src" href="https://www.amazon.com/diymore-ATmega32U4-Replace-ATmega328-Leonardo/dp/B01KJR41J4">source</a></span><div class="bar"><i style="width: 13.3%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">USB-C female breakout boards</span><span class="cost">$6.35</span><span class="nt">For the charging side · <a class="src" href="https://www.amazon.com/Breakout-Type-C-Serial-BreakoutFemale-Connector/dp/B0GVK4TZXN">source</a></span><div class="bar"><i style="width: 8%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">USB-C male breakout boards</span><span class="cost">$6.88</span><span class="nt">For connecting to the phone · <a class="src" href="https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B">source</a></span><div class="bar"><i style="width: 8.7%"></i></div></div>
+              <div class="total"><span>Total</span><span>$135.80</span></div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c1-recovery" data-chapter>
+            <span class="eyebrow">Chapter 8</span>
+            <h3>Recovery and references</h3>
+            <p class="lead">Changing how the phone behaves carries some risk of bricking it, so there is a recovery path, and there are similar builds to learn from.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Recovery plan</h4>
+                <p>If the phone will not boot, restore it with <a href="https://en-us.support.motorola.com/app/softwarefix/">Motorola's software fix and rescue tool</a>. Hardware-button bootloader access is the fallback if ADB cannot reach it.</p>
+              </div>
+              <div class="panel">
+                <h4>Similar builds</h4>
+                <ul class="links-list">
+                  <li><a href="https://github.com/Dakkaron/Fairberry/tree/main">Fairberry</a></li>
+                  <li><a href="https://github.com/Archfx/RAZR">A public GitHub project with the same goal</a>. Next step is to study its process and learn from it.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c1-next" data-chapter>
+            <span class="eyebrow">Chapter 9</span>
+            <h3>What is next</h3>
+            <ul class="list" style="margin-top: 8px; font-size: 17px">
+              <li>Finish the V3 fixes: keyboard spacing, a longer body, and the charging port position.</li>
+              <li>Print the main board to check fit under the screen.</li>
+              <li>Confirm with the SDK whether the screen can default to the flipped orientation.</li>
+              <li>Find out whether the screen can be sourced without the camera humps.</li>
+              <li>Study the public RAZR project's process.</li>
+              <li>Revision 2: add the extra keyboard buttons and the mouse roller, and decide on the final finish.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <nav class="next" aria-label="Project navigation"><a href="#home">Back to overview</a><a href="#beamng">Next project: BeamNG Map ↓</a></nav>
+    </section>
+
+    <div class="gap" aria-hidden="true"></div>
+
+    <!-- PROJECT 2 -->
+    <section class="sec s-p2" id="beamng" data-section data-pal="2">
+      <div class="head">
+        <span class="eyebrow">Project 02</span><span class="pill live">In progress</span>
+        <h2>BeamNG Map and Driver-in-the-Loop</h2>
+        <p class="sub">A custom map for the BeamNG driving simulator, built as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Type</dt><dd>Simulation environment</dd></div>
+        <div><dt>Tools</dt><dd>BeamNG, MapNG, PBR Forge, MS Paint</dd></div>
+        <div><dt>Current focus</dt><dd>Roads, decals, and friction by surface</dd></div>
+        <div><dt>Status</dt><dd>Map in progress, missions next</dd></div>
+      </dl>
+
+      <div class="chapters">
+        <aside class="rail" aria-label="Project 2 chapters">
+          <div class="rt">Process</div>
+          <ol>
+            <li data-rail="c2-req"><a href="#c2-req">Requirements</a></li>
+            <li data-rail="c2-data"><a href="#c2-data">Base map data</a></li>
+            <li data-rail="c2-edit"><a href="#c2-edit">Editing the base map</a></li>
+            <li data-rail="c2-tex"><a href="#c2-tex">PBR textures</a></li>
+            <li data-rail="c2-build"><a href="#c2-build">Terrain and environment</a></li>
+            <li data-rail="c2-spawn"><a href="#c2-spawn">Spawn points</a></li>
+            <li data-rail="c2-miss"><a href="#c2-miss">Missions</a></li>
+            <li data-rail="c2-issues"><a href="#c2-issues">Open issues</a></li>
+            <li data-rail="c2-dil"><a href="#c2-dil">Driver-in-the-loop plan</a></li>
+          </ol>
+        </aside>
+
+        <div class="content">
+          <article class="chapter" id="c2-req" data-chapter>
+            <span class="eyebrow">Chapter 1</span>
+            <h3>Requirements</h3>
+            <p class="lead">The near-term requirement is to learn how BeamNG levels and mods are made. The longer-term requirement is a driver-in-the-loop system that uses a real ESP brake system.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Learning requirements</h4>
+                <ul class="reqs">
+                  <li><span class="id">R1</span><span>Understand how game levels are made, and how that workflow compares to CAD and Blender.</span></li>
+                  <li><span class="id">R2</span><span>Understand the texture pipeline.</span></li>
+                  <li><span class="id">R3</span><span>Judge how realistic the physics are. The soft-body model is detailed and the tire model is being updated.</span></li>
+                  <li><span class="id">R4</span><span>Make the result useful as a demonstration at work.</span></li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>System requirements</h4>
+                <ul class="reqs">
+                  <li><span class="id">S1</span><span>A driver-in-the-loop system that integrates a real ESP brake system.</span></li>
+                  <li><span class="id">S2</span><span>A way to calibrate the model or the ESP from the simulation.</span></li>
+                  <li><span class="id">S3</span><span>General driver training scenarios.</span></li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top: 20px; color: var(--muted)">Background on the tire model work: <a href="https://www.beamng.com/game/news/blog/tire-physics-development-sneak-peek/">BeamNG tire physics development</a>.</p>
+          </article>
+
+          <article class="chapter" id="c2-data" data-chapter>
+            <span class="eyebrow">Chapter 2</span>
+            <h3>Base map data</h3>
+            <p class="lead">The first question was where to get real-world terrain. The open question was whether the resolution would be good enough to drive on, or look terrible.</p>
+            <div class="row" style="--n:3">
+              <div class="panel">
+                <h4>Google Maps and Earth</h4>
+                <p>GPS data could be downloaded as a 3D model, but scans are only available for areas that have already been scanned.</p>
+              </div>
+              <div class="panel">
+                <h4>OpenStreetMap</h4>
+                <p>Export a region, convert it to an OBJ model with OSM2World, then import it into a 3D app and delete the extra geometry.</p>
+              </div>
+              <div class="panel">
+                <h4>MapNG, chosen</h4>
+                <p>A tool built for BeamNG that already includes the game's level structure.</p>
+              </div>
+            </div>
+            <div class="label">MapNG settings</div>
+            <div class="scroll-x">
+              <table class="specs">
+                <tr><th>Resolution</th><td>4096 x 4096</td></tr>
+                <tr><th>Elevation source</th><td>USGS 1 m where possible. The standard 30 m source has low resolution and is offset from the satellite image.</td></tr>
+                <tr><th>Surrounding tiles</th><td>All. The vehicle will fall through them, but they give a visual base.</td></tr>
+                <tr><th>Satellite quality</th><td>Standard, the highest available. It is worse than USGS, but there are no other options.</td></tr>
+                <tr><th>Generated objects</th><td>No trees, buildings or rivers. They are inaccurate and inconsistent, and the base map is better.</td></tr>
+              </table>
+            </div>
+            <div class="callout">
+              <b>Constraint</b>
+              <p>BeamNG's level system uses the satellite image as a base, limited to 5 m per pixel. It looks rough up close, but works as generic ground cover and for distant views. The baked-in global shadows also need to be removed.</p>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-edit" data-chapter>
+            <span class="eyebrow">Chapter 3</span>
+            <h3>Editing the base map</h3>
+            <p class="lead">Only the base map is modified, since the other layers affect visuals only.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Work done</h4>
+                <ul class="list">
+                  <li>Edit the base satellite image to look better and remove baked shadows.</li>
+                  <li>Reorganize the folder structure to match the main levels and allow new terrain types.</li>
+                  <li>Smooth the image. At 5 m per pixel there is no detail to preserve, and MS Paint is the best tool for it.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Why it matters</h4>
+                <p>Adding road markings and decals gives the map the details of a real place, so it does not look like it was built in Minecraft.</p>
+              </div>
+            </div>
+            <div class="row" style="--n:1">
+              <figure class="slot wide"><span>Image to add: the base map at its native resolution</span></figure>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-tex" data-chapter>
+            <span class="eyebrow">Chapter 4</span>
+            <h3>PBR textures</h3>
+            <p class="lead">BeamNG recently moved to physically based rendering. A texture is described by a set of image maps that tell the engine how light behaves on it.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Maps BeamNG uses</h4>
+                <ul class="chips">
+                  <li>Base color</li><li>Metallic</li><li>Normal</li><li>Roughness</li><li>Opacity</li><li>Ambient occlusion</li>
+                </ul>
+                <p style="margin-top: 12px">Each has a detail version as well. The advanced maps are not used for now.</p>
+              </div>
+              <div class="panel">
+                <h4>Making the terrains</h4>
+                <p>PBR needs many maps to work with lighting. They can be generated from a single image, though not always accurately, using <a href="https://www.pbrforge.com/">PBR Forge</a>. Initial values such as macro strength, detail strength, roughness and scale came from another track, then were tuned.</p>
+              </div>
+            </div>
+            <div class="label">Folder structure</div>
+            <div class="scroll-x">
+              <table class="specs">
+                <tr><th>Terrain types</th><td>One folder per terrain type</td></tr>
+                <tr><th>Inside each</th><td>A "detail" folder and a "macro" folder</td></tr>
+                <tr><th>Each holds 5 maps</th><td>ao (ambient occlusion), b (base), h (height), nm (normal), r (roughness)</td></tr>
+                <tr><th>Material definitions</th><td>All defined in the terrain material library</td></tr>
+              </table>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-build" data-chapter>
+            <span class="eyebrow">Chapter 5</span>
+            <h3>Terrain and environment</h3>
+            <p class="lead">With the base map and textures in place, the map was built up in layers.</p>
+            <ol class="log" style="margin-top: 24px">
+              <li class="step done"><span class="dot">1</span>
+                <h3>Initial map</h3>
+                <p>Created with MapNG.</p>
+              </li>
+              <li class="step done"><span class="dot">2</span>
+                <h3>Terrain painting</h3>
+                <p>Created base terrains with PBR textures and used the terrain painter to update every major terrain type.</p>
+              </li>
+              <li class="step done"><span class="dot">3</span>
+                <h3>Surface smoothing</h3>
+                <p>Smoothed the surfaces so hills and ramps behave correctly.</p>
+              </li>
+              <li class="step done"><span class="dot">4</span>
+                <h3>Objects</h3>
+                <p>Created objects for the grass terrain to give it 3D properties. Added forest and shrubs, plus placeholder buildings, parked vehicles and a bus stop.</p>
+              </li>
+              <li class="step now"><span class="dot">5</span>
+                <h3>Roads and decals</h3>
+                <p>Road and surface decals are added for visual clarity. Finishing the road work and learning to control friction by road surface.</p>
+              </li>
+            </ol>
+            <div class="label">Progress showcase</div>
+            <div class="row" style="--n:3">
+              <figure class="slot"><span>Video to add: early driving after terrain smoothing and new terrain types</span></figure>
+              <figure class="slot"><span>Video to add: terrain painting and trees, before models, roads or decals</span></figure>
+              <figure class="slot"><span>Image to add: after the 0.39 update broke the grass and forest, then the fixes</span></figure>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-spawn" data-chapter>
+            <span class="eyebrow">Chapter 6</span>
+            <h3>Spawn points</h3>
+            <p class="lead">Spawn points let anyone start the track close to what they want to test.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Requirements</h4>
+                <ul class="list">
+                  <li>Parking lot 102, where the track starts.</li>
+                  <li>Parking lot 103, to add if the map is shared internally with that team.</li>
+                  <li>The 20/30 hills, the tallest place in Flat Rock.</li>
+                  <li>The new ESP area, where most testing happens, for a one-to-one match.</li>
+                  <li>VDA, which stays the default while the track is in progress.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>How they are added</h4>
+                <ul class="list">
+                  <li>Add each as a new object in the level.</li>
+                  <li>Edit the info.json file to add spawn points, referenced pictures and map details.</li>
+                  <li>Use in-game screenshots as the spawn loading images.</li>
+                </ul>
+                <p style="margin-top: 12px">All spawn points are in the game for now.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-miss" data-chapter>
+            <span class="eyebrow">Chapter 7</span>
+            <h3>Missions</h3>
+            <p class="lead">Missions are the way to introduce the simulator at work. Two types are planned, both for driver training.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Introduction drive</h4>
+                <ul class="list">
+                  <li>Drive around all of Flat Rock.</li>
+                  <li>Gets people used to BeamNG.</li>
+                  <li>Shows areas people do not normally go to, including a hill jump.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>ESP disconnected</h4>
+                <ul class="list">
+                  <li>Control the vehicle when the ESP is disconnected during a split-friction stop.</li>
+                  <li>Replicates part of level 2 training, where quite a few people had a hard time saving the vehicle.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="label">How missions are built</div>
+            <div class="row first" style="--n:2">
+              <div class="panel">
+                <h4>Missions</h4>
+                <p>You drive to them on the map, in free mode.</p>
+                <ul class="links-list" style="margin-top: 10px">
+                  <li><a href="https://beamng.fandom.com/wiki/Missions">BeamNG wiki: Missions</a></li>
+                  <li><a href="https://documentation.beamng.com/modding/gamemodes/missions/">Missions documentation</a></li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Scenarios</h4>
+                <p>Loaded from the main menu, with a custom track, vehicle and scenario.</p>
+                <ul class="links-list" style="margin-top: 10px">
+                  <li><a href="https://www.beamng.com/threads/introduction-to-scenarios-creation.14700/">Introduction to scenario creation</a></li>
+                  <li><a href="https://www.beamng.com/forums/scenarios.47/">Scenarios forum</a></li>
+                  <li><a href="https://www.beamng.com/resources/categories/scenarios.8/">Scenario resources</a></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c2-issues" data-chapter>
+            <span class="eyebrow">Chapter 8</span>
+            <h3>Open issues</h3>
+            <div class="callout" style="margin-top: 0">
+              <b>Game update 0.39</b>
+              <p>The update broke most of the groundcover and forest assets, along with several smaller items. Forest and main grass have been fixed so far.</p>
+            </div>
+            <div class="label">To do</div>
+            <ul class="list" style="font-size: 17px">
+              <li>Complete the road and decal work, and learn how to control friction by the selected road surface.</li>
+              <li>Add missions and scenarios.</li>
+              <li>Clean up the base map further.</li>
+              <li>Once the map is good enough, move on to making a vehicle.</li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c2-dil" data-chapter>
+            <span class="eyebrow">Chapter 9</span>
+            <h3>Driver-in-the-loop plan</h3>
+            <p class="lead">This phase is further down the line. It would become a work project and require the BeamNG.tech license. For now it is a learning project.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Why BeamNG fits</h4>
+                <ul class="list">
+                  <li>A soft-body physics system that runs at 2000 Hz.</li>
+                  <li>Easy vehicle customization with a lot of community support, including the unusual vehicles in use at work.</li>
+                  <li>A built-in <a href="https://documentation.beamng.com/beamng_tech/interfaces/can-bus/">CAN interface</a>.</li>
+                  <li>Frequent updates, including an upcoming tire model change.</li>
+                  <li><a href="https://documentation.beamng.com/beamng_tech/interfaces/lua/">Lua scripting</a> for telemetry output and for modifying incoming sensor signals.</li>
+                  <li>Third-party tools and <a href="https://documentation.beamng.com/beamng_tech/interfaces/matlab-simulink/">MATLAB and Simulink</a>, through the <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/">co-simulation editor</a>.</li>
+                  <li>Many <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/available_signals_window/">vehicle signals</a> that can be saved and overlaid with ESP data.</li>
+                  <li>A <a href="https://documentation.beamng.com/beamng_tech/tools/scriptaieditor/">script editor</a> for maneuver runs and variations, and a built-in <a href="https://documentation.beamng.com/beamng_tech/sensors/">sensor system</a>.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Needed to connect the ESP</h4>
+                <ul class="reqs">
+                  <li><span class="id">N1</span><span>A wet bench with brake pressure transducers.</span></li>
+                  <li><span class="id">N2</span><span>CANalyzer for the CAN inputs to the system.</span></li>
+                  <li><span class="id">N3</span><span>Lua scripts to export ESP inputs from BeamNG and import brake torque into it.</span></li>
+                  <li><span class="id">N4</span><span>MATLAB for the UDP interface from the Lua scripts, and Simulink to convert ESP inputs into voltages and brake pressure into brake torque.</span></li>
+                  <li><span class="id">N5</span><span>A DAQ interface to output to and import from the ESP. The model is not chosen yet.</span></li>
+                  <li><span class="id">N6</span><span>A solid sim rig: direct-drive wheel, gas, clutch, load cell brake, shifter, and a StreamDeck for all other functions.</span></li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top: 20px; color: var(--muted)">Reference: an <a href="https://documentation.beamng.com/beamng_tech/hil_and_dil/hil/">example hardware-in-the-loop system using an external shifter</a>.</p>
+          </article>
+        </div>
+      </div>
+
+      <nav class="next" aria-label="Project navigation"><a href="#razr">↑ Previous: Slide Razr</a><a href="#project3">Next project: Project 3 ↓</a></nav>
+    </section>
+
+    <div class="gap" aria-hidden="true"></div>
+
+    <!-- PROJECT 3 -->
+    <section class="sec s-p3" id="project3" data-section data-pal="3">
+      <div class="head">
+        <span class="eyebrow">Project 03</span><span class="pill">Coming soon</span>
+        <h2>Project 3</h2>
+        <p class="sub">This space is reserved for a third project. Send the details and it will follow the same structure as the two above.</p>
+      </div>
+      <div class="row" style="--n:1">
+        <figure class="slot wide"><span>Image to add</span></figure>
+      </div>
+      <nav class="next" aria-label="Project navigation"><a href="#beamng">↑ Previous: BeamNG Map</a><a href="#about">About me ↓</a></nav>
+    </section>
+
+    <div class="gap" aria-hidden="true"></div>
+
+    <!-- ABOUT -->
+    <section class="sec s-about" id="about" data-section data-pal="4">
+      <span class="eyebrow">About</span>
+      <h2>About me</h2>
+      <div class="about-text">
+        <p>I'm an engineer who likes working on physical products and the systems around them: mechanisms, vehicle systems, and the testing that shows whether a design holds up.</p>
+        <p>My current projects include a slide-out phone built on a donor Razr and a driving simulation environment built to support driver-in-the-loop testing. I use CAD for design work and I'm learning game-engine tools to build realistic test environments.</p>
+      </div>
+      <ul class="chips" style="margin-top: 28px">
+        <li>CAD</li><li>Mechanism design</li><li>Simulation</li><li>Systems integration</li>
+      </ul>
+      <div class="gallery" tabindex="0" role="group" aria-label="Photo gallery, scroll sideways">
+        <figure class="slot"><span>Photo to add: portrait</span></figure>
+        <figure class="slot w"><span>Photo to add: workspace</span></figure>
+        <figure class="slot"><span>Photo to add: project in progress</span></figure>
+        <figure class="slot w"><span>Photo to add: testing or on site</span></figure>
+      </div>
+      <footer>
+        <span>Amir Rahmani</span>
+        <span>amirahmani@gmail.com</span>
+      </footer>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.chapters')).map(function (g) {
+    return {
+      el: g,
+      chapters: Array.prototype.slice.call(g.querySelectorAll('[data-chapter]')),
+      items: Array.prototype.slice.call(g.querySelectorAll('[data-rail]'))
+    };
+  });
+  /* Per section: colours at its start (a) and end (b). base, horizon glow (g1), upper tint (g2). */
+  var palette = [
+    { a: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] },        b: { base: [0, 0, 0], g1: [44, 62, 100], g2: [22, 34, 58] }, hz: [72, 72] },
+    { a: { base: [10, 6, 24], g1: [78, 44, 170], g2: [40, 22, 92] },     b: { base: [18, 6, 28], g1: [160, 64, 176], g2: [92, 30, 112] }, hz: [76, 52] },
+    { a: { base: [4, 10, 30], g1: [34, 84, 196], g2: [16, 44, 108] },    b: { base: [4, 16, 30], g1: [22, 152, 198], g2: [12, 88, 120] }, hz: [76, 52] },
+    { a: { base: [3, 16, 12], g1: [24, 136, 92], g2: [10, 72, 52] },     b: { base: [6, 18, 10], g1: [88, 168, 88], g2: [44, 98, 54] }, hz: [76, 52] },
+    { a: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] },        b: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] }, hz: [72, 72] }
+  ];
+  var bounds = [];
+  var docEnd = 0;
+  var BAND = 360;
+
+  function measure() {
+    bounds = [];
+    for (var i = 0; i < sections.length - 1; i++) {
+      var a = sections[i].getBoundingClientRect();
+      var b = sections[i + 1].getBoundingClientRect();
+      bounds.push(((a.bottom + b.top) / 2) + window.scrollY);
+    }
+    docEnd = document.documentElement.scrollHeight;
+  }
+  function mix(a, b, t) {
+    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  }
+  function ease(t) { return t * t * (3 - 2 * t); }
+  function clamp(t) { return Math.max(0, Math.min(1, t)); }
+  /* colour of section i at scroll position pos, drifting from its start colour to its end colour */
+  function within(i, pos) {
+    var lo = i === 0 ? 0 : bounds[i - 1];
+    var hi = i === bounds.length ? docEnd : bounds[i];
+    var p = clamp((pos - lo) / Math.max(1, hi - lo));
+    var s = palette[i];
+    return {
+      base: mix(s.a.base, s.b.base, p),
+      g1: mix(s.a.g1, s.b.g1, p),
+      g2: mix(s.a.g2, s.b.g2, p),
+      hz: s.hz[0] + (s.hz[1] - s.hz[0]) * p
+    };
+  }
+  function blend(c1, c2, t) {
+    return { base: mix(c1.base, c2.base, t), g1: mix(c1.g1, c2.g1, t), g2: mix(c1.g2, c2.g2, t), hz: c1.hz + (c2.hz - c1.hz) * t };
+  }
+  function pick(pos) {
+    for (var i = 0; i < bounds.length; i++) {
+      if (pos < bounds[i] - BAND) return within(i, pos);
+      if (pos <= bounds[i] + BAND) {
+        var t = ease((pos - (bounds[i] - BAND)) / (2 * BAND));
+        return blend(within(i, pos), within(i + 1, pos), t);
+      }
+    }
+    return within(bounds.length, pos);
+  }
+  function css(a) { return Math.round(a[0]) + ' ' + Math.round(a[1]) + ' ' + Math.round(a[2]); }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY;
+    var c = pick(y + window.innerHeight * 0.5);
+    root.style.setProperty('--base', css(c.base));
+    root.style.setProperty('--g1', css(c.g1));
+    root.style.setProperty('--g2', css(c.g2));
+    root.style.setProperty('--hz', c.hz.toFixed(1) + '%');
+
+    var current = sections[0].id;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top <= 140) current = sections[i].id;
+    }
+    links.forEach(function (l) {
+      if (l.getAttribute('data-nav') === current) l.setAttribute('aria-current', 'true');
+      else l.removeAttribute('aria-current');
+    });
+
+    groups.forEach(function (g) {
+      var active = -1;
+      for (var j = 0; j < g.chapters.length; j++) {
+        if (g.chapters[j].getBoundingClientRect().top <= 180) active = j;
+      }
+      var started = g.chapters[0].getBoundingClientRect().top <= 180;
+      var lastEl = g.chapters[g.chapters.length - 1];
+      var finished = lastEl.getBoundingClientRect().bottom < 120;
+      g.items.forEach(function (li, k) {
+        li.classList.toggle('active', started && !finished && k === active);
+        li.classList.toggle('done', started && (finished || k < active));
+      });
+    });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { measure(); onScroll(); });
+  window.addEventListener('load', function () { measure(); update(); });
+  measure();
+  update();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); update(); });
+
+  /* play the CAD recording, muted, while it is on screen */
+  var vid = document.getElementById('cad-video');
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (vid && 'IntersectionObserver' in window && !still) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+        else vid.pause();
+      });
+    }, { threshold: 0.5 }).observe(vid);
+  }
+})();
+</script>
+
+</body></html>
