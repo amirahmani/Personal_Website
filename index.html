@@ -855,7 +855,10 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       <div class="head">
         <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 03</span><span class="pill live">In progress</span>
         <h2>Creating a test track for BeamNG</h2>
-        <p class="sub">I am building a custom track for BeamNG as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
+        <p class="sub">Added a test track to the soft-body simulation program, BeamNG.drive, in order to learn the BeamNG modding system. Focused on learning about the PBR texture system, track topography accuracy, and track surface behavior and friction accuracy. Long term goals include validating accuracy of real-world driving data compared to the model.</p>
+        <p class="sub">   - Pulled GPS data of real world track and implement into BeamNG as a new mod.</p>
+         <p class="sub">   - Selected the Bosch Flat Rock proving ground as the location in order to compare the real-world experience to the modelled track.</p>
+         <p class="sub">   - Future plans to the project involve integrating an active ESP System into BeamNG, using a wet bench with pressure transducers and Lua programs to integrate brake pressures, and Canalyzer for CAN communication.</p>
       </div>
       <div class="board">
         <div class="bt">Kanban board</div>
