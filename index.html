@@ -242,6 +242,18 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .note b { color: var(--fg); font-weight: 600; }
 .hand { margin-top: 24px; }
 
+
+.board .panel { padding: 14px; background: rgba(0,0,0,0.28); }
+.board .panel h4 { padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--glass-line); }
+.board .panel h4 span { border: 1px solid var(--glass-line); border-radius: 999px; padding: 0 8px; }
+.board .list { gap: 8px; }
+.board .list li { padding: 10px 12px; border: 1px solid var(--glass-line); border-radius: 8px; background: var(--glass); color: var(--fg); }
+.board .list li::before { display: none; }
+.board .col-prog li { border-left: 3px solid var(--accent); }
+.board .col-done li { color: var(--muted); border-left: 3px solid var(--accent); opacity: .85; }
+.board .col-done li::after { content: "\2713"; float: right; color: var(--accent); }
+.board .col-done h4 { color: var(--fg); }
+
 /* photos */
 .ph { margin: 0; width: 100%; min-width: 0; }
 .ph img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--glass-line); background: #05050a; }
@@ -315,11 +327,11 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         <p class="sub">I want a plant wall that looks after itself, because I am terrible at taking care of plants. This is my planning journal so far, section by section, from my sketchbook.</p>
       </div>
       <div class="board">
-        <div class="bt">Progress board</div>
+        <div class="bt">Kanban board</div>
         <div class="row" style="--n:3">
+          <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Pick the communication protocol</li><li>Decide where flow meters go</li><li>Move the hygrometers</li><li>Software section (still blank)</li><li>First build and tests</li></ul></div>
+          <div class="panel col-prog"><h4>In Progress<span>4</span></h4><ul class="list"><li>Firmware notes</li><li>Electrical (12V so far)</li><li>HMI notes</li><li>Tuning and modeling notes</li></ul></div>
           <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Intro and concept sketch</li><li>Requirements</li><li>Hardware list</li><li>Mechanical layout</li><li>Plant holder sketch</li></ul></div>
-          <div class="panel col-prog"><h4>In progress<span>4</span></h4><ul class="list"><li>Firmware notes</li><li>Electrical (12V so far)</li><li>HMI notes</li><li>Tuning and modeling notes</li></ul></div>
-          <div class="panel col-next"><h4>Next<span>5</span></h4><ul class="list"><li>Pick the communication protocol</li><li>Decide where flow meters go</li><li>Move the hygrometers</li><li>Software section (still blank)</li><li>First build and tests</li></ul></div>
         </div>
       </div>
 
@@ -494,11 +506,11 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
       </div>
 
       <div class="board">
-        <div class="bt">Progress board</div>
+        <div class="bt">Kanban board</div>
         <div class="row" style="--n:3">
+          <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
+          <div class="panel col-prog"><h4>In Progress<span>1</span></h4><ul class="list"><li>Body design V3 in CAD</li></ul></div>
           <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Initial sketches and goal</li><li>Requirements</li><li>Donor phone chosen and torn down</li><li>Outer screen software</li><li>Parts list ($135.80 so far)</li></ul></div>
-          <div class="panel col-prog"><h4>In progress<span>1</span></h4><ul class="list"><li>Body design V3 in CAD</li></ul></div>
-          <div class="panel col-next"><h4>Next<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
         </div>
       </div>
 
@@ -840,11 +852,11 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <p class="sub">I am building a custom track for BeamNG as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
       </div>
       <div class="board">
-        <div class="bt">Progress board</div>
+        <div class="bt">Kanban board</div>
         <div class="row" style="--n:3">
+          <div class="panel col-next"><h4>To Do<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
+          <div class="panel col-prog"><h4>In Progress<span>2</span></h4><ul class="list"><li>Roads, decals and friction by surface</li><li>Fixes after the 0.39 update</li></ul></div>
           <div class="panel col-done"><h4>Done<span>4</span></h4><ul class="list"><li>Base map from real map data</li><li>PBR textures and terrain types</li><li>Early terrain painting and trees</li><li>Spawn points</li></ul></div>
-          <div class="panel col-prog"><h4>In progress<span>2</span></h4><ul class="list"><li>Roads, decals and friction by surface</li><li>Fixes after the 0.39 update</li></ul></div>
-          <div class="panel col-next"><h4>Next<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
         </div>
       </div>
       <dl class="facts">
