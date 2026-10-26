@@ -94,21 +94,13 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .slot.wide { aspect-ratio: 16 / 9; }
 .slot span { max-width: 36ch; }
 .figure { margin: 24px 0 0; width: 100%; }
-.figure figcaption { font-size: 14px; color: var(--faint); margin-top: 8px; }
-.diagram { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 16px; width: 100%; }
-.diagram svg { display: block; width: 100%; height: auto; max-height: 300px; }
-.diagram .ln { stroke: var(--fg); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.diagram .rail-l { stroke: var(--accent); fill: none; stroke-width: 2.6; stroke-linecap: round; }
-.diagram .dash { stroke: var(--faint); fill: none; stroke-width: 1.2; stroke-dasharray: 4 5; stroke-linecap: round; }
-.diagram .mag { fill: var(--accent); }
-.diagram .tray { fill: rgba(255, 255, 255, 0.05); }
-.diagram text { font-family: var(--font-body); font-size: 14px; fill: var(--muted); }
+.figure figcaption { font-size: 14px; color: var(--faint); margin: 0 0 8px; }
 .sk { margin: 0; border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 18px; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 .sk img { display: block; width: 100%; height: auto; max-width: 880px; margin: 0 auto; background: #fff; border-radius: 6px; }
 .sk .frame { display: grid; place-items: center; aspect-ratio: 3 / 2; background: #fff; border-radius: 6px; }
 .sk .frame img { width: 100%; height: 100%; object-fit: contain; }
 .sk.tall img { max-width: 860px; }
-.sk figcaption { font-size: 14px; color: var(--faint); }
+.sk figcaption { font-size: 14px; color: var(--faint); order: -1; }
 .sk figcaption b { color: var(--fg); font-weight: 600; }
 .video { display: block; width: 100%; aspect-ratio: 2550 / 1238; border: 1px solid var(--glass-line); border-radius: 10px; background: #05050a; }
 
@@ -213,7 +205,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .card:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
 .card .cover { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: radial-gradient(90% 80% at 50% 108%, rgb(var(--cg) / 0.85), transparent 70%), linear-gradient(180deg, rgb(var(--cb)), rgb(var(--cg) / 0.35)); border-bottom: 1px solid rgb(var(--cg) / 0.6); }
 .card .cover img, .card .cover svg { position: absolute; inset: 18px; display: block; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; }
-.card .cover img { background: #fff; border-radius: 6px; }
+.card .cover img { background: #fff; border-radius: 6px; border: 1px solid rgba(255,255,255,0.28); }
 .card .cover .l { stroke: var(--c); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .card .cover .soft { stroke: var(--c); opacity: .38; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .card .cover .dash { stroke: var(--fg); opacity: .8; fill: none; stroke-width: 1.2; stroke-dasharray: 4 6; stroke-linecap: round; }
@@ -236,13 +228,27 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
   .card .cover { aspect-ratio: 16 / 10; }
 }
 
+
+/* progress board + journal feel */
+.board { margin-top: 36px; }
+.board .bt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 12px; }
+.board .row { margin-top: 0; }
+.board .panel h4 { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.board .panel h4 span { font-family: var(--font-mono); font-size: 12px; color: var(--faint); font-weight: 400; }
+.board .col-done h4 { color: var(--accent); }
+.board .list li { font-size: 15px; }
+.board .col-done .list li::before { background: var(--accent); height: 2px; }
+.note { margin-top: 20px; padding: 2px 0 2px 16px; border-left: 2px solid var(--accent); color: var(--muted); max-width: 62ch; }
+.note b { color: var(--fg); font-weight: 600; }
+.hand { margin-top: 24px; }
+
 /* photos */
 .ph { margin: 0; width: 100%; min-width: 0; }
 .ph img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--glass-line); background: #05050a; }
-.ph figcaption { font-size: 14px; color: var(--faint); margin-top: 8px; }
+.ph figcaption { font-size: 14px; color: var(--faint); margin: 0 0 8px; }
 .ph figcaption b { color: var(--fg); font-weight: 600; }
 .row .ph img { aspect-ratio: 16 / 10; object-fit: cover; object-position: var(--pos, 50% 50%); }
-.card .cover.photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; background: none; }
+.card .cover.photo img { object-fit: cover; background: none; border: 1px solid rgba(255,255,255,0.28); }
 </style>
 
 <div class="sky" id="sky" aria-hidden="true"></div>
@@ -272,42 +278,11 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 
       <div class="cards" role="list">
         <a class="card c-plant" role="listitem" href="#plant">
-          <div class="cover">
-          <svg viewBox="0 0 320 240" role="img" aria-label="Illustration of a plant wall with a grow light above, a grid of planters and a water line down one side">
-          <rect class="solid" x="70" y="20" width="180" height="8" rx="4"/>
-          <path class="soft" d="M92 32 V50" stroke-dasharray="3 5"/>
-          <path class="soft" d="M126 32 V50" stroke-dasharray="3 5"/>
-          <path class="soft" d="M160 32 V50" stroke-dasharray="3 5"/>
-          <path class="soft" d="M194 32 V50" stroke-dasharray="3 5"/>
-          <path class="soft" d="M228 32 V50" stroke-dasharray="3 5"/>
-          <rect class="soft" x="58" y="54" width="204" height="150" rx="6"/>
-          <rect class="l" x="64" y="92" width="60" height="22" rx="4"/>
-          <path class="l" d="M94 92 q-12 -16 -3 -26 M94 92 q12 -16 3 -26 M94 92 V70"/>
-          <rect class="l" x="130" y="92" width="60" height="22" rx="4"/>
-          <path class="l" d="M160 92 q-12 -16 -3 -26 M160 92 q12 -16 3 -26 M160 92 V70"/>
-          <rect class="l" x="196" y="92" width="60" height="22" rx="4"/>
-          <path class="l" d="M226 92 q-12 -16 -3 -26 M226 92 q12 -16 3 -26 M226 92 V70"/>
-          <rect class="l" x="64" y="134" width="60" height="22" rx="4"/>
-          <path class="l" d="M94 134 q-12 -16 -3 -26 M94 134 q12 -16 3 -26 M94 134 V112"/>
-          <rect class="l" x="130" y="134" width="60" height="22" rx="4"/>
-          <path class="l" d="M160 134 q-12 -16 -3 -26 M160 134 q12 -16 3 -26 M160 134 V112"/>
-          <rect class="l" x="196" y="134" width="60" height="22" rx="4"/>
-          <path class="l" d="M226 134 q-12 -16 -3 -26 M226 134 q12 -16 3 -26 M226 134 V112"/>
-          <rect class="l" x="64" y="176" width="60" height="22" rx="4"/>
-          <path class="l" d="M94 176 q-12 -16 -3 -26 M94 176 q12 -16 3 -26 M94 176 V154"/>
-          <rect class="l" x="130" y="176" width="60" height="22" rx="4"/>
-          <path class="l" d="M160 176 q-12 -16 -3 -26 M160 176 q12 -16 3 -26 M160 176 V154"/>
-          <rect class="l" x="196" y="176" width="60" height="22" rx="4"/>
-          <path class="l" d="M226 176 q-12 -16 -3 -26 M226 176 q12 -16 3 -26 M226 176 V154"/>
-          <path class="l" d="M36 40 V212"/>
-          <circle class="solid" cx="36" cy="34" r="7"/>
-          <path class="soft" d="M36 70 q-6 8 0 12 q6 -4 0 -12 M36 130 q-6 8 0 12 q6 -4 0 -12"/>
-          </svg>
-          </div>
+          <div class="cover"><img src="plant-concept.png" width="1500" height="1162" alt="Hand sketch of the plant wall: a water tank on top, stacked planter rows with lights, and a pump and tube down one side"></div>
           <div class="body">
-            <div class="num"><span>Project 01</span><span class="pill">Coming soon</span></div>
+            <div class="num"><span>Project 01</span><span class="pill">Planning</span></div>
             <h3>Autonomous Plant Wall</h3>
-            <p>A self watering, self lighting plant wall.</p>
+            <p>A self watering, self lighting plant wall, planned from the first sketches.</p>
             <span class="go">View project →</span>
           </div>
         </a>
@@ -335,28 +310,178 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
     <section class="view sec v-plant" data-view="plant" hidden>
       <div class="head">
         <a class="back" href="#home">← All projects</a><br>
-        <span class="eyebrow">Project 01</span><span class="pill">Coming soon</span>
+        <span class="eyebrow">Project 01</span><span class="pill live">Planning</span>
         <h2>Autonomous Plant Wall</h2>
-        <p class="sub">A self watering, self lighting plant wall.</p>
+        <p class="sub">I want a plant wall that looks after itself, because I am terrible at taking care of plants. This is my planning journal so far, section by section, from my sketchbook.</p>
       </div>
-      <div class="label">Requirements</div>
-      <div class="row first" style="--n:1">
-        <div class="panel">
-          <h4>Starting requirements</h4>
-          <ul class="reqs">
-            <li><span class="id">R1</span><span>The wall waters its plants without manual input.</span></li>
-            <li><span class="id">R2</span><span>The wall lights its plants without manual input.</span></li>
-          </ul>
+      <div class="board">
+        <div class="bt">Progress board</div>
+        <div class="row" style="--n:3">
+          <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Intro and concept sketch</li><li>Requirements</li><li>Hardware list</li><li>Mechanical layout</li><li>Plant holder sketch</li></ul></div>
+          <div class="panel col-prog"><h4>In progress<span>4</span></h4><ul class="list"><li>Firmware notes</li><li>Electrical (12V so far)</li><li>HMI notes</li><li>Tuning and modeling notes</li></ul></div>
+          <div class="panel col-next"><h4>Next<span>5</span></h4><ul class="list"><li>Pick the communication protocol</li><li>Decide where flow meters go</li><li>Move the hygrometers</li><li>Software section (still blank)</li><li>First build and tests</li></ul></div>
         </div>
       </div>
-      <div class="callout">
-        <b>Details to come</b>
-        <p>The process, parts and photos for this project will be added here as it moves forward, in the same chapter format as the other two.</p>
-      </div>
-      <div class="row" style="--n:3">
-        <figure class="slot"><span>Image to add: sketch or concept</span></figure>
-        <figure class="slot"><span>Image to add: first prototype</span></figure>
-        <figure class="slot"><span>Image to add: the wall in use</span></figure>
+
+      <dl class="facts">
+        <div><dt>Goal</dt><dd>Covers watering and light, stackable</dd></div>
+        <div><dt>Language</dt><dd>Rust, to learn it</dd></div>
+        <div><dt>Power</dt><dd>12V</dd></div>
+        <div><dt>Time limit</dt><dd>Good enough in 1 month</dd></div>
+      </dl>
+
+      <div class="chapters">
+        <aside class="rail" aria-label="Plant wall updates">
+          <div class="rt">Updates</div>
+          <ol>
+            <li data-rail="c0-intro"><a href="#c0-intro">Intro</a></li>
+            <li data-rail="c0-req"><a href="#c0-req">Requirements</a></li>
+            <li data-rail="c0-hw"><a href="#c0-hw">Hardware</a></li>
+            <li data-rail="c0-mech"><a href="#c0-mech">Mechanical</a></li>
+            <li data-rail="c0-holder"><a href="#c0-holder">Plant holder</a></li>
+            <li data-rail="c0-fw"><a href="#c0-fw">Firmware</a></li>
+            <li data-rail="c0-sw"><a href="#c0-sw">Software</a></li>
+            <li data-rail="c0-elec"><a href="#c0-elec">Electrical</a></li>
+            <li data-rail="c0-hmi"><a href="#c0-hmi">HMI</a></li>
+            <li data-rail="c0-tune"><a href="#c0-tune">Tuning and modeling</a></li>
+          </ol>
+        </aside>
+        <div class="content">
+          <article class="chapter" id="c0-intro" data-chapter>
+            <span class="eyebrow">Update 1</span>
+            <h3>Intro</h3>
+            <p class="lead">I want to create a plant wall that is autonomous, because I am terrible at taking care of them.</p>
+            <ul class="list" style="margin-top: 20px">
+              <li>Covering watering and light.</li>
+              <li>Just choose the amount of light and water.</li>
+              <li>Selectable plants, to have pre-built profiles?</li>
+              <li>Stackable.</li>
+            </ul>
+            <figure class="sk hand">
+              <figcaption><b>First concept.</b> A gravity assisted water tank on top (does it still need to be, if I use a motor?), a control board and pump on the side, a water tube with a valve at each layer to limit pressure dilution, and lights under each module and the tank. Lighting stays on the lowest layer for manufacturing ease.</figcaption>
+              <img src="plant-concept.png" width="1500" height="1162" alt="Sketch of the plant wall: water tank on top, control board, pump and water tube on the right, three stacked planter rows with lights underneath, and a valve at each layer." loading="lazy">
+            </figure>
+          </article>
+
+          <article class="chapter" id="c0-req" data-chapter>
+            <span class="eyebrow">Update 2</span>
+            <h3>Requirements</h3>
+            <p class="lead">What I wrote down before building anything.</p>
+            <div class="row" style="--n:1">
+              <div class="panel">
+                <ul class="reqs">
+                  <li><span class="id">R1</span><span>Time limitation: get it to "good enough" in 1 month.</span></li>
+                  <li><span class="id">R2</span><span>Easy for my wife to use, as she is not in the software world, because this is going on her office wall.</span></li>
+                  <li><span class="id">R3</span><span>In depth understanding of embedded systems. I do software work and testing, but have a gap in knowledge of the hardware and firmware part. I want to do the whole process to understand.</span></li>
+                  <li><span class="id">R4</span><span>Use Rust to write it, as it is smaller and quicker than C, and I want to learn it as well.</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c0-hw" data-chapter>
+            <span class="eyebrow">Update 3</span>
+            <h3>Hardware</h3>
+            <p class="lead">The parts I think I need.</p>
+            <div class="bom">
+              <div class="brow"><span class="nm">Pump or motor</span><span class="nt">Moves the water. An auto windshield washer pump should be reliable enough and common enough.</span></div>
+              <div class="brow"><span class="nm">Valves</span><span class="nt">One for each module and each row.</span></div>
+              <div class="brow"><span class="nm">Tubing</span><span class="nt">Auto windshield washer diameter, to keep it consistent and cheap.</span></div>
+              <div class="brow"><span class="nm">Plant holder</span><span class="nt">A module to hold the plants.</span></div>
+              <div class="brow"><span class="nm">Plant row</span><span class="nt">A row of plants. Width is undefined so far, possibly varying widths.</span></div>
+              <div class="brow"><span class="nm">Water tank</span><span class="nt">Holds the water. It needs to be easy to fill and hold enough for a week or two.</span></div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c0-mech" data-chapter>
+            <span class="eyebrow">Update 4</span>
+            <h3>Mechanical</h3>
+            <p class="lead">The water path as a block diagram: tank, pump, flow rate sensor, then a row valve for each row and a valve for each planter.</p>
+            <figure class="sk hand">
+              <figcaption><b>Water flow.</b> The tank (with a refill) feeds the pump, then a flow rate sensor. Each row has its own row valve, and each planter its own valve and outlet.</figcaption>
+              <img src="plant-mechanical.png" width="1500" height="2274" alt="Block diagram: water tank to pump to flow rate sensor, then two rows each with a row valve and five planter valves with outlets." loading="lazy">
+            </figure>
+          </article>
+
+          <article class="chapter" id="c0-holder" data-chapter>
+            <span class="eyebrow">Update 5</span>
+            <h3>Plant holder</h3>
+            <p class="lead">A first sketch of a single planter, with the water outlet, the hygrometer and the valve marked.</p>
+            <figure class="sk hand">
+              <figcaption><b>Planter notes.</b> Move the water outlet to a corner, but up to the soil line so it does not interfere with plant growth. Move the hygrometers to the opposite side of the hose: it will add time to read, but will be more accurate to the total soil moisture level. Maybe add a reading delay.</figcaption>
+              <img src="plant-holder.png" width="1500" height="1869" alt="Sketch of a planter box with a water output, hygrometers and a valve, and notes about where to move each." loading="lazy">
+            </figure>
+            <div class="row" style="--n:1">
+              <div class="panel">
+                <h4>Still to settle</h4>
+                <ul class="list">
+                  <li>Drainage.</li>
+                  <li>Quick connect and disconnect.</li>
+                  <li>Water and sensor integrated.</li>
+                  <li>Add a flow meter here, or only per row, or per whole system?</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="chapter" id="c0-fw" data-chapter>
+            <span class="eyebrow">Update 6</span>
+            <h3>Firmware</h3>
+            <p class="lead">What the firmware has to check and keep.</p>
+            <ul class="list" style="margin-top: 20px">
+              <li>Checks for the number of connected sensors.</li>
+              <li>Checks sensor readings to make sure they are in spec: rate and range.</li>
+              <li>Makes sure things like flow rate can be updated without a flash, by keeping them in EEPROM.</li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c0-sw" data-chapter>
+            <span class="eyebrow">Update 7</span>
+            <h3>Software</h3>
+            <p class="lead">Nothing written here yet. The page in my notebook is just the heading for now.</p>
+          </article>
+
+          <article class="chapter" id="c0-elec" data-chapter>
+            <span class="eyebrow">Update 8</span>
+            <h3>Electrical</h3>
+            <p class="lead">Only two lines so far.</p>
+            <ul class="list" style="margin-top: 20px">
+              <li>Communication protocol: still to choose.</li>
+              <li>Run on 12V.</li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c0-hmi" data-chapter>
+            <span class="eyebrow">Update 9</span>
+            <h3>HMI</h3>
+            <p class="lead">How a person will set it up.</p>
+            <ul class="list" style="margin-top: 20px">
+              <li>Allow the user to create custom profiles.</li>
+              <li>Pre-made profiles in a drop-down for various plants.</li>
+            </ul>
+          </article>
+
+          <article class="chapter" id="c0-tune" data-chapter>
+            <span class="eyebrow">Update 10</span>
+            <h3>Tuning and modeling</h3>
+            <p class="lead">With a flow meter, I will need to compare the actual water out against the calculated amount.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Three sections of a valve cycle</h4>
+                <ul class="list">
+                  <li>Valve opening.</li>
+                  <li>Valve steady state open.</li>
+                  <li>Valve closing.</li>
+                </ul>
+                <p style="margin-top: 12px">This is probably affected by the total number of shelves. What is the minimum number of sensors I can get away with?</p>
+              </div>
+              <div class="panel">
+                <h4>Hygrometer</h4>
+                <p>Water amount versus soil moisture level. Probably not linear, so I will need a curve parameter.</p>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
       <nav class="next" aria-label="Project navigation"><a href="#home">← All projects</a><a href="#razr">Next: RAZR keyboard →</a></nav>
     </section>
@@ -365,36 +490,45 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
       <div class="head">
         <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 02</span><span class="pill live">In progress</span>
         <h2>Motorola RAZR with a slide-out QWERTY keyboard</h2>
-        <p class="sub">Retrofitting a flip RAZR with a BlackBerry keyboard, built on a donor Motorola Razr Plus. The page follows the build in order, from the first sketches to requirements, parts, software and the body design.</p>
+        <p class="sub">I want a slide-out keyboard phone, so I am retrofitting a flip RAZR with a BlackBerry keyboard on a donor Motorola Razr Plus. This is my build journal, newest thinking at the bottom, starting with the first sketches.</p>
       </div>
 
-      <div class="label">Initial designs, from the BOOX sketchbook</div>
+      <div class="board">
+        <div class="bt">Progress board</div>
+        <div class="row" style="--n:3">
+          <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Initial sketches and goal</li><li>Requirements</li><li>Donor phone chosen and torn down</li><li>Outer screen software</li><li>Parts list ($135.80 so far)</li></ul></div>
+          <div class="panel col-prog"><h4>In progress<span>1</span></h4><ul class="list"><li>Body design V3 in CAD</li></ul></div>
+          <div class="panel col-next"><h4>Next<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
+        </div>
+      </div>
+
+      <div class="label">Notes from the sketchbook</div>
       <div class="row first" style="--n:1">
         <figure class="sk">
-          <img src="razr-goal.png" width="1628" height="825" alt="Handwritten goal: turn the Razr into a slide phone. No big screen, slide or rotate QWERTY, slightly taller, thinner than the full fold." loading="lazy">
           <figcaption><b>Goal.</b> Turn the Razr into a slide phone: no big screen, a slide or rotate QWERTY, slightly taller, and thinner than the full fold.</figcaption>
+          <img src="razr-goal.png" width="1628" height="825" alt="Handwritten goal: turn the Razr into a slide phone. No big screen, slide or rotate QWERTY, slightly taller, thinner than the full fold." loading="lazy">
         </figure>
       </div>
       <div class="row" style="--n:1">
         <figure class="sk tall">
-          <img src="razr-initial-design.png" width="1616" height="2140" alt="Sketch of the initial design: a slide-up mechanism with a BlackBerry Q10 keyboard under the screen, center of gravity marked, and a side view of the internal stack with keyboard, battery, Arduino, pass-through charger, main board and camera module." loading="lazy">
           <figcaption><b>Initial design.</b> A slide-up mechanism with the Q10 keyboard under the screen. Notes cover the center of gravity, keeping the camera module separate from the main board, and the internal stack-up.</figcaption>
+          <img src="razr-initial-design.png" width="1616" height="2140" alt="Sketch of the initial design: a slide-up mechanism with a BlackBerry Q10 keyboard under the screen, center of gravity marked, and a side view of the internal stack with keyboard, battery, Arduino, pass-through charger, main board and camera module." loading="lazy">
         </figure>
       </div>
       <div class="row" style="--n:2">
         <figure class="sk">
-          <div class="frame"><img src="razr-flat-vs-hinge.png" width="1541" height="1013" alt="Flat versus hinge comparison. Flat: sleek, easier to integrate screen wires, easier design. Hinge: super cool, size limited, physical position stops easier to implement. First version will be flat." loading="lazy"></div>
           <figcaption><b>Flat or hinge.</b> Flat is sleeker and easier for the screen wires. A hinge is limited by size. The first version will be flat.</figcaption>
+          <div class="frame"><img src="razr-flat-vs-hinge.png" width="1541" height="1013" alt="Flat versus hinge comparison. Flat: sleek, easier to integrate screen wires, easier design. Hinge: super cool, size limited, physical position stops easier to implement. First version will be flat." loading="lazy"></div>
         </figure>
         <figure class="sk">
-          <div class="frame"><img src="razr-rotated-design.png" width="1603" height="1403" alt="Sketch of a rotated design with a pivot point, with open questions about where the battery and screen ribbon would go." loading="lazy"></div>
           <figcaption><b>Rotated design.</b> A pivot-point idea with open questions about the battery and screen ribbon. Shelved for now.</figcaption>
+          <div class="frame"><img src="razr-rotated-design.png" width="1603" height="1403" alt="Sketch of a rotated design with a pivot point, with open questions about where the battery and screen ribbon would go." loading="lazy"></div>
         </figure>
       </div>
       <div class="row" style="--n:1">
         <figure class="sk">
-          <img src="razr-open-questions.png" width="1788" height="1048" alt="Handwritten open questions: do I need both batteries, is there a screen without camera bumps, can the screen orientation be flipped, how does the open and close sensor work." loading="lazy">
           <figcaption><b>Open questions.</b> Whether both batteries are needed, finding a screen without camera bumps, flipping the screen orientation, and how the open and close sensor works.</figcaption>
+          <img src="razr-open-questions.png" width="1788" height="1048" alt="Handwritten open questions: do I need both batteries, is there a screen without camera bumps, can the screen orientation be flipped, how does the open and close sensor work." loading="lazy">
         </figure>
       </div>
 
@@ -406,8 +540,8 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
       </dl>
 
       <div class="chapters">
-        <aside class="rail" aria-label="Project 1 chapters">
-          <div class="rt">Process</div>
+        <aside class="rail" aria-label="RAZR updates">
+          <div class="rt">Updates</div>
           <ol>
             <li data-rail="c1-idea"><a href="#c1-idea">The idea</a></li>
             <li data-rail="c1-req"><a href="#c1-req">Requirements</a></li>
@@ -423,7 +557,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 
         <div class="content">
           <article class="chapter" id="c1-idea" data-chapter>
-            <span class="eyebrow">Chapter 1</span>
+            <span class="eyebrow">Update 1</span>
             <h3>The idea</h3>
             <p class="lead">Make a modern QWERTY keyboard device that slides out. It keeps a small screen and modern hardware, and uses BlackBerry keyboards because they felt good to type on.</p>
             <ul class="list" style="margin-top: 20px">
@@ -471,7 +605,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-req" data-chapter>
-            <span class="eyebrow">Chapter 2</span>
+            <span class="eyebrow">Update 2</span>
             <h3>Requirements</h3>
             <p class="lead">Two design requirements drive the build. The constraints below come from the donor phone and shape how each requirement can be met.</p>
             <div class="row" style="--n:2">
@@ -505,7 +639,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-mule" data-chapter>
-            <span class="eyebrow">Chapter 3</span>
+            <span class="eyebrow">Update 3</span>
             <h3>The donor phone</h3>
             <p class="lead">The development phone is a test unit, called the mule. It was bought broken on purpose to keep cost down.</p>
             <div class="row" style="--n:3">
@@ -535,7 +669,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-teardown" data-chapter>
-            <span class="eyebrow">Chapter 4</span>
+            <span class="eyebrow">Update 4</span>
             <h3>Teardown</h3>
             <p class="lead">Before drawing anything, the phone was taken apart and photographed in sections to understand the stack and the ribbon routing.</p>
             <div class="row" style="--n:3">
@@ -556,7 +690,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-software" data-chapter>
-            <span class="eyebrow">Chapter 5</span>
+            <span class="eyebrow">Update 5</span>
             <h3>Outer screen software</h3>
             <p class="lead">With the inner screen removed, the phone has to run entirely on the outer screen. By default, Android on the Razr blocks many apps there.</p>
             <div class="row" style="--n:2">
@@ -626,12 +760,12 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-body" data-chapter>
-            <span class="eyebrow">Chapter 6</span>
+            <span class="eyebrow">Update 6</span>
             <h3>Body design</h3>
             <p class="lead">The body is modeled in CAD and printed. Version 3 is in progress. The recording below walks around the current assembly in Onshape.</p>
             <figure class="figure">
-              <video class="video" id="cad-video" src="demo.mp4" poster="poster.jpg" controls muted loop playsinline preload="metadata" aria-label="Screen recording of the V3 body assembly in Onshape, viewed from the side, front and top"></video>
               <figcaption>Screen recording of the V3 assembly in Onshape, shown from the side, front and top. The slider mate joins the two halves.</figcaption>
+              <video class="video" id="cad-video" src="demo.mp4" poster="poster.jpg" controls muted loop playsinline preload="metadata" aria-label="Screen recording of the V3 body assembly in Onshape, viewed from the side, front and top"></video>
             </figure>
             <p style="margin-top: 16px"><a href="https://cad.onshape.com/documents/51dd4e57e4c8c3349e2b81be/w/5f7d954e8cba4436397dca66/e/ce9da926a45f0d3afeef535f">Open the CAD model in Onshape</a></p>
             <div class="callout">
@@ -648,7 +782,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-parts" data-chapter>
-            <span class="eyebrow">Chapter 7</span>
+            <span class="eyebrow">Update 7</span>
             <h3>Parts and cost</h3>
             <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
             <div class="bom" role="table" aria-label="Bill of materials">
@@ -663,7 +797,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-recovery" data-chapter>
-            <span class="eyebrow">Chapter 8</span>
+            <span class="eyebrow">Update 8</span>
             <h3>Recovery and references</h3>
             <p class="lead">Changing how the phone behaves carries some risk of bricking it, so there is a recovery path, and there are similar builds to learn from.</p>
             <div class="row" style="--n:2">
@@ -682,7 +816,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-next" data-chapter>
-            <span class="eyebrow">Chapter 9</span>
+            <span class="eyebrow">Update 9</span>
             <h3>What is next</h3>
             <ul class="list" style="margin-top: 8px; font-size: 17px">
               <li>Finish the V3 fixes: keyboard spacing, a longer body, and the charging port position.</li>
@@ -703,7 +837,15 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       <div class="head">
         <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 03</span><span class="pill live">In progress</span>
         <h2>Creating a test track for BeamNG</h2>
-        <p class="sub">A custom track built for BeamNG, as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
+        <p class="sub">I am building a custom track for BeamNG as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
+      </div>
+      <div class="board">
+        <div class="bt">Progress board</div>
+        <div class="row" style="--n:3">
+          <div class="panel col-done"><h4>Done<span>4</span></h4><ul class="list"><li>Base map from real map data</li><li>PBR textures and terrain types</li><li>Early terrain painting and trees</li><li>Spawn points</li></ul></div>
+          <div class="panel col-prog"><h4>In progress<span>2</span></h4><ul class="list"><li>Roads, decals and friction by surface</li><li>Fixes after the 0.39 update</li></ul></div>
+          <div class="panel col-next"><h4>Next<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
+        </div>
       </div>
       <dl class="facts">
         <div><dt>Type</dt><dd>Simulation environment</dd></div>
@@ -714,18 +856,18 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
 
       <div class="row" style="--n:2; margin-top: 32px">
         <figure class="ph">
-          <img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the Flat Rock map in BeamNG, with painted terrain and orange autumn trees around the test pads" loading="lazy">
           <figcaption><b>Main overview.</b> The Flat Rock map in BeamNG.</figcaption>
+          <img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the Flat Rock map in BeamNG, with painted terrain and orange autumn trees around the test pads" loading="lazy">
         </figure>
         <figure class="ph">
-          <img src="beamng-overview-2.jpg" width="954" height="634" alt="Closer aerial view of the Flat Rock test pads and roads in BeamNG" loading="lazy">
           <figcaption><b>Main overview, closer.</b> The test pads and roads.</figcaption>
+          <img src="beamng-overview-2.jpg" width="954" height="634" alt="Closer aerial view of the Flat Rock test pads and roads in BeamNG" loading="lazy">
         </figure>
       </div>
 
       <div class="chapters">
-        <aside class="rail" aria-label="Project 2 chapters">
-          <div class="rt">Process</div>
+        <aside class="rail" aria-label="BeamNG updates">
+          <div class="rt">Updates</div>
           <ol>
             <li data-rail="c2-req"><a href="#c2-req">Requirements</a></li>
             <li data-rail="c2-data"><a href="#c2-data">Base map data</a></li>
@@ -741,7 +883,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
 
         <div class="content">
           <article class="chapter" id="c2-req" data-chapter>
-            <span class="eyebrow">Chapter 1</span>
+            <span class="eyebrow">Update 1</span>
             <h3>Requirements</h3>
             <p class="lead">The near-term requirement is to learn how BeamNG levels and mods are made. The longer-term requirement is a driver-in-the-loop system that uses a real ESP brake system.</p>
             <div class="row" style="--n:2">
@@ -767,7 +909,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-data" data-chapter>
-            <span class="eyebrow">Chapter 2</span>
+            <span class="eyebrow">Update 2</span>
             <h3>Base map data</h3>
             <p class="lead">The first question was where to get real-world terrain. The open question was whether the resolution would be good enough to drive on, or look terrible.</p>
             <div class="row" style="--n:3">
@@ -801,7 +943,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-edit" data-chapter>
-            <span class="eyebrow">Chapter 3</span>
+            <span class="eyebrow">Update 3</span>
             <h3>Editing the base map</h3>
             <p class="lead">Only the base map is modified, since the other layers affect visuals only.</p>
             <div class="row" style="--n:2">
@@ -824,7 +966,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-tex" data-chapter>
-            <span class="eyebrow">Chapter 4</span>
+            <span class="eyebrow">Update 4</span>
             <h3>PBR textures</h3>
             <p class="lead">BeamNG recently moved to physically based rendering. A texture is described by a set of image maps that tell the engine how light behaves on it.</p>
             <div class="row" style="--n:2">
@@ -852,7 +994,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-build" data-chapter>
-            <span class="eyebrow">Chapter 5</span>
+            <span class="eyebrow">Update 5</span>
             <h3>Terrain and environment</h3>
             <p class="lead">With the base map and textures in place, the map was built up in layers.</p>
             <ol class="log" style="margin-top: 24px">
@@ -897,7 +1039,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-spawn" data-chapter>
-            <span class="eyebrow">Chapter 6</span>
+            <span class="eyebrow">Update 6</span>
             <h3>Spawn points</h3>
             <p class="lead">Spawn points let anyone start the track close to what they want to test.</p>
             <div class="row" style="--n:2">
@@ -923,18 +1065,18 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             </div>
             <div class="row" style="--n:2">
               <figure class="ph">
-                <img src="beamng-spawn-1.jpg" width="1464" height="900" alt="Aerial view of a spawn point beside large white placeholder buildings and parked vehicles" loading="lazy">
                 <figcaption><b>Spawn view 1.</b></figcaption>
+                <img src="beamng-spawn-1.jpg" width="1464" height="900" alt="Aerial view of a spawn point beside large white placeholder buildings and parked vehicles" loading="lazy">
               </figure>
               <figure class="ph">
-                <img src="beamng-spawn-2.jpg" width="1600" height="907" alt="Aerial view of a spawn point on a hill with a looping road" loading="lazy">
                 <figcaption><b>Spawn view 2.</b></figcaption>
+                <img src="beamng-spawn-2.jpg" width="1600" height="907" alt="Aerial view of a spawn point on a hill with a looping road" loading="lazy">
               </figure>
             </div>
           </article>
 
           <article class="chapter" id="c2-miss" data-chapter>
-            <span class="eyebrow">Chapter 7</span>
+            <span class="eyebrow">Update 7</span>
             <h3>Missions</h3>
             <p class="lead">Missions are the way to introduce the simulator at work. Two types are planned, both for driver training.</p>
             <div class="row" style="--n:2">
@@ -977,7 +1119,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-issues" data-chapter>
-            <span class="eyebrow">Chapter 8</span>
+            <span class="eyebrow">Update 8</span>
             <h3>Open issues</h3>
             <div class="callout" style="margin-top: 0">
               <b>Game update 0.39</b>
@@ -993,7 +1135,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-dil" data-chapter>
-            <span class="eyebrow">Chapter 9</span>
+            <span class="eyebrow">Update 9</span>
             <h3>Driver-in-the-loop plan</h3>
             <p class="lead">This phase is further down the line. It would become a work project and require the BeamNG.tech license. For now it is a learning project.</p>
             <div class="row" style="--n:2">
