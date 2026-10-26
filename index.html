@@ -77,6 +77,7 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .head h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
 .head .sub { color: var(--muted); font-size: 18px; max-width: 62ch; margin-top: 16px; }
 .head .pill { margin-left: 12px; }
+.head .sub-list { margin-top: 14px; max-width: 62ch; }
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px 28px; margin: 36px 0 0; padding: 20px 0; border-block: 1px solid var(--glass-line); }
 .facts dt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
 .facts dd { margin: 4px 0 0; font-size: 15px; }
@@ -254,6 +255,18 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .board .col-done li::after { content: "\2713"; float: right; color: var(--accent); }
 .board .col-done h4 { color: var(--fg); }
 
+
+/* auto-scrolling image list */
+.show { margin-top: 32px; }
+.show .slides { display: grid; }
+.show .slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s; }
+.show .slide.on { opacity: 1; visibility: visible; }
+.show .slide img { aspect-ratio: 16 / 9; object-fit: cover; }
+.show .dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.show .dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid var(--faint); background: transparent; cursor: pointer; }
+.show .dots button.on { background: var(--accent); border-color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .show .slide { transition: none; } }
+
 /* photos */
 .ph { margin: 0; width: 100%; min-width: 0; }
 .ph img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--glass-line); background: #05050a; }
@@ -357,6 +370,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <li data-rail="c0-elec"><a href="#c0-elec">Electrical</a></li>
             <li data-rail="c0-hmi"><a href="#c0-hmi">HMI</a></li>
             <li data-rail="c0-tune"><a href="#c0-tune">Tuning and modeling</a></li>
+            <li data-rail="c0-res"><a href="#c0-res">Resources</a></li>
           </ol>
         </aside>
         <div class="content">
@@ -495,6 +509,19 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               </div>
             </div>
           </article>
+
+          <article class="chapter" id="c0-res" data-chapter>
+            <span class="eyebrow">Update 11</span>
+            <h3>Resources</h3>
+            <p class="lead">Links I am using to learn STM32 firmware.</p>
+            <ul class="list links-list" style="margin-top: 20px">
+              <li><a href="https://www.st.com/resource/en/product_training/stm32l4_system_gpio.pdf">STM32L4 system and GPIO training (ST, PDF)</a></li>
+              <li><a href="https://purge12.github.io/blog/writing-stm32-firmware/">Writing STM32 firmware (purge12 blog)</a></li>
+              <li><a href="https://cimpleo.com/blog/stm32-firmware-development/">STM32 firmware development (Cimpleo blog)</a></li>
+              <li><a href="https://www.compilenrun.com/docs/category/stm32-tutorial/">STM32 tutorial (CompileNRun)</a></li>
+              <li><a href="https://www.st.com/resource/en/application_note/an4894-how-to-use-eeprom-emulation-on-stm32-mcus-stmicroelectronics.pdf">AN4894: How to use EEPROM emulation on STM32 MCUs (ST, PDF)</a></li>
+            </ul>
+          </article>
         </div>
       </div>
       <nav class="next" aria-label="Project navigation"><a href="#home">← All projects</a><a href="#razr">Next: RAZR keyboard →</a></nav>
@@ -504,10 +531,12 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
       <div class="head">
         <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 02</span><span class="pill live">In progress</span>
         <h2>Motorola RAZR with a slide-out QWERTY keyboard</h2>
-         <p class="sub">Retrofitting a flip Motorola RAZR into a modern Blackberry with a slide out keyboard, using a 2025 Motorola RAZR, a Blackberry Q10 keyboard, Arduino Micro, and Android dev tools to remove the RAZR internal screen and external screen application limitations and configurations.</p>
-         <p class="sub">   - Arduino Micro to adapt Q10 board to Android system as USB keyboard.</p>
-         <p class="sub">   - CAD to design for sliding mechanism created using OnShape.</p>
-         <p class="sub">   - Using Android SDK tools to remove internal screen requirements.</p>
+        <p class="sub">Retrofitting a flip Motorola RAZR into a modern Blackberry with a slide out keyboard, using a 2025 Motorola RAZR, a Blackberry Q10 keyboard, Arduino Micro, and Android dev tools to remove the RAZR internal screen and external screen application limitations and configurations.</p>
+        <ul class="list sub-list">
+          <li>Arduino Micro to adapt Q10 board to Android system as USB keyboard.</li>
+          <li>CAD to design for sliding mechanism created using OnShape.</li>
+          <li>Using Android SDK tools to remove internal screen requirements.</li>
+        </ul>
       </div>
 
       <div class="board">
@@ -519,48 +548,11 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         </div>
       </div>
 
-      <div class="label">Notes from the sketchbook</div>
-      <p class="note">Full notebook: <a href="https://drive.google.com/file/d/1E1YdGZxQlou4Xevd5c7-vfD_76FqWapn/view?usp=sharing">open the BOOX notebook</a></p>
-      <div class="row first" style="--n:1">
-        <figure class="sk">
-          <figcaption><b>Goal.</b> Turn the Razr into a slide phone: no big screen, a slide or rotate QWERTY, slightly taller, and thinner than the full fold.</figcaption>
-          <img src="razr-goal.png" width="1628" height="825" alt="Handwritten goal: turn the Razr into a slide phone. No big screen, slide or rotate QWERTY, slightly taller, thinner than the full fold." loading="lazy">
-        </figure>
-      </div>
-      <div class="row" style="--n:1">
-        <figure class="sk tall">
-          <figcaption><b>Initial design.</b> A slide-up mechanism with the Q10 keyboard under the screen. Notes cover the center of gravity, keeping the camera module separate from the main board, and the internal stack-up.</figcaption>
-          <img src="razr-initial-design.png" width="1616" height="2140" alt="Sketch of the initial design: a slide-up mechanism with a BlackBerry Q10 keyboard under the screen, center of gravity marked, and a side view of the internal stack with keyboard, battery, Arduino, pass-through charger, main board and camera module." loading="lazy">
-        </figure>
-      </div>
-      <div class="row" style="--n:2">
-        <figure class="sk">
-          <figcaption><b>Flat or hinge.</b> Flat is sleeker and easier for the screen wires. A hinge is limited by size. The first version will be flat.</figcaption>
-          <div class="frame"><img src="razr-flat-vs-hinge.png" width="1541" height="1013" alt="Flat versus hinge comparison. Flat: sleek, easier to integrate screen wires, easier design. Hinge: super cool, size limited, physical position stops easier to implement. First version will be flat." loading="lazy"></div>
-        </figure>
-        <figure class="sk">
-          <figcaption><b>Rotated design.</b> A pivot-point idea with open questions about the battery and screen ribbon. Shelved for now.</figcaption>
-          <div class="frame"><img src="razr-rotated-design.png" width="1603" height="1403" alt="Sketch of a rotated design with a pivot point, with open questions about where the battery and screen ribbon would go." loading="lazy"></div>
-        </figure>
-      </div>
-      <div class="row" style="--n:1">
-        <figure class="sk">
-          <figcaption><b>Open questions.</b> Whether both batteries are needed, finding a screen without camera bumps, flipping the screen orientation, and how the open and close sensor works.</figcaption>
-          <img src="razr-open-questions.png" width="1788" height="1048" alt="Handwritten open questions: do I need both batteries, is there a screen without camera bumps, can the screen orientation be flipped, how does the open and close sensor work." loading="lazy">
-        </figure>
-      </div>
-
-      <dl class="facts">
-        <div><dt>Donor phone</dt><dd>Motorola RAZR Plus 5G (2025), bought with a broken inner screen</dd></div>
-        <div><dt>Keyboard</dt><dd>BlackBerry Q10</dd></div>
-        <div><dt>Parts cost so far</dt><dd>$135.80</dd></div>
-        <div><dt>Status</dt><dd>Body design V3 in progress</dd></div>
-      </dl>
-
       <div class="chapters">
         <aside class="rail" aria-label="RAZR updates">
           <div class="rt">Updates</div>
           <ol>
+            <li data-rail="c1-intro"><a href="#c1-intro">Intro</a></li>
             <li data-rail="c1-idea"><a href="#c1-idea">The idea</a></li>
             <li data-rail="c1-req"><a href="#c1-req">Requirements</a></li>
             <li data-rail="c1-mule"><a href="#c1-mule">The donor phone</a></li>
@@ -574,8 +566,51 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         </aside>
 
         <div class="content">
-          <article class="chapter" id="c1-idea" data-chapter>
+          <article class="chapter" id="c1-intro" data-chapter>
             <span class="eyebrow">Update 1</span>
+            <h3>Intro</h3>
+
+          <div class="label">Notes from the sketchbook</div>
+          <p class="note">Full notebook: <a href="https://drive.google.com/file/d/1E1YdGZxQlou4Xevd5c7-vfD_76FqWapn/view?usp=sharing">open the BOOX notebook</a></p>
+          <div class="row first" style="--n:1">
+            <figure class="sk">
+              <figcaption><b>Goal.</b> Turn the Razr into a slide phone: no big screen, a slide or rotate QWERTY, slightly taller, and thinner than the full fold.</figcaption>
+              <img src="razr-goal.png" width="1628" height="825" alt="Handwritten goal: turn the Razr into a slide phone. No big screen, slide or rotate QWERTY, slightly taller, thinner than the full fold." loading="lazy">
+            </figure>
+          </div>
+          <div class="row" style="--n:1">
+            <figure class="sk tall">
+              <figcaption><b>Initial design.</b> A slide-up mechanism with the Q10 keyboard under the screen. Notes cover the center of gravity, keeping the camera module separate from the main board, and the internal stack-up.</figcaption>
+              <img src="razr-initial-design.png" width="1616" height="2140" alt="Sketch of the initial design: a slide-up mechanism with a BlackBerry Q10 keyboard under the screen, center of gravity marked, and a side view of the internal stack with keyboard, battery, Arduino, pass-through charger, main board and camera module." loading="lazy">
+            </figure>
+          </div>
+          <div class="row" style="--n:2">
+            <figure class="sk">
+              <figcaption><b>Flat or hinge.</b> Flat is sleeker and easier for the screen wires. A hinge is limited by size. The first version will be flat.</figcaption>
+              <div class="frame"><img src="razr-flat-vs-hinge.png" width="1541" height="1013" alt="Flat versus hinge comparison. Flat: sleek, easier to integrate screen wires, easier design. Hinge: super cool, size limited, physical position stops easier to implement. First version will be flat." loading="lazy"></div>
+            </figure>
+            <figure class="sk">
+              <figcaption><b>Rotated design.</b> A pivot-point idea with open questions about the battery and screen ribbon. Shelved for now.</figcaption>
+              <div class="frame"><img src="razr-rotated-design.png" width="1603" height="1403" alt="Sketch of a rotated design with a pivot point, with open questions about where the battery and screen ribbon would go." loading="lazy"></div>
+            </figure>
+          </div>
+          <div class="row" style="--n:1">
+            <figure class="sk">
+              <figcaption><b>Open questions.</b> Whether both batteries are needed, finding a screen without camera bumps, flipping the screen orientation, and how the open and close sensor works.</figcaption>
+              <img src="razr-open-questions.png" width="1788" height="1048" alt="Handwritten open questions: do I need both batteries, is there a screen without camera bumps, can the screen orientation be flipped, how does the open and close sensor work." loading="lazy">
+            </figure>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Donor phone</dt><dd>Motorola RAZR Plus 5G (2025), bought with a broken inner screen</dd></div>
+            <div><dt>Keyboard</dt><dd>BlackBerry Q10</dd></div>
+            <div><dt>Parts cost so far</dt><dd>$135.80</dd></div>
+            <div><dt>Status</dt><dd>Body design V3 in progress</dd></div>
+          </dl>
+          </article>
+
+          <article class="chapter" id="c1-idea" data-chapter>
+            <span class="eyebrow">Update 2</span>
             <h3>The idea</h3>
             <p class="lead">Make a modern QWERTY keyboard device that slides out. It keeps a small screen and modern hardware, and uses BlackBerry keyboards because they felt good to type on.</p>
             <ul class="list" style="margin-top: 20px">
@@ -623,7 +658,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-req" data-chapter>
-            <span class="eyebrow">Update 2</span>
+            <span class="eyebrow">Update 3</span>
             <h3>Requirements</h3>
             <p class="lead">Two design requirements drive the build. The constraints below come from the donor phone and shape how each requirement can be met.</p>
             <div class="row" style="--n:2">
@@ -657,7 +692,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-mule" data-chapter>
-            <span class="eyebrow">Update 3</span>
+            <span class="eyebrow">Update 4</span>
             <h3>The donor phone</h3>
             <p class="lead">The development phone is a test unit, called the mule. It was bought broken on purpose to keep cost down.</p>
             <div class="row" style="--n:3">
@@ -687,7 +722,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-teardown" data-chapter>
-            <span class="eyebrow">Update 4</span>
+            <span class="eyebrow">Update 5</span>
             <h3>Teardown</h3>
             <p class="lead">Before drawing anything, the phone was taken apart and photographed in sections to understand the stack and the ribbon routing.</p>
             <div class="row" style="--n:3">
@@ -708,7 +743,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </article>
 
           <article class="chapter" id="c1-software" data-chapter>
-            <span class="eyebrow">Update 5</span>
+            <span class="eyebrow">Update 6</span>
             <h3>Outer screen software</h3>
             <p class="lead">With the inner screen removed, the phone has to run entirely on the outer screen. By default, Android on the Razr blocks many apps there.</p>
             <div class="row" style="--n:2">
@@ -778,7 +813,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-body" data-chapter>
-            <span class="eyebrow">Update 6</span>
+            <span class="eyebrow">Update 7</span>
             <h3>Body design</h3>
             <p class="lead">The body is modeled in CAD and printed. Version 3 is in progress. The recording below walks around the current assembly in Onshape.</p>
             <figure class="figure">
@@ -800,7 +835,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-parts" data-chapter>
-            <span class="eyebrow">Update 7</span>
+            <span class="eyebrow">Update 8</span>
             <h3>Parts and cost</h3>
             <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
             <div class="bom" role="table" aria-label="Bill of materials">
@@ -815,7 +850,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-recovery" data-chapter>
-            <span class="eyebrow">Update 8</span>
+            <span class="eyebrow">Update 9</span>
             <h3>Recovery and references</h3>
             <p class="lead">Changing how the phone behaves carries some risk of bricking it, so there is a recovery path, and there are similar builds to learn from.</p>
             <div class="row" style="--n:2">
@@ -834,7 +869,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c1-next" data-chapter>
-            <span class="eyebrow">Update 9</span>
+            <span class="eyebrow">Update 10</span>
             <h3>What is next</h3>
             <ul class="list" style="margin-top: 8px; font-size: 17px">
               <li>Finish the V3 fixes: keyboard spacing, a longer body, and the charging port position.</li>
@@ -856,9 +891,11 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 03</span><span class="pill live">In progress</span>
         <h2>Creating a test track for BeamNG</h2>
         <p class="sub">Added a test track to the soft-body simulation program, BeamNG.drive, in order to learn the BeamNG modding system. Focused on learning about the PBR texture system, track topography accuracy, and track surface behavior and friction accuracy. Long term goals include validating accuracy of real-world driving data compared to the model.</p>
-        <p class="sub">   - Pulled GPS data of real world track and implement into BeamNG as a new mod.</p>
-         <p class="sub">   - Selected the Bosch Flat Rock proving ground as the location in order to compare the real-world experience to the modelled track.</p>
-         <p class="sub">   - Future plans to the project involve integrating an active ESP System into BeamNG, using a wet bench with pressure transducers and Lua programs to integrate brake pressures, and Canalyzer for CAN communication.</p>
+        <ul class="list sub-list">
+          <li>Pulled GPS data of real world track and implement into BeamNG as a new mod.</li>
+          <li>Selected the Bosch Flat Rock proving ground as the location in order to compare the real-world experience to the modelled track.</li>
+          <li>Future plans to the project involve integrating an active ESP System into BeamNG, using a wet bench with pressure transducers and Lua programs to integrate brake pressures, and Canalyzer for CAN communication.</li>
+        </ul>
       </div>
       <div class="board">
         <div class="bt">Kanban board</div>
@@ -875,15 +912,22 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <div><dt>Status</dt><dd>Map in progress, missions next</dd></div>
       </dl>
 
-      <div class="row" style="--n:2; margin-top: 32px">
-        <figure class="ph">
-          <figcaption><b>Main overview.</b> The Flat Rock map in BeamNG.</figcaption>
-          <img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the Flat Rock map in BeamNG, with painted terrain and orange autumn trees around the test pads" loading="lazy">
-        </figure>
-        <figure class="ph">
-          <figcaption><b>Main overview, closer.</b> The test pads and roads.</figcaption>
-          <img src="beamng-overview-2.jpg" width="954" height="634" alt="Closer aerial view of the Flat Rock test pads and roads in BeamNG" loading="lazy">
-        </figure>
+      <div class="show" id="bn-show" role="group" aria-roledescription="carousel" aria-label="BeamNG highlights">
+        <div class="slides">
+          <figure class="ph slide on">
+            <figcaption><b>Main overview.</b> The Flat Rock map in BeamNG.</figcaption>
+            <img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the Flat Rock map in BeamNG, with painted terrain and orange autumn trees around the test pads">
+          </figure>
+          <figure class="ph slide">
+            <figcaption><b>Jumping the hills.</b></figcaption>
+            <img src="beamng-jump-hills.jpg" width="2000" height="1065" alt="An SUV launched into the air off the crest of a grassy hill at Flat Rock, with the free camera and speedometer showing 151 km/h" loading="lazy">
+          </figure>
+          <figure class="ph slide">
+            <figcaption><b>Banked curve on the VDA.</b></figcaption>
+            <img src="beamng-vda-banked.jpg" width="2000" height="1061" alt="A red car driving the banked curve on the VDA, with orange placeholder buildings and autumn trees beside the track" loading="lazy">
+          </figure>
+        </div>
+        <div class="dots" aria-label="Choose image"><button type="button" class="on" aria-label="Image 1"></button><button type="button" aria-label="Image 2"></button><button type="button" aria-label="Image 3"></button></div>
       </div>
 
       <div class="chapters">
@@ -893,7 +937,6 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             <li data-rail="c2-req"><a href="#c2-req">Requirements</a></li>
             <li data-rail="c2-data"><a href="#c2-data">Base map data</a></li>
             <li data-rail="c2-edit"><a href="#c2-edit">Editing the base map</a></li>
-            <li data-rail="c2-tex"><a href="#c2-tex">PBR textures</a></li>
             <li data-rail="c2-build"><a href="#c2-build">Terrain and environment</a></li>
             <li data-rail="c2-spawn"><a href="#c2-spawn">Spawn points</a></li>
             <li data-rail="c2-miss"><a href="#c2-miss">Missions</a></li>
@@ -947,6 +990,10 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
                 <p>A tool built for BeamNG that already includes the game's level structure.</p>
               </div>
             </div>
+            <figure class="ph" style="margin-top: 32px">
+              <figcaption><b>MapNG is SO COOL</b></figcaption>
+              <img src="beamng-mapng.jpg" width="1906" height="888" alt="MapNG 3D preview of the Flat Rock area with satellite imagery draped over the terrain, and the MapNG settings panel on the left." loading="lazy">
+            </figure>
             <div class="label">MapNG settings</div>
             <div class="scroll-x">
               <table class="specs">
@@ -966,31 +1013,27 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           <article class="chapter" id="c2-edit" data-chapter>
             <span class="eyebrow">Update 3</span>
             <h3>Editing the base map</h3>
-            <p class="lead">Only the base map is modified, since the other layers affect visuals only.</p>
-            <div class="row" style="--n:2">
-              <div class="panel">
-                <h4>Work done</h4>
-                <ul class="list">
-                  <li>Edit the base satellite image to look better and remove baked shadows.</li>
-                  <li>Reorganize the folder structure to match the main levels and allow new terrain types.</li>
-                  <li>Smooth the image. At 5 m per pixel there is no detail to preserve, and MS Paint is the best tool for it.</li>
-                </ul>
-              </div>
-              <div class="panel">
-                <h4>Why it matters</h4>
-                <p>Adding road markings and decals gives the map the details of a real place, so it does not look like it was built in Minecraft.</p>
-              </div>
-            </div>
-            <div class="row" style="--n:1">
-              <figure class="slot wide"><span>Image to add: the base map at its native resolution</span></figure>
-            </div>
+            <div class="label">Active notes</div>
+            <ul class="list">
+              <li>Global shadows baked onto the base texture, need to remove.</li>
+              <li>Reorganized folder structure to match main levels, plus to add new terrain types, so now the main terrain .png is in <code>...current\levels\bpg_flatrock\art\terrains\TerrainBase</code></li>
+              <li>Modify the base map, no need to touch the others! (since it's just visual)</li>
+              <li>Low resolution, at 5m/px density means each there is no detail, so just trying to smooth things out is the best bet.</li>
+              <li>MS Paint does a good enough job to get it smooth, the rest of the details will need to be with the map creator details to make it look like it wasn't made in minecraft, like roads, decals, etc.</li>
+            </ul>
+            <figure class="ph" style="margin-top: 28px">
+              <figcaption>This is the resolution, it's rough:</figcaption>
+              <img src="beamng-paint-smooth.jpg" width="1321" height="940" alt="MS Paint open on a zoomed in section of the base terrain texture, showing large blurry pixels of road, grass and trees." loading="lazy">
+            </figure>
           </article>
 
-          <article class="chapter" id="c2-tex" data-chapter>
+          <article class="chapter" id="c2-build" data-chapter>
             <span class="eyebrow">Update 4</span>
-            <h3>PBR textures</h3>
-            <p class="lead">BeamNG recently moved to physically based rendering. A texture is described by a set of image maps that tell the engine how light behaves on it.</p>
-            <div class="row" style="--n:2">
+            <h3>Terrain and environment</h3>
+            <p class="lead">The map is built up in layers: PBR textures first, then terrain painting, smoothing, objects, roads and decals.</p>
+            <div class="label">PBR textures</div>
+            <p class="prose">BeamNG recently moved to physically based rendering. A texture is described by a set of image maps that tell the engine how light behaves on it.</p>
+            <div class="row" style="--n:2; margin-top: 16px">
               <div class="panel">
                 <h4>Maps BeamNG uses</h4>
                 <ul class="chips">
@@ -1012,12 +1055,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
                 <tr><th>Material definitions</th><td>All defined in the terrain material library</td></tr>
               </table>
             </div>
-          </article>
-
-          <article class="chapter" id="c2-build" data-chapter>
-            <span class="eyebrow">Update 5</span>
-            <h3>Terrain and environment</h3>
-            <p class="lead">With the base map and textures in place, the map was built up in layers.</p>
+            <div class="label">Build steps</div>
             <ol class="log" style="margin-top: 24px">
               <li class="step done"><span class="dot">1</span>
                 <h3>Initial map</h3>
@@ -1044,12 +1082,12 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             <p class="prose" style="margin-bottom: 16px">In process of terrain painting, adding trees. No other models, roads or decals yet.</p>
             <div class="row first" style="--n:2">
               <figure class="ph" style="--pos: 62% 50%">
-                <img src="beamng-terrain-1.jpg" width="1800" height="698" alt="In-game view of the painted terrain, with a buggy on a pale gravel surface, grass and autumn trees" loading="lazy">
                 <figcaption><b>Terrain 1.</b></figcaption>
+                <img src="beamng-terrain-1.jpg" width="1800" height="698" alt="In-game view of the painted terrain, with a buggy on a pale gravel surface, grass and autumn trees" loading="lazy">
               </figure>
               <figure class="ph" style="--pos: 40% 50%">
-                <img src="beamng-progress.jpg" width="1600" height="853" alt="In-game view of a buggy on a painted dirt track beside a line of autumn trees" loading="lazy">
                 <figcaption><b>Terrain 2.</b></figcaption>
+                <img src="beamng-progress.jpg" width="1600" height="853" alt="In-game view of a buggy on a painted dirt track beside a line of autumn trees" loading="lazy">
               </figure>
             </div>
             <div class="label">Still to add</div>
@@ -1060,44 +1098,41 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-spawn" data-chapter>
-            <span class="eyebrow">Update 6</span>
+            <span class="eyebrow">Update 5</span>
             <h3>Spawn points</h3>
-            <p class="lead">Spawn points let anyone start the track close to what they want to test.</p>
-            <div class="row" style="--n:2">
-              <div class="panel">
-                <h4>Requirements</h4>
-                <ul class="list">
-                  <li>Parking lot 102, where the track starts.</li>
-                  <li>Parking lot 103, to add if the map is shared internally with that team.</li>
-                  <li>The 20/30 hills, the tallest place in Flat Rock.</li>
-                  <li>The new ESP area, where most testing happens, for a one-to-one match.</li>
-                  <li>VDA, which stays the default while the track is in progress.</li>
-                </ul>
-              </div>
-              <div class="panel">
-                <h4>How they are added</h4>
-                <ul class="list">
-                  <li>Add each as a new object in the level.</li>
-                  <li>Edit the info.json file to add spawn points, referenced pictures and map details.</li>
-                  <li>Use in-game screenshots as the spawn loading images.</li>
-                </ul>
-                <p style="margin-top: 12px">All spawn points are in the game for now.</p>
-              </div>
-            </div>
-            <div class="row" style="--n:2">
-              <figure class="ph">
-                <figcaption><b>Spawn view 1.</b></figcaption>
-                <img src="beamng-spawn-1.jpg" width="1464" height="900" alt="Aerial view of a spawn point beside large white placeholder buildings and parked vehicles" loading="lazy">
-              </figure>
-              <figure class="ph">
-                <figcaption><b>Spawn view 2.</b></figcaption>
-                <img src="beamng-spawn-2.jpg" width="1600" height="907" alt="Aerial view of a spawn point on a hill with a looping road" loading="lazy">
-              </figure>
-            </div>
+            <p style="margin-top: 20px"><b>Notes:</b></p>
+            <p style="margin-top: 8px; color: var(--muted)">Spawns to choose</p>
+            <ul class="list" style="margin-top: 8px">
+              <li>102 Parking lot, it's where I start the track from.</li>
+              <li>20/30 hills, it's the tallest place in all of Flat Rock.</li>
+              <li>New ESP, most of my testing is there, so easy 1 to 1.</li>
+              <li>VDA for sure.</li>
+            </ul>
+            <p style="margin-top: 28px"><b>Adding it:</b></p>
+            <ul class="list" style="margin-top: 8px">
+              <li>Screenshots taken from in-game to have reference points.</li>
+              <li>Modify info.json file to add spawn points, referenced pics, map details.</li>
+            </ul>
+            <figure class="ph" style="margin-top: 24px">
+              <figcaption>Adding spawn in World Editor:</figcaption>
+              <img src="beamng-world-editor.jpg" width="2550" height="1338" alt="BeamNG World Editor with a spawn sphere named spawn_ESP selected on a gravel road beside a parked SUV, and its properties in the Inspector panel." loading="lazy">
+            </figure>
+            <figure class="sk hand">
+              <figcaption>info.json</figcaption>
+              <img src="beamng-infojson.png" width="404" height="219" alt="info.json excerpt: defaultSpawnPointName spawn_102, and a spawnPoints list with entries for 102 Building Parking Lot and ESP Runup, each with translationId, objectname and preview image." loading="lazy" style="max-width: 520px">
+            </figure>
+            <figure class="ph" style="margin-top: 24px">
+              <figcaption>Main Menu:</figcaption>
+              <img src="beamng-spawn-menu.jpg" width="2526" height="1157" alt="BeamNG freeroam location menu for Bosch Flat Rock Proving Ground, with four spawn choices: 102 Building Parking Lot, ESP Runup, 20/30% Hills and VDA." loading="lazy">
+            </figure>
+            <figure class="ph" style="margin-top: 24px">
+              <figcaption>In-Game Menu:</figcaption>
+              <img src="beamng-spawn-ingame-menu.jpg" width="2136" height="1133" alt="BeamNG in-game map over Bosch Flat Rock with a Points of Interest list of quicktravel points: 102 Building Parking Lot, 20/30% Hills, ESP Runup and VDA, each marked on the map." loading="lazy">
+            </figure>
           </article>
 
           <article class="chapter" id="c2-miss" data-chapter>
-            <span class="eyebrow">Update 7</span>
+            <span class="eyebrow">Update 6</span>
             <h3>Missions</h3>
             <p class="lead">Missions are the way to introduce the simulator at work. Two types are planned, both for driver training.</p>
             <div class="row" style="--n:2">
@@ -1117,7 +1152,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
                 </ul>
               </div>
             </div>
-            <div class="label">How missions are built</div>
+            <div class="label">Resources for Missions and Scenarios:</div>
             <div class="row first" style="--n:2">
               <div class="panel">
                 <h4>Missions</h4>
@@ -1140,7 +1175,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-issues" data-chapter>
-            <span class="eyebrow">Update 8</span>
+            <span class="eyebrow">Update 7</span>
             <h3>Open issues</h3>
             <div class="callout" style="margin-top: 0">
               <b>Game update 0.39</b>
@@ -1156,7 +1191,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </article>
 
           <article class="chapter" id="c2-dil" data-chapter>
-            <span class="eyebrow">Update 9</span>
+            <span class="eyebrow">Update 8</span>
             <h3>Driver-in-the-loop plan</h3>
             <p class="lead">This phase is further down the line. It would become a work project and require the BeamNG.tech license. For now it is a learning project.</p>
             <div class="row" style="--n:2">
@@ -1341,6 +1376,35 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       });
     }, { threshold: 0.5 }).observe(vid);
   }
+})();
+</script>
+
+<script>
+(function () {
+  var box = document.getElementById('bn-show');
+  if (!box) return;
+  var slides = box.querySelectorAll('.slide'), dots = box.querySelectorAll('.dots button');
+  var i = 0, timer = null, held = false;
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    for (var k = 0; k < slides.length; k++) {
+      slides[k].classList.toggle('on', k === i);
+      dots[k].classList.toggle('on', k === i);
+    }
+  }
+  function tick() {
+    if (held || still || box.offsetParent === null) return;
+    go(i + 1);
+  }
+  for (var d = 0; d < dots.length; d++) (function (n) {
+    dots[n].addEventListener('click', function () { go(n); });
+  })(d);
+  box.addEventListener('mouseenter', function () { held = true; });
+  box.addEventListener('mouseleave', function () { held = false; });
+  box.addEventListener('focusin', function () { held = true; });
+  box.addEventListener('focusout', function () { held = false; });
+  timer = setInterval(tick, 4500);
 })();
 </script>
 
