@@ -3,7 +3,8 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: one continuous dark page. The background is a horizon: the colour is identical across the full width and changes only top to bottom. Its hue drifts with scroll progress inside each project (and the glow rises as you go), then blends into the next project's colour between sections. Projects 1 and 2 are long chapter-by-chapter build logs with a sticky progress rail. Every row of boxes spans the full column width. */
+/* Layout: a home page with an about-me intro and three project cards side by side, then one scrolling page per project (hash routes: #razr, #beamng, #plant, #about). Each project page has its own colour, green, blue or purple, and the background horizon drifts within it as you scroll.
+   Earlier note: one continuous dark page. The background is a horizon: the colour is identical across the full width and changes only top to bottom. Its hue drifts with scroll progress inside each project (and the glow rises as you go), then blends into the next project's colour between sections. Projects 1 and 2 are long chapter-by-chapter build logs with a sticky progress rail. Every row of boxes spans the full column width. */
 :root {
   color-scheme: dark;
   --fg: #eeedf4;
@@ -57,33 +58,20 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .top nav { display: flex; flex-wrap: wrap; gap: 0 20px; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: 14px; padding: 6px 0; border-bottom: 2px solid transparent; }
 .top nav a:hover { color: var(--fg); }
-.top nav a[aria-current="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+.top nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); }
 
 .sec { padding-block: 88px 40px; }
 .gap { height: 140px; }
-.s-home { --accent: #eeedf4; }
-.s-p1 { --accent: #cdb4ff; }
-.s-p2 { --accent: #9fcbff; }
-.s-p3 { --accent: #92f0c6; }
-.s-about { --accent: #eeedf4; }
+.v-home, .v-about { --accent: #eeedf4; }
+.v-plant { --accent: #92f0c6; }
+.v-razr { --accent: #9fcbff; }
+.v-beamng { --accent: #cdb4ff; }
 
 .eyebrow { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); }
 .pill { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 11px; border-radius: 999px; border: 1px solid var(--glass-line); color: var(--fg); background: var(--glass); white-space: nowrap; }
 .pill.live { color: var(--accent); border-color: var(--accent); }
 
 /* home */
-.s-home h1 { font-size: clamp(38px, 6.4vw, 66px); margin-top: 14px; max-width: 17ch; }
-.s-home .lede { font-size: 19px; color: var(--muted); max-width: 54ch; margin-top: 22px; }
-.index { margin-top: 56px; border-top: 1px solid var(--glass-line); }
-.index a { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--glass-line); color: var(--fg); text-decoration: none; }
-.index a:hover .t { color: var(--c); }
-.index .n { font-family: var(--font-mono); font-size: 13px; color: var(--faint); }
-.index .t { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
-.index .d { grid-column: 2; color: var(--muted); font-size: 15px; }
-.index .pill { grid-column: 3; grid-row: 1; }
-.index a:nth-child(1) { --c: #cdb4ff; }
-.index a:nth-child(2) { --c: #9fcbff; }
-.index a:nth-child(3) { --c: #92f0c6; }
 
 /* project heads */
 .head h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
@@ -115,6 +103,13 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .diagram .mag { fill: var(--accent); }
 .diagram .tray { fill: rgba(255, 255, 255, 0.05); }
 .diagram text { font-family: var(--font-body); font-size: 14px; fill: var(--muted); }
+.sk { margin: 0; border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 18px; width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.sk img { display: block; width: 100%; height: auto; max-width: 880px; margin: 0 auto; background: #fff; border-radius: 6px; }
+.sk .frame { display: grid; place-items: center; aspect-ratio: 3 / 2; background: #fff; border-radius: 6px; }
+.sk .frame img { width: 100%; height: 100%; object-fit: contain; }
+.sk.tall img { max-width: 860px; }
+.sk figcaption { font-size: 14px; color: var(--faint); }
+.sk figcaption b { color: var(--fg); font-weight: 600; }
 .video { display: block; width: 100%; aspect-ratio: 2550 / 1238; border: 1px solid var(--glass-line); border-radius: 10px; background: #05050a; }
 
 .list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--muted); }
@@ -179,7 +174,7 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .next a:hover { text-decoration: underline; }
 
 /* about */
-.s-about h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
+.v-about h2 { font-size: clamp(32px, 5.2vw, 52px); margin-top: 14px; }
 .about-text { display: grid; gap: 16px; margin-top: 24px; max-width: 60ch; color: var(--muted); font-size: 18px; }
 .gallery { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; margin-top: 40px; }
 .gallery .slot { flex: 0 0 min(78%, 420px); aspect-ratio: 4 / 5; scroll-snap-align: start; width: auto; }
@@ -206,6 +201,48 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
   .top .who { width: 100%; }
   .specs th { width: 42%; }
 }
+
+/* home */
+.intro { max-width: 760px; }
+.intro h1 { font-size: clamp(32px, 5vw, 52px); margin-top: 14px; }
+.intro .lede { font-size: 18px; color: var(--muted); max-width: 56ch; margin-top: 18px; }
+.intro .about-line { color: var(--muted); max-width: 56ch; margin-top: 12px; font-size: 16px; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.card { --c: #eeedf4; --cg: 60 60 80; --cb: 8 8 12; display: flex; flex-direction: column; min-width: 0; border: 1px solid rgb(var(--cg) / 0.7); border-radius: 12px; overflow: hidden; background: rgb(var(--cb) / 0.72); color: var(--fg); text-decoration: none; transition: border-color .2s, box-shadow .2s; }
+.card:hover { border-color: var(--c); box-shadow: 0 0 0 1px var(--c), 0 10px 40px -12px rgb(var(--cg) / 0.8); }
+.card:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
+.card .cover { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: radial-gradient(90% 80% at 50% 108%, rgb(var(--cg) / 0.85), transparent 70%), linear-gradient(180deg, rgb(var(--cb)), rgb(var(--cg) / 0.35)); border-bottom: 1px solid rgb(var(--cg) / 0.6); }
+.card .cover img, .card .cover svg { position: absolute; inset: 18px; display: block; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; }
+.card .cover img { background: #fff; border-radius: 6px; }
+.card .cover .l { stroke: var(--c); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.card .cover .soft { stroke: var(--c); opacity: .38; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.card .cover .dash { stroke: var(--fg); opacity: .8; fill: none; stroke-width: 1.2; stroke-dasharray: 4 6; stroke-linecap: round; }
+.card .cover .solid { fill: var(--c); stroke: none; }
+.card .body { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px 18px; flex: 1; }
+.card .num { font-family: var(--font-mono); font-size: 12px; color: var(--c); letter-spacing: .1em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.card .num .pill { color: var(--fg); border-color: rgb(var(--cg) / 0.9); }
+.card h3 { font-size: 21px; line-height: 1.15; }
+.card p { color: var(--muted); font-size: 15px; }
+.card .go { margin-top: auto; padding-top: 8px; font-size: 14px; color: var(--c); }
+.card.c-plant { --c: #92f0c6; --cg: 24 136 92; --cb: 4 18 14; }
+.card.c-razr { --c: #9fcbff; --cg: 34 84 196; --cb: 5 11 32; }
+.card.c-beamng { --c: #cdb4ff; --cg: 104 52 178; --cb: 11 7 26; }
+
+/* pages */
+.view .back { display: inline-block; margin-bottom: 18px; color: var(--muted); text-decoration: none; font-size: 14px; }
+.view .back:hover { color: var(--fg); }
+@media (max-width: 800px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card .cover { aspect-ratio: 16 / 10; }
+}
+
+/* photos */
+.ph { margin: 0; width: 100%; min-width: 0; }
+.ph img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--glass-line); background: #05050a; }
+.ph figcaption { font-size: 14px; color: var(--faint); margin-top: 8px; }
+.ph figcaption b { color: var(--fg); font-weight: 600; }
+.row .ph img { aspect-ratio: 16 / 10; object-fit: cover; object-position: var(--pos, 50% 50%); }
+.card .cover.photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; background: none; }
 </style>
 
 <div class="sky" id="sky" aria-hidden="true"></div>
@@ -214,43 +251,151 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
   <header class="top">
     <div class="inner">
       <span class="who">Amir Rahmani</span>
-      <nav aria-label="Sections">
-        <a href="#home" data-nav="home">Overview</a>
-        <a href="#razr" data-nav="razr">Slide Razr</a>
-        <a href="#beamng" data-nav="beamng">BeamNG Map</a>
-        <a href="#project3" data-nav="project3">Project 3</a>
+      <nav aria-label="Pages">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#plant" data-nav="plant">Plant Wall</a>
+        <a href="#razr" data-nav="razr">RAZR Keyboard</a>
+        <a href="#beamng" data-nav="beamng">BeamNG Track</a>
         <a href="#about" data-nav="about">About</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- OVERVIEW -->
-    <section class="sec s-home" id="home" data-section data-pal="0">
-      <span class="eyebrow">Engineering portfolio</span>
-      <h1>Welcome! Enjoy the project's I've made, just because</h1>
-      <p class="lede">Scroll down to join me through this journey, or click the tabs to jump around.</p>
-      <div class="index">
-        <a href="#razr"><span class="n">01</span><span class="t">Motorola RAZR with a slide-out QWERTY keyboard</span><span class="pill live">In progress</span><span class="d">Retrofitting a flip RAZR to with a BlackBerry keyboard.</span></a>
-        <a href="#beamng"><span class="n">02</span><span class="t">Creating a test track for BeamNG</span><span class="pill live">In progress</span><span class="d">A custom track built for BeamNG.</span></a>
-        <a href="#project3"><span class="n">03</span><span class="t">Autonomous Plant Wall</span><span class="pill">Coming soon</span><span class="d">A self watering, self lighting plant wall.</span></a>
+    <section class="view sec v-home" data-view="home">
+      <div class="intro">
+        <span class="eyebrow">Engineering portfolio</span>
+        <h1>Welcome! Enjoy the projects I've made, just because</h1>
+        <p class="lede">Scroll down to join me through this journey, or click the tabs to jump around.</p>
+        <p class="about-line">I'm an engineer who works on mechanisms, vehicle systems, and the testing that shows whether a design holds up. <a href="#about">More about me</a></p>
+      </div>
+
+      <div class="cards" role="list">
+        <a class="card c-plant" role="listitem" href="#plant">
+          <div class="cover">
+          <svg viewBox="0 0 320 240" role="img" aria-label="Illustration of a plant wall with a grow light above, a grid of planters and a water line down one side">
+          <rect class="solid" x="70" y="20" width="180" height="8" rx="4"/>
+          <path class="soft" d="M92 32 V50" stroke-dasharray="3 5"/>
+          <path class="soft" d="M126 32 V50" stroke-dasharray="3 5"/>
+          <path class="soft" d="M160 32 V50" stroke-dasharray="3 5"/>
+          <path class="soft" d="M194 32 V50" stroke-dasharray="3 5"/>
+          <path class="soft" d="M228 32 V50" stroke-dasharray="3 5"/>
+          <rect class="soft" x="58" y="54" width="204" height="150" rx="6"/>
+          <rect class="l" x="64" y="92" width="60" height="22" rx="4"/>
+          <path class="l" d="M94 92 q-12 -16 -3 -26 M94 92 q12 -16 3 -26 M94 92 V70"/>
+          <rect class="l" x="130" y="92" width="60" height="22" rx="4"/>
+          <path class="l" d="M160 92 q-12 -16 -3 -26 M160 92 q12 -16 3 -26 M160 92 V70"/>
+          <rect class="l" x="196" y="92" width="60" height="22" rx="4"/>
+          <path class="l" d="M226 92 q-12 -16 -3 -26 M226 92 q12 -16 3 -26 M226 92 V70"/>
+          <rect class="l" x="64" y="134" width="60" height="22" rx="4"/>
+          <path class="l" d="M94 134 q-12 -16 -3 -26 M94 134 q12 -16 3 -26 M94 134 V112"/>
+          <rect class="l" x="130" y="134" width="60" height="22" rx="4"/>
+          <path class="l" d="M160 134 q-12 -16 -3 -26 M160 134 q12 -16 3 -26 M160 134 V112"/>
+          <rect class="l" x="196" y="134" width="60" height="22" rx="4"/>
+          <path class="l" d="M226 134 q-12 -16 -3 -26 M226 134 q12 -16 3 -26 M226 134 V112"/>
+          <rect class="l" x="64" y="176" width="60" height="22" rx="4"/>
+          <path class="l" d="M94 176 q-12 -16 -3 -26 M94 176 q12 -16 3 -26 M94 176 V154"/>
+          <rect class="l" x="130" y="176" width="60" height="22" rx="4"/>
+          <path class="l" d="M160 176 q-12 -16 -3 -26 M160 176 q12 -16 3 -26 M160 176 V154"/>
+          <rect class="l" x="196" y="176" width="60" height="22" rx="4"/>
+          <path class="l" d="M226 176 q-12 -16 -3 -26 M226 176 q12 -16 3 -26 M226 176 V154"/>
+          <path class="l" d="M36 40 V212"/>
+          <circle class="solid" cx="36" cy="34" r="7"/>
+          <path class="soft" d="M36 70 q-6 8 0 12 q6 -4 0 -12 M36 130 q-6 8 0 12 q6 -4 0 -12"/>
+          </svg>
+          </div>
+          <div class="body">
+            <div class="num"><span>Project 01</span><span class="pill">Coming soon</span></div>
+            <h3>Autonomous Plant Wall</h3>
+            <p>A self watering, self lighting plant wall.</p>
+            <span class="go">View project →</span>
+          </div>
+        </a>
+        <a class="card c-razr" role="listitem" href="#razr">
+          <div class="cover"><img src="razr-cover.png" width="900" height="650" alt="Hand sketch of a RAZR phone sliding up to reveal a keyboard"></div>
+          <div class="body">
+            <div class="num"><span>Project 02</span><span class="pill">In progress</span></div>
+            <h3>Motorola RAZR with a slide-out QWERTY keyboard</h3>
+            <p>Retrofitting a flip RAZR with a BlackBerry keyboard.</p>
+            <span class="go">View project →</span>
+          </div>
+        </a>
+        <a class="card c-beamng" role="listitem" href="#beamng">
+          <div class="cover photo"><img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the BeamNG map: a proving ground with painted terrain and trees"></div>
+          <div class="body">
+            <div class="num"><span>Project 03</span><span class="pill">In progress</span></div>
+            <h3>Creating a test track for BeamNG</h3>
+            <p>A custom track built for BeamNG.</p>
+            <span class="go">View project →</span>
+          </div>
+        </a>
       </div>
     </section>
 
-    <div class="gap" aria-hidden="true"></div>
-
-    <!-- PROJECT 1 -->
-    <section class="sec s-p1" id="razr" data-section data-pal="1">
+    <section class="view sec v-plant" data-view="plant" hidden>
       <div class="head">
-        <span class="eyebrow">Project 01</span><span class="pill live">In progress</span>
-        <h2>Slide Razr with Keyboard</h2>
-        <p class="sub">A modern phone with a BlackBerry Q10 keyboard that slides out, built on a donor Motorola Razr Plus. The page follows the build in order, from the first sketches to requirements, parts, software and the body design.</p>
+        <a class="back" href="#home">← All projects</a><br>
+        <span class="eyebrow">Project 01</span><span class="pill">Coming soon</span>
+        <h2>Autonomous Plant Wall</h2>
+        <p class="sub">A self watering, self lighting plant wall.</p>
+      </div>
+      <div class="label">Requirements</div>
+      <div class="row first" style="--n:1">
+        <div class="panel">
+          <h4>Starting requirements</h4>
+          <ul class="reqs">
+            <li><span class="id">R1</span><span>The wall waters its plants without manual input.</span></li>
+            <li><span class="id">R2</span><span>The wall lights its plants without manual input.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <b>Details to come</b>
+        <p>The process, parts and photos for this project will be added here as it moves forward, in the same chapter format as the other two.</p>
+      </div>
+      <div class="row" style="--n:3">
+        <figure class="slot"><span>Image to add: sketch or concept</span></figure>
+        <figure class="slot"><span>Image to add: first prototype</span></figure>
+        <figure class="slot"><span>Image to add: the wall in use</span></figure>
+      </div>
+      <nav class="next" aria-label="Project navigation"><a href="#home">← All projects</a><a href="#razr">Next: RAZR keyboard →</a></nav>
+    </section>
+
+    <section class="view sec v-razr" data-view="razr" hidden>
+      <div class="head">
+        <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 02</span><span class="pill live">In progress</span>
+        <h2>Motorola RAZR with a slide-out QWERTY keyboard</h2>
+        <p class="sub">Retrofitting a flip RAZR with a BlackBerry keyboard, built on a donor Motorola Razr Plus. The page follows the build in order, from the first sketches to requirements, parts, software and the body design.</p>
       </div>
 
-      <div class="label">Initial designs</div>
-      <div class="row first" style="--n:2">
-        <figure class="slot"><span>Sketch page to add: initial design, from the BOOX notes</span></figure>
-        <figure class="slot"><span>Sketch page to add: initial design, from the BOOX notes</span></figure>
+      <div class="label">Initial designs, from the BOOX sketchbook</div>
+      <div class="row first" style="--n:1">
+        <figure class="sk">
+          <img src="razr-goal.png" width="1628" height="825" alt="Handwritten goal: turn the Razr into a slide phone. No big screen, slide or rotate QWERTY, slightly taller, thinner than the full fold." loading="lazy">
+          <figcaption><b>Goal.</b> Turn the Razr into a slide phone: no big screen, a slide or rotate QWERTY, slightly taller, and thinner than the full fold.</figcaption>
+        </figure>
+      </div>
+      <div class="row" style="--n:1">
+        <figure class="sk tall">
+          <img src="razr-initial-design.png" width="1616" height="2140" alt="Sketch of the initial design: a slide-up mechanism with a BlackBerry Q10 keyboard under the screen, center of gravity marked, and a side view of the internal stack with keyboard, battery, Arduino, pass-through charger, main board and camera module." loading="lazy">
+          <figcaption><b>Initial design.</b> A slide-up mechanism with the Q10 keyboard under the screen. Notes cover the center of gravity, keeping the camera module separate from the main board, and the internal stack-up.</figcaption>
+        </figure>
+      </div>
+      <div class="row" style="--n:2">
+        <figure class="sk">
+          <div class="frame"><img src="razr-flat-vs-hinge.png" width="1541" height="1013" alt="Flat versus hinge comparison. Flat: sleek, easier to integrate screen wires, easier design. Hinge: super cool, size limited, physical position stops easier to implement. First version will be flat." loading="lazy"></div>
+          <figcaption><b>Flat or hinge.</b> Flat is sleeker and easier for the screen wires. A hinge is limited by size. The first version will be flat.</figcaption>
+        </figure>
+        <figure class="sk">
+          <div class="frame"><img src="razr-rotated-design.png" width="1603" height="1403" alt="Sketch of a rotated design with a pivot point, with open questions about where the battery and screen ribbon would go." loading="lazy"></div>
+          <figcaption><b>Rotated design.</b> A pivot-point idea with open questions about the battery and screen ribbon. Shelved for now.</figcaption>
+        </figure>
+      </div>
+      <div class="row" style="--n:1">
+        <figure class="sk">
+          <img src="razr-open-questions.png" width="1788" height="1048" alt="Handwritten open questions: do I need both batteries, is there a screen without camera bumps, can the screen orientation be flipped, how does the open and close sensor work." loading="lazy">
+          <figcaption><b>Open questions.</b> Whether both batteries are needed, finding a screen without camera bumps, flipping the screen orientation, and how the open and close sensor works.</figcaption>
+        </figure>
       </div>
 
       <dl class="facts">
@@ -286,6 +431,22 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <li>BlackBerry keyboard feel.</li>
               <li>3D printed for now, with a walnut and green aluminum finish under consideration.</li>
             </ul>
+
+            <div class="label">Decisions from the sketches</div>
+            <div class="row first" style="--n:3">
+              <div class="panel">
+                <h4>Flat first</h4>
+                <p>The first version is a flat slider. It is sleeker and makes the screen wiring easier. A hinge would be limited by size, but its physical stops would be easier to implement.</p>
+              </div>
+              <div class="panel">
+                <h4>Balance</h4>
+                <p>The phone should feel planted in the hand, with the center of gravity around the index and middle fingers when open. That means keeping minimal weight in the screen section and, if possible, the camera module separate from the main board.</p>
+              </div>
+              <div class="panel">
+                <h4>Keyboard</h4>
+                <p>The Q10 feels very nice to type on. An Arduino can map its buttons to a USB-C input. The Q20 is a possible future option, along with call pickup, hang up, a BB button, a back button and a mouse.</p>
+              </div>
+            </div>
 
             <div class="label">The reference: BlackBerry Priv</div>
             <div class="row first" style="--n:2">
@@ -356,6 +517,8 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <ul class="list">
                 <li>Can the screen be flipped as the default orientation using the SDK? (R1)</li>
                 <li>Can the original screen be sourced without the camera humps? (C2)</li>
+                <li>Are both batteries needed? Daily driving gave about two days of battery life with both, so the small one may be removable, if the system still works without it.</li>
+                <li>How does the open and close sensor work?</li>
               </ul>
             </div>
           </article>
@@ -552,17 +715,14 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         </div>
       </div>
 
-      <nav class="next" aria-label="Project navigation"><a href="#home">Back to overview</a><a href="#beamng">Next project: BeamNG Map ↓</a></nav>
+      <nav class="next" aria-label="Project navigation"><a href="#plant">← Previous: Autonomous Plant Wall</a><a href="#beamng">Next: BeamNG test track →</a></nav>
     </section>
 
-    <div class="gap" aria-hidden="true"></div>
-
-    <!-- PROJECT 2 -->
-    <section class="sec s-p2" id="beamng" data-section data-pal="2">
+    <section class="view sec v-beamng" data-view="beamng" hidden>
       <div class="head">
-        <span class="eyebrow">Project 02</span><span class="pill live">In progress</span>
-        <h2>BeamNG Map and Driver-in-the-Loop</h2>
-        <p class="sub">A custom map for the BeamNG driving simulator, built as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
+        <a class="back" href="#home">← All projects</a><br><span class="eyebrow">Project 03</span><span class="pill live">In progress</span>
+        <h2>Creating a test track for BeamNG</h2>
+        <p class="sub">A custom track built for BeamNG, as a first step toward a driver-in-the-loop setup with a real ESP brake system. The page follows the work in order, from requirements and map data to textures, spawns, missions and the integration plan.</p>
       </div>
       <dl class="facts">
         <div><dt>Type</dt><dd>Simulation environment</dd></div>
@@ -570,6 +730,17 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <div><dt>Current focus</dt><dd>Roads, decals, and friction by surface</dd></div>
         <div><dt>Status</dt><dd>Map in progress, missions next</dd></div>
       </dl>
+
+      <div class="row" style="--n:2; margin-top: 32px">
+        <figure class="ph">
+          <img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the Flat Rock map in BeamNG, with painted terrain and orange autumn trees around the test pads" loading="lazy">
+          <figcaption><b>Main overview.</b> The Flat Rock map in BeamNG.</figcaption>
+        </figure>
+        <figure class="ph">
+          <img src="beamng-overview-2.jpg" width="954" height="634" alt="Closer aerial view of the Flat Rock test pads and roads in BeamNG" loading="lazy">
+          <figcaption><b>Main overview, closer.</b> The test pads and roads.</figcaption>
+        </figure>
+      </div>
 
       <div class="chapters">
         <aside class="rail" aria-label="Project 2 chapters">
@@ -725,10 +896,21 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
                 <p>Road and surface decals are added for visual clarity. Finishing the road work and learning to control friction by road surface.</p>
               </li>
             </ol>
-            <div class="label">Progress showcase</div>
-            <div class="row" style="--n:3">
+            <div class="label">Progress showcase: early process</div>
+            <p class="prose" style="margin-bottom: 16px">In process of terrain painting, adding trees. No other models, roads or decals yet.</p>
+            <div class="row first" style="--n:2">
+              <figure class="ph" style="--pos: 62% 50%">
+                <img src="beamng-terrain-1.jpg" width="1800" height="698" alt="In-game view of the painted terrain, with a buggy on a pale gravel surface, grass and autumn trees" loading="lazy">
+                <figcaption><b>Terrain 1.</b></figcaption>
+              </figure>
+              <figure class="ph" style="--pos: 40% 50%">
+                <img src="beamng-progress.jpg" width="1600" height="853" alt="In-game view of a buggy on a painted dirt track beside a line of autumn trees" loading="lazy">
+                <figcaption><b>Terrain 2.</b></figcaption>
+              </figure>
+            </div>
+            <div class="label">Still to add</div>
+            <div class="row first" style="--n:2">
               <figure class="slot"><span>Video to add: early driving after terrain smoothing and new terrain types</span></figure>
-              <figure class="slot"><span>Video to add: terrain painting and trees, before models, roads or decals</span></figure>
               <figure class="slot"><span>Image to add: after the 0.39 update broke the grass and forest, then the fixes</span></figure>
             </div>
           </article>
@@ -757,6 +939,16 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
                 </ul>
                 <p style="margin-top: 12px">All spawn points are in the game for now.</p>
               </div>
+            </div>
+            <div class="row" style="--n:2">
+              <figure class="ph">
+                <img src="beamng-spawn-1.jpg" width="1464" height="900" alt="Aerial view of a spawn point beside large white placeholder buildings and parked vehicles" loading="lazy">
+                <figcaption><b>Spawn view 1.</b></figcaption>
+              </figure>
+              <figure class="ph">
+                <img src="beamng-spawn-2.jpg" width="1600" height="907" alt="Aerial view of a spawn point on a hill with a looping road" loading="lazy">
+                <figcaption><b>Spawn view 2.</b></figcaption>
+              </figure>
             </div>
           </article>
 
@@ -854,33 +1046,15 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         </div>
       </div>
 
-      <nav class="next" aria-label="Project navigation"><a href="#razr">↑ Previous: Slide Razr</a><a href="#project3">Next project: Project 3 ↓</a></nav>
+      <nav class="next" aria-label="Project navigation"><a href="#razr">← Previous: RAZR keyboard</a><a href="#about">About me →</a></nav>
     </section>
 
-    <div class="gap" aria-hidden="true"></div>
-
-    <!-- PROJECT 3 -->
-    <section class="sec s-p3" id="project3" data-section data-pal="3">
-      <div class="head">
-        <span class="eyebrow">Project 03</span><span class="pill">Coming soon</span>
-        <h2>Project 3</h2>
-        <p class="sub">This space is reserved for a third project. Send the details and it will follow the same structure as the two above.</p>
-      </div>
-      <div class="row" style="--n:1">
-        <figure class="slot wide"><span>Image to add</span></figure>
-      </div>
-      <nav class="next" aria-label="Project navigation"><a href="#beamng">↑ Previous: BeamNG Map</a><a href="#about">About me ↓</a></nav>
-    </section>
-
-    <div class="gap" aria-hidden="true"></div>
-
-    <!-- ABOUT -->
-    <section class="sec s-about" id="about" data-section data-pal="4">
+    <section class="view sec v-about" data-view="about" hidden>
       <span class="eyebrow">About</span>
       <h2>About me</h2>
       <div class="about-text">
         <p>I'm an engineer who likes working on physical products and the systems around them: mechanisms, vehicle systems, and the testing that shows whether a design holds up.</p>
-        <p>My current projects include a slide-out phone built on a donor Razr and a driving simulation environment built to support driver-in-the-loop testing. I use CAD for design work and I'm learning game-engine tools to build realistic test environments.</p>
+        <p>My current projects include a slide-out phone built on a donor Razr, a driving simulation environment built to support driver-in-the-loop testing, and an autonomous plant wall. I use CAD for design work and I'm learning game-engine tools to build realistic test environments.</p>
       </div>
       <ul class="chips" style="margin-top: 28px">
         <li>CAD</li><li>Mechanism design</li><li>Simulation</li><li>Systems integration</li>
@@ -891,125 +1065,131 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <figure class="slot"><span>Photo to add: project in progress</span></figure>
         <figure class="slot w"><span>Photo to add: testing or on site</span></figure>
       </div>
-      <footer>
-        <span>Amir Rahmani</span>
-        <span>amirahmani@gmail.com</span>
-      </footer>
     </section>
   </main>
+
+  <footer>
+    <span>Amir Rahmani</span>
+    <span>amirahmani@gmail.com</span>
+  </footer>
 </div>
 
 <script>
 (function () {
   var root = document.documentElement;
-  var sections = Array.prototype.slice.call(document.querySelectorAll('[data-section]'));
+  var views = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
+  var names = views.map(function (v) { return v.getAttribute('data-view'); });
   var links = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
-  var groups = Array.prototype.slice.call(document.querySelectorAll('.chapters')).map(function (g) {
-    return {
-      el: g,
-      chapters: Array.prototype.slice.call(g.querySelectorAll('[data-chapter]')),
-      items: Array.prototype.slice.call(g.querySelectorAll('[data-rail]'))
-    };
-  });
-  /* Per section: colours at its start (a) and end (b). base, horizon glow (g1), upper tint (g2). */
-  var palette = [
-    { a: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] },        b: { base: [0, 0, 0], g1: [44, 62, 100], g2: [22, 34, 58] }, hz: [72, 72] },
-    { a: { base: [10, 6, 24], g1: [78, 44, 170], g2: [40, 22, 92] },     b: { base: [18, 6, 28], g1: [160, 64, 176], g2: [92, 30, 112] }, hz: [76, 52] },
-    { a: { base: [4, 10, 30], g1: [34, 84, 196], g2: [16, 44, 108] },    b: { base: [4, 16, 30], g1: [22, 152, 198], g2: [12, 88, 120] }, hz: [76, 52] },
-    { a: { base: [3, 16, 12], g1: [24, 136, 92], g2: [10, 72, 52] },     b: { base: [6, 18, 10], g1: [88, 168, 88], g2: [44, 98, 54] }, hz: [76, 52] },
-    { a: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] },        b: { base: [0, 0, 0], g1: [34, 50, 78], g2: [18, 28, 46] }, hz: [72, 72] }
-  ];
-  var bounds = [];
-  var docEnd = 0;
-  var BAND = 360;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function measure() {
-    bounds = [];
-    for (var i = 0; i < sections.length - 1; i++) {
-      var a = sections[i].getBoundingClientRect();
-      var b = sections[i + 1].getBoundingClientRect();
-      bounds.push(((a.bottom + b.top) / 2) + window.scrollY);
-    }
-    docEnd = document.documentElement.scrollHeight;
-  }
-  function mix(a, b, t) {
-    return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
-  }
-  function ease(t) { return t * t * (3 - 2 * t); }
+  /* background per page: colours at the top (a) and bottom (b) of the page, base / horizon glow / upper tint, plus horizon height */
+  var PAL = {
+    home:   { a: { base: [0, 0, 0],    g1: [34, 50, 78],  g2: [18, 28, 46] },  b: { base: [0, 0, 0],    g1: [44, 62, 100], g2: [22, 34, 58] },  hz: [72, 72] },
+    plant:   { a: { base: [3, 16, 12],  g1: [24, 136, 92], g2: [10, 72, 52] },  b: { base: [6, 18, 10],  g1: [88, 168, 88], g2: [44, 98, 54] },  hz: [76, 52] },
+    razr: { a: { base: [4, 10, 30],  g1: [34, 84, 196], g2: [16, 44, 108] }, b: { base: [4, 16, 30],  g1: [22, 152, 198], g2: [12, 88, 120] }, hz: [76, 52] },
+    beamng:  { a: { base: [10, 6, 24],  g1: [78, 44, 170], g2: [40, 22, 92] },  b: { base: [18, 6, 28],  g1: [160, 64, 176], g2: [92, 30, 112] }, hz: [76, 52] },
+    about:  { a: { base: [0, 0, 0],    g1: [34, 50, 78],  g2: [18, 28, 46] },  b: { base: [0, 0, 0],    g1: [34, 50, 78],  g2: [18, 28, 46] },  hz: [72, 72] }
+  };
+  var current = 'home';
+  var cur = null, tgt = null, raf = 0;
+
+  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
   function clamp(t) { return Math.max(0, Math.min(1, t)); }
-  /* colour of section i at scroll position pos, drifting from its start colour to its end colour */
-  function within(i, pos) {
-    var lo = i === 0 ? 0 : bounds[i - 1];
-    var hi = i === bounds.length ? docEnd : bounds[i];
-    var p = clamp((pos - lo) / Math.max(1, hi - lo));
-    var s = palette[i];
-    return {
-      base: mix(s.a.base, s.b.base, p),
-      g1: mix(s.a.g1, s.b.g1, p),
-      g2: mix(s.a.g2, s.b.g2, p),
-      hz: s.hz[0] + (s.hz[1] - s.hz[0]) * p
-    };
-  }
-  function blend(c1, c2, t) {
-    return { base: mix(c1.base, c2.base, t), g1: mix(c1.g1, c2.g1, t), g2: mix(c1.g2, c2.g2, t), hz: c1.hz + (c2.hz - c1.hz) * t };
-  }
-  function pick(pos) {
-    for (var i = 0; i < bounds.length; i++) {
-      if (pos < bounds[i] - BAND) return within(i, pos);
-      if (pos <= bounds[i] + BAND) {
-        var t = ease((pos - (bounds[i] - BAND)) / (2 * BAND));
-        return blend(within(i, pos), within(i + 1, pos), t);
-      }
-    }
-    return within(bounds.length, pos);
+  function target() {
+    var p = PAL[current] || PAL.home;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var t = max > 0 ? clamp(window.scrollY / max) : 0;
+    return { base: mix(p.a.base, p.b.base, t), g1: mix(p.a.g1, p.b.g1, t), g2: mix(p.a.g2, p.b.g2, t), hz: p.hz[0] + (p.hz[1] - p.hz[0]) * t };
   }
   function css(a) { return Math.round(a[0]) + ' ' + Math.round(a[1]) + ' ' + Math.round(a[2]); }
-
-  var ticking = false;
-  function update() {
-    ticking = false;
-    var y = window.scrollY;
-    var c = pick(y + window.innerHeight * 0.5);
-    root.style.setProperty('--base', css(c.base));
-    root.style.setProperty('--g1', css(c.g1));
-    root.style.setProperty('--g2', css(c.g2));
-    root.style.setProperty('--hz', c.hz.toFixed(1) + '%');
-
-    var current = sections[0].id;
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i].getBoundingClientRect().top <= 140) current = sections[i].id;
-    }
-    links.forEach(function (l) {
-      if (l.getAttribute('data-nav') === current) l.setAttribute('aria-current', 'true');
-      else l.removeAttribute('aria-current');
-    });
-
-    groups.forEach(function (g) {
-      var active = -1;
-      for (var j = 0; j < g.chapters.length; j++) {
-        if (g.chapters[j].getBoundingClientRect().top <= 180) active = j;
+  function apply() {
+    root.style.setProperty('--base', css(cur.base));
+    root.style.setProperty('--g1', css(cur.g1));
+    root.style.setProperty('--g2', css(cur.g2));
+    root.style.setProperty('--hz', cur.hz.toFixed(1) + '%');
+  }
+  function clone(c) { return { base: c.base.slice(), g1: c.g1.slice(), g2: c.g2.slice(), hz: c.hz }; }
+  function step() {
+    raf = 0;
+    var moved = false;
+    ['base', 'g1', 'g2'].forEach(function (k) {
+      for (var i = 0; i < 3; i++) {
+        var d = tgt[k][i] - cur[k][i];
+        if (Math.abs(d) > 0.3) { cur[k][i] += d * 0.14; moved = true; } else cur[k][i] = tgt[k][i];
       }
-      var started = g.chapters[0].getBoundingClientRect().top <= 180;
-      var lastEl = g.chapters[g.chapters.length - 1];
-      var finished = lastEl.getBoundingClientRect().bottom < 120;
-      g.items.forEach(function (li, k) {
-        li.classList.toggle('active', started && !finished && k === active);
-        li.classList.toggle('done', started && (finished || k < active));
-      });
+    });
+    var dh = tgt.hz - cur.hz;
+    if (Math.abs(dh) > 0.1) { cur.hz += dh * 0.14; moved = true; } else cur.hz = tgt.hz;
+    apply();
+    if (moved) raf = requestAnimationFrame(step);
+  }
+  function setTarget(t) {
+    tgt = t;
+    if (!cur || reduce) { cur = clone(t); apply(); return; }
+    if (!raf) raf = requestAnimationFrame(step);
+  }
+
+  /* chapter rail for the visible project page */
+  function updateRail() {
+    var view = views.filter(function (v) { return !v.hidden; })[0];
+    if (!view) return;
+    var chapters = Array.prototype.slice.call(view.querySelectorAll('[data-chapter]'));
+    if (!chapters.length) return;
+    var items = Array.prototype.slice.call(view.querySelectorAll('[data-rail]'));
+    var active = -1;
+    for (var j = 0; j < chapters.length; j++) {
+      if (chapters[j].getBoundingClientRect().top <= 180) active = j;
+    }
+    var started = chapters[0].getBoundingClientRect().top <= 180;
+    var finished = chapters[chapters.length - 1].getBoundingClientRect().bottom < 120;
+    items.forEach(function (li, k) {
+      li.classList.toggle('active', started && !finished && k === active);
+      li.classList.toggle('done', started && (finished || k < active));
     });
   }
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; setTarget(target()); updateRail(); });
+  }
+
+  function show(name) {
+    current = name;
+    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== name; });
+    links.forEach(function (l) {
+      if (l.getAttribute('data-nav') === name) l.setAttribute('aria-current', 'page');
+      else l.removeAttribute('aria-current');
+    });
+  }
+  function route() {
+    var h = (location.hash || '').replace('#', '');
+    var name = 'home', anchor = null;
+    if (names.indexOf(h) > -1) name = h;
+    else if (h) {
+      var el = document.getElementById(h);
+      var host = el && el.closest ? el.closest('[data-view]') : null;
+      if (host) { name = host.getAttribute('data-view'); anchor = el; }
+    }
+    var changed = name !== current;
+    show(name);
+    if (anchor) anchor.scrollIntoView();
+    else if (changed || !h) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    setTarget(target());
+    updateRail();
+  }
+
+  window.addEventListener('hashchange', route);
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { measure(); onScroll(); });
-  window.addEventListener('load', function () { measure(); update(); });
-  measure();
-  update();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); update(); });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', function () { setTarget(target()); updateRail(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTarget(target()); updateRail(); });
+  route();
 
   /* play the CAD recording, muted, while it is on screen */
   var vid = document.getElementById('cad-video');
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (vid && 'IntersectionObserver' in window && !still) {
+  if (vid && 'IntersectionObserver' in window && !reduce) {
     new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
