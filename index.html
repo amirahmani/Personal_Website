@@ -109,7 +109,8 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .list li { padding-left: 18px; position: relative; }
 .list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 1px; background: var(--accent); }
 .reqs { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; color: var(--muted); }
-.reqs li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; }
+.reqs > li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; }
+.reqs ul.list { margin-top: 10px; }
 .reqs .id { font-family: var(--font-mono); font-size: 12px; color: var(--accent); padding-top: .25em; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .chips li { font-family: var(--font-mono); font-size: 13px; padding: 4px 12px; border: 1px solid var(--glass-line); border-radius: 999px; color: var(--muted); background: var(--glass); }
@@ -137,11 +138,12 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .rail li.active a { color: var(--fg); font-weight: 500; }
 .chapter { padding-top: 8px; margin-top: 88px; scroll-margin-top: 88px; min-width: 0; }
 .chapter:first-child { margin-top: 0; }
-.chapter > h3 { font-size: clamp(26px, 3.6vw, 36px); margin: 10px 0 18px; }
+.chapter > h3 { font-size: clamp(34px, 5vw, 52px); margin: 10px 0 18px; line-height: 1.05; }
 .chapter .lead { color: var(--muted); font-size: 18px; max-width: 62ch; }
 
 .bom { margin-top: 24px; border-top: 1px solid var(--glass-line); width: 100%; }
 .bom .brow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 20px; padding: 14px 0; border-bottom: 1px solid var(--glass-line); }
+#c0-hw .bom .brow { padding: 6px 0; gap: 0 20px; }
 .bom .nm { font-weight: 500; }
 .bom .nt { color: var(--faint); font-size: 14px; grid-column: 1; }
 .bom .cost { font-family: var(--font-mono); font-size: 15px; grid-column: 2; grid-row: 1; text-align: right; }
@@ -257,7 +259,8 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 
 
 /* auto-scrolling image list */
-.show { margin-top: 32px; }
+.show { margin: 32px auto 0; width: 80%; }
+@media (max-width: 720px) { .show { width: 100%; } }
 .show .slides { display: grid; }
 .show .slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s; }
 .show .slide.on { opacity: 1; visibility: visible; }
@@ -266,6 +269,29 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .show .dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid var(--faint); background: transparent; cursor: pointer; }
 .show .dots button.on { background: var(--accent); border-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) { .show .slide { transition: none; } }
+
+
+/* project phases */
+.part { margin-top: 64px; scroll-margin-top: 88px; min-width: 0; }
+.part > h4 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 28px); line-height: 1.15; margin: 0 0 16px; font-weight: 700; padding-top: 18px; border-top: 1px solid var(--glass-line); }
+.chapter > .lead + .part, .chapter > .lead + .label, .chapter > .lead + .note { margin-top: 28px; }
+.entries { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.entries .empty { color: var(--faint); border: 1px dashed var(--glass-line); border-radius: 10px; padding: 16px 18px; }
+.entries .entry { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 16px 18px; }
+.entries .entry time { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+.entries .entry h4 { font-size: 18px; margin: 6px 0 8px; }
+.entries .entry p { color: var(--muted); }
+
+
+.bomtable { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
+.bomtable th, .bomtable td { text-align: left; padding: 6px 12px 6px 0; vertical-align: top; font-weight: 400; color: var(--muted); }
+.bomtable thead th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); white-space: nowrap; border-bottom: 1px solid var(--glass-line); }
+.bomtable tbody th { color: var(--fg); font-weight: 500; min-width: 150px; }
+.bomtable .n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-right: 12px; }
+.bomtable tr.main td, .bomtable tr.main th { padding-bottom: 0; }
+.bomtable tr.desc td { padding: 0 0 7px; color: var(--faint); font-size: 13px; border-bottom: 1px solid var(--glass-line); }
+.bomtable tr.main:not(:has(+ tr.desc)) td, .bomtable tr.main:not(:has(+ tr.desc)) th { padding-bottom: 7px; border-bottom: 1px solid var(--glass-line); }
+.bomtable tfoot th, .bomtable tfoot td { color: var(--fg); font-weight: 700; border-bottom: 0; padding-top: 10px; }
 
 /* photos */
 .ph { margin: 0; width: 100%; min-width: 0; }
@@ -338,110 +364,122 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         <h2>Autonomous Plant Wall</h2>
         <p class="sub">I want a plant wall that looks after itself, because I am terrible at taking care of plants. This is my planning journal so far, section by section, from my sketchbook.</p>
       </div>
-      <div class="board">
-        <div class="bt">Kanban board</div>
-        <div class="row" style="--n:3">
-          <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Pick the communication protocol</li><li>Decide where flow meters go</li><li>Move the hygrometers</li><li>Software section (still blank)</li><li>First build and tests</li></ul></div>
-          <div class="panel col-prog"><h4>In Progress<span>4</span></h4><ul class="list"><li>Firmware notes</li><li>Electrical Diagram</li><li>HMI notes</li><li>Tuning and modeling notes</li></ul></div>
-          <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Intro and concept sketch</li><li>Requirements</li><li>Hardware list</li><li>Mechanical layout</li><li>Plant holder sketch</li></ul></div>
-        </div>
-      </div>
 
-      <div class="label">Notes from the sketchbook</div>
-      <p class="note">Full notebook: <a href="https://drive.google.com/file/d/1kl6QKHEIeUdE1FEalC4yS5pAjoq6SP7s/view?usp=sharing">open the BOOX notebook</a></p>
-      <dl class="facts">
-        <div><dt>Goal</dt><dd>Covers watering and light, stackable</dd></div>
-        <div><dt>Language</dt><dd>Rust, to learn it</dd></div>
-        <div><dt>Power</dt><dd>12V</dd></div>
-        <div><dt>Time limit</dt><dd>Good enough in 1 month</dd></div>
-      </dl>
 
       <div class="chapters">
-        <aside class="rail" aria-label="Plant wall updates">
-          <div class="rt">Updates</div>
+        <aside class="rail" aria-label="Project phases">
+          <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c0-intro"><a href="#c0-intro">Intro</a></li>
-            <li data-rail="c0-req"><a href="#c0-req">Requirements</a></li>
-            <li data-rail="c0-hw"><a href="#c0-hw">Hardware</a></li>
-            <li data-rail="c0-mech"><a href="#c0-mech">Mechanical</a></li>
-            <li data-rail="c0-holder"><a href="#c0-holder">Plant holder</a></li>
-            <li data-rail="c0-fw"><a href="#c0-fw">Firmware</a></li>
-            <li data-rail="c0-sw"><a href="#c0-sw">Software</a></li>
-            <li data-rail="c0-elec"><a href="#c0-elec">Electrical</a></li>
-            <li data-rail="c0-hmi"><a href="#c0-hmi">HMI</a></li>
-            <li data-rail="c0-tune"><a href="#c0-tune">Tuning and modeling</a></li>
-            <li data-rail="c0-res"><a href="#c0-res">Resources</a></li>
+            <li data-rail="c0-init"><a href="#c0-init">Initiation</a></li>
+            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a></li>
+            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a></li>
+            <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a></li>
+            <li data-rail="c0-close"><a href="#c0-close">Closure</a></li>
           </ol>
         </aside>
         <div class="content">
-          <article class="chapter" id="c0-intro" data-chapter>
-            <span class="eyebrow">Update 1</span>
-            <h3>Intro</h3>
+          <article class="chapter" id="c0-init" data-chapter>
+            <span class="eyebrow">Phase 1</span>
+            <h3>Initiation</h3>
+          <section class="part" style="margin-top: 28px" id="c0-intro">
+            <h4>Intro</h4>
             <p class="lead">I want to create a plant wall that is autonomous, because I am terrible at taking care of them.</p>
             <ul class="list" style="margin-top: 20px">
-              <li>Covering watering and light.</li>
+              <li>Covering watering and lighting.</li>
               <li>Just choose the amount of light and water.</li>
-              <li>Selectable plants, to have pre-built profiles?</li>
+              <li>Selectable plants to have pre-built profiles?</li>
               <li>Stackable.</li>
             </ul>
             <figure class="sk hand">
-              <figcaption><b>First concept.</b> A gravity assisted water tank on top (does it still need to be, if I use a motor?), a control board and pump on the side, a water tube with a valve at each layer to limit pressure dilution, and lights under each module and the tank. Lighting stays on the lowest layer for manufacturing ease.</figcaption>
-              <img src="plant-concept-full.png" width="1500" height="1840" alt="Intro page: notes on an autonomous plant wall, then a sketch of the plant wall: water tank on top, control board, pump and water tube on the right, three stacked planter rows with lights underneath, and a valve at each layer." loading="lazy">
+              <figcaption><b>First concept.</b> A gravity assisted water tank on top (does it need to be if I use a motor?), with the control board and HMI and the pump on the side, and a water tube with a valve at each layer to limit pressure dilution. Lighting is attached under each module and the water tank, and still on the lowest one for manufacturing ease. Open question: height adjustable based on plant type, or consistent so hose length is not a factor?</figcaption>
+              <img src="plant-concept-full.png" width="1500" height="1816" alt="Intro page: notes on an autonomous plant wall, then a sketch of the wall with a water tank on top, control board and HMI, pump and water tube on the right, stacked planter rows with lights underneath, and a valve at each layer." loading="lazy">
             </figure>
-          </article>
+            <div class="label">Helpful links</div>
+            <ul class="list links-list">
+              <li><a href="https://drive.google.com/file/d/1kl6QKHEIeUdE1FEalC4yS5pAjoq6SP7s/view?usp=sharing">BOOX notebook with the sketches</a></li>
+              <li><a href="https://github.com/amirahmani/Plant_Wall/tree/main">GitHub: Plant_Wall repository</a></li>
+              <li><a href="https://github.com/users/amirahmani/projects/1/views/1">GitHub: roadmap</a></li>
+            </ul>
+          </section>
 
-          <article class="chapter" id="c0-req" data-chapter>
-            <span class="eyebrow">Update 2</span>
-            <h3>Requirements</h3>
-            <p class="lead">What I wrote down before building anything.</p>
-            <div class="row" style="--n:1">
+          <section class="part" id="c0-goals">
+            <h4>Goals</h4>
+            <ul class="list">
+              <li>Prove out an autonomous plant wall in a single month</li>
+              <li>Learn to create Embedded Systems from scratch</li>
+              <li>Use RUST to program it</li>
+              <li>Create, test, tune, and integrate control loops</li>
+            </ul>
+          </section>
+
+          <section class="part" id="c0-req">
+            <h4>Initial Requirements</h4>
+            <div class="row" style="--n:1; margin-top: 16px">
               <div class="panel">
                 <ul class="reqs">
-                  <li><span class="id">R1</span><span>Time limitation: get it to "good enough" in 1 month.</span></li>
+                  <li><span class="id">R1</span><div>Time limitation: get it to "good enough" in 1 month, the month of November 2026.
+                    <ul class="list" style="margin-top: 8px">
+                      <li>Functional electrical system.</li>
+                      <li>Firmware created, with sensor checks and plant position checks.</li>
+                      <li>Mechanical for 2 shelves, with 3 plants made. This allows for mixing and matching locations to prove out the logic, and includes plumbing, plant box and row. It does not include lighting.</li>
+                      <li>HMI functioning to select water amount and time, with functioning buttons and no visible clock.</li>
+                    </ul></div></li>
                   <li><span class="id">R2</span><span>Easy for my wife to use, as she is not in the software world, because this is going on her office wall.</span></li>
                   <li><span class="id">R3</span><span>In depth understanding of embedded systems. I do software work and testing, but have a gap in knowledge of the hardware and firmware part. I want to do the whole process to understand.</span></li>
                   <li><span class="id">R4</span><span>Use Rust to write it, as it is smaller and quicker than C, and I want to learn it as well.</span></li>
+                  <li><span class="id">R5</span><span>A system to understand which plants exist, to have safety for the water valves.</span></li>
+                  <li><span class="id">R6</span><span>Normally closed valves, for lower power draw and low leak risk if power is lost.</span></li>
                 </ul>
               </div>
             </div>
-          </article>
+          </section>
 
-          <article class="chapter" id="c0-hw" data-chapter>
-            <span class="eyebrow">Update 3</span>
-            <h3>Hardware</h3>
-            <p class="lead">The parts I think I need.</p>
+          <section class="part" id="c0-sys">
+            <h4>System Diagram</h4>
+            <figure class="sk hand">
+              <figcaption><b>System diagram.</b> A single STM32 sits in the middle. A water reservoir holds a level sensor and the pump, which is switched by a MOSFET from the 12V power supply. Three shelves each have a row of hygrometers, a flow sensor and a row of valves. The HMI has an LCD screen, a 4-digit display, a D-pad, two buttons and a warning LED.</figcaption>
+              <img src="plant-system.png" width="1500" height="1934" alt="System diagram: a water reservoir with a level sensor and pump, a 12V supply, three shelves of hygrometers, flow sensors and valves, and an HMI with LCD screen, 4-digit display, D-pad, buttons and a warning LED, all connected to one STM32." loading="lazy">
+            </figure>
+          </section>
+
+          <section class="part" id="c0-mech">
+            <h4>Mechanical / Fluid</h4>
+            <figure class="sk hand">
+              <figcaption><b>Water flow.</b> The water tank (with a refill) now carries a water level sensor. It feeds the pump, then each row has its own row valve and a valve for each planter. The single flow rate sensor after the pump is crossed out: remove it, and add a flow rate sensor per row instead.</figcaption>
+              <img src="plant-mechanical.png" width="1500" height="2031" alt="Block diagram of the water path: tank with a water level sensor, pump, then two rows each with a row valve, a flow rate sensor and five planter valves with outlets. The flow sensor after the pump is crossed out." loading="lazy">
+            </figure>
+          </section>
+
+          <section class="part" id="c0-hw">
+            <h4>Hardware Estimates</h4>
             <div class="bom">
-              <div class="brow"><span class="nm">Primary Board</span><span class="nt">STM32 Nucleo-64 development board with STM32F446RE MCU, good for learning, gives me a chance to create my own firmware and software from scratch.</span></div>
-              <div class="brow"><span class="nm">Pump or motor</span><span class="nt">Moves the water. An auto windshield washer pump should be reliable enough and common enough.</span></div>
-              <div class="brow"><span class="nm">Valves</span><span class="nt">One for each module and each row.</span></div>
+              <div class="brow"><span class="nm">Primary Board</span><span class="nt">STM32 Nucleo-64 development board with STM32F446RE MCU, good for learning, gives me a chance to create my own firmware and software from scratch. It controls the whole thing.</span></div>
+              <div class="brow"><span class="nm">Pump / motor</span><span class="nt">Moves the water. An auto windshield washer pump should be reliable enough and common enough.</span></div>
+              <div class="brow"><span class="nm">Valves</span><span class="nt">For each module and each row. Normally closed!</span></div>
               <div class="brow"><span class="nm">Tubing</span><span class="nt">Auto windshield washer diameter, to keep it consistent and cheap.</span></div>
-              <div class="brow"><span class="nm">Plant holder</span><span class="nt">A module to hold the plants.</span></div>
+              <div class="brow"><span class="nm">Plant holder</span><span class="nt">A module to hold plants.</span></div>
               <div class="brow"><span class="nm">Plant row</span><span class="nt">A row of plants. Width is undefined so far, possibly varying widths.</span></div>
               <div class="brow"><span class="nm">Water tank</span><span class="nt">Holds the water. It needs to be easy to fill and hold enough for a week or two.</span></div>
+              <div class="brow"><span class="nm">LCD screen</span><span class="nt">To display info and set profiles.</span></div>
+              <div class="brow"><span class="nm">D-pad</span><span class="nt">Controls the HMI to enter profiles.</span></div>
+              <div class="brow"><span class="nm">Button(s)</span><span class="nt">ENTER for the menu, a circle button to enter settings.</span></div>
+              <div class="brow"><span class="nm">Flow rate sensor</span><span class="nt">Each row instead?</span></div>
+              <div class="brow"><span class="nm">LED</span><span class="nt">For lights to feed from.</span></div>
+              <div class="brow"><span class="nm">Water level sensor</span><span class="nt">To not run out of water or empty the tubes.</span></div>
+              <div class="brow"><span class="nm">Small LED</span><span class="nt">HMI warning: low light, fault, etc.</span></div>
+              <div class="brow"><span class="nm">4 digit, 7 segment display</span><span class="nt">I have one, so I want to use it for the clock.</span></div>
             </div>
-          </article>
+          </section>
 
-          <article class="chapter" id="c0-mech" data-chapter>
-            <span class="eyebrow">Update 4</span>
-            <h3>Mechanical</h3>
-            <p class="lead">The water path as a block diagram: tank, pump, flow rate sensor, then a row valve for each row and a valve for each planter.</p>
+          <section class="part" id="c0-holder">
+            <h4>Plant Holder</h4>
             <figure class="sk hand">
-              <figcaption><b>Water flow.</b> The tank (with a refill) feeds the pump, then a flow rate sensor. Each row has its own row valve, and each planter its own valve and outlet.</figcaption>
-              <img src="plant-mechanical.png" width="1500" height="2274" alt="Block diagram: water tank to pump to flow rate sensor, then two rows each with a row valve and five planter valves with outlets." loading="lazy">
-            </figure>
-          </article>
-
-          <article class="chapter" id="c0-holder" data-chapter>
-            <span class="eyebrow">Update 5</span>
-            <h3>Plant holder</h3>
-            <p class="lead">A first sketch of a single planter, with the water outlet, the hygrometer and the valve marked.</p>
-            <figure class="sk hand">
-              <figcaption><b>Planter notes.</b> Move the water outlet to a corner, but up to the soil line so it does not interfere with plant growth. Move the hygrometers to the opposite side of the hose: it will add time to read, but will be more accurate to the total soil moisture level. Maybe add a reading delay.</figcaption>
-              <img src="plant-holder.png" width="1500" height="1869" alt="Sketch of a planter box with a water output, hygrometers and a valve, and notes about where to move each." loading="lazy">
+              <figcaption><b>Initial idea.</b> Move the water outlet to a corner, but up until the soil line so it does not interfere with plant growth. Move the hygrometers to the opposite side of the hose: it will add time to read, but will be more accurate to the total soil moisture level. Maybe add a reading delay.</figcaption>
+              <img src="plant-holder.png" width="1500" height="1854" alt="Sketch of a planter box with a water output, hygrometers and a valve, and notes about where to move each." loading="lazy">
             </figure>
             <div class="row" style="--n:1">
               <div class="panel">
-                <h4>Still to settle</h4>
+                <h4>Open Points</h4>
                 <ul class="list">
                   <li>Drainage.</li>
                   <li>Quick connect and disconnect.</li>
@@ -450,48 +488,92 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
                 </ul>
               </div>
             </div>
-          </article>
+          </section>
 
-          <article class="chapter" id="c0-fw" data-chapter>
-            <span class="eyebrow">Update 6</span>
-            <h3>Firmware</h3>
-            <p class="lead">What the firmware has to check and keep.</p>
+          <section class="part" id="c0-row">
+            <h4>Plant Row</h4>
+            <figure class="sk hand">
+              <figcaption><b>Plant row.</b> The holder installs directly to the wall. Slots let the plant modules slide on, and the water tube is split per module with valves. A sensor connector carries the sensor wiring (5x), and a flow rate sensor sits at the end of the row. The side view shows a wedge, with the connector and wiring, valve and water tube at the bottom.</figcaption>
+              <img src="plant-row.png" width="1500" height="1595" alt="Sketch of a plant row with five plant modules sliding onto slots, a split water tube with valves, a sensor connector and a flow rate sensor, plus a side view showing a wedge, connector, valve and water tube." loading="lazy">
+            </figure>
             <ul class="list" style="margin-top: 20px">
+              <li>There should be a limit switch added per slot to allow for the valves to work or not.</li>
+              <li>5x plants per row, sized for a max 1.5 ft plant height.</li>
+            </ul>
+            <div class="row" style="--n:1">
+              <div class="panel">
+                <h4>Drainage</h4>
+                <ul class="list">
+                  <li>If tuned well, drainage should be minimal.</li>
+                  <li>A small cubby built into each module to dump manually?</li>
+                  <li>Don't want extra plumbing unless necessary.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="part" id="c0-fw">
+            <h4>Firmware &amp; Embedded SW</h4>
+            <ul class="list" style="margin-top: 8px">
               <li>Checks for the number of connected sensors.</li>
               <li>Checks sensor readings to make sure they are in spec: rate and range.</li>
-              <li>Makes sure things like flow rate can be updated without a flash, by keeping them in EEPROM.</li>
+              <li>Use the hygrometer sensor as a presence sensor.</li>
+              <li>Make sure things like flow rate can be updated without a flash, by keeping them in EEPROM.</li>
+              <li>Check for the number of rows and plants, allow that many spots in the HMI and hide the rest.</li>
+              <li>Check the fluid level sensor for the warning LED, and add HMI warnings.</li>
             </ul>
-          </article>
+            <div class="row" style="--n:1">
+              <div class="panel">
+                <h4>Task cycles</h4>
+                <p>20 Hz? 100 Hz? It depends on the flow sensor and the physical rate of flow.</p>
+              </div>
+            </div>
+          </section>
 
-          <article class="chapter" id="c0-sw" data-chapter>
-            <span class="eyebrow">Update 7</span>
-            <h3>Software</h3>
-            <p class="lead">Nothing written here yet. The page in my notebook is just the heading for now.</p>
-          </article>
+          <section class="part" id="c0-elec">
+            <h4>Electrical</h4>
+            <div class="row" style="--n:2; margin-top: 16px">
+              <div class="panel">
+                <h4>Communication protocol</h4>
+                <ul class="list">
+                  <li>I want adding sensors (from more rows) to be easy.</li>
+                  <li>Comm rate? Flow rate, 100 Hz? How fast can I get?</li>
+                  <li>I²C seems like a good option: relatively simple, minimal wiring, easy to add new rows, never used so good to learn, and the standard is 100 kHz, more than fast enough.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Inputs and outputs, max</h4>
+                <ul class="list">
+                  <li>1x overall system: 1x water level sensor, 1x pump.</li>
+                  <li>5x rows: 1x flow sensor per row.</li>
+                  <li>10x plants per row: 1x valve per plant, 1x LED per plant.</li>
+                  <li>Max = 102 possible I/O.</li>
+                  <li>STM32 max is 114.</li>
+                  <li>5V though, need 12V for the pump.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
 
-          <article class="chapter" id="c0-elec" data-chapter>
-            <span class="eyebrow">Update 8</span>
-            <h3>Electrical</h3>
-            <p class="lead">Only two lines so far.</p>
-            <ul class="list" style="margin-top: 20px">
-              <li>Communication protocol: still to choose.</li>
-              <li>Run on 12V.</li>
-            </ul>
-          </article>
-
-          <article class="chapter" id="c0-hmi" data-chapter>
-            <span class="eyebrow">Update 9</span>
-            <h3>HMI</h3>
-            <p class="lead">How a person will set it up.</p>
-            <ul class="list" style="margin-top: 20px">
+          <section class="part" id="c0-hmi">
+            <h4>HMI</h4>
+            <ul class="list" style="margin-top: 8px">
               <li>Allow the user to create custom profiles.</li>
               <li>Pre-made profiles in a drop-down for various plants.</li>
+              <li>Should include a clock and watering time.</li>
             </ul>
-          </article>
+            <figure class="sk hand">
+              <figcaption><b>HMI.</b> A simple, non-touch LCD with columns for name, H2O, light and fed time (Profile 1: 10 mL/wk, low; Profile 2: 1 L/wk, high). A D-pad is for the interface, and an Enter button selects.</figcaption>
+              <img src="plant-hmi.png" width="1500" height="1583" alt="Sketch of a simple non-touch LCD listing profiles with water amount, light level and fed time, with a D-pad and an Enter button below." loading="lazy">
+            </figure>
+            <figure class="sk hand">
+              <figcaption><b>HMI again.</b> A table of row number, spot number, H2O, light and time, with a hint line "Use D-pad and Enter to select", the clock, a system button and a fault or warning LED. Scroll down, and maybe scroll across for more options?</figcaption>
+              <img src="plant-hmi-2.png" width="1500" height="1562" alt="Sketch of a second HMI screen: a table with row, spot, H2O, light and time columns, a clock, a D-pad, an Enter button, a warning LED and a system button." loading="lazy">
+            </figure>
+          </section>
 
-          <article class="chapter" id="c0-tune" data-chapter>
-            <span class="eyebrow">Update 10</span>
-            <h3>Tuning and modeling</h3>
+          <section class="part" id="c0-tune">
+            <h4>Tuning and modeling</h4>
             <p class="lead">With a flow meter, I will need to compare the actual water out against the calculated amount.</p>
             <div class="row" style="--n:2">
               <div class="panel">
@@ -508,11 +590,76 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
                 <p>Water amount versus soil moisture level. Probably not linear, so I will need a curve parameter.</p>
               </div>
             </div>
+          </section>
           </article>
 
-          <article class="chapter" id="c0-res" data-chapter>
-            <span class="eyebrow">Update 11</span>
-            <h3>Resources</h3>
+          <article class="chapter" id="c0-plan" data-chapter>
+            <span class="eyebrow">Phase 2</span>
+            <h3>Planning</h3>
+            <p class="lead">The plan: task board, parts, references and what comes next.</p>
+            <div class="board">
+              <div class="bt">Kanban board</div>
+              <div class="row" style="--n:3">
+                <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Confirm I²C as the communication protocol</li><li>Settle the plant holder open points</li><li>Pick the task cycle rate (20 Hz or 100 Hz)</li><li>Build 2 shelves with 3 plants</li><li>Write the firmware in Rust</li></ul></div>
+          <div class="panel col-prog"><h4>In Progress<span>3</span></h4><ul class="list"><li>Firmware and embedded SW notes</li><li>Electrical: I/O count and power</li><li>Tuning and modeling notes</li></ul></div>
+          <div class="panel col-done"><h4>Done<span>7</span></h4><ul class="list"><li>Intro and concept sketch</li><li>Initial requirements</li><li>System diagram</li><li>Mechanical and fluid layout</li><li>Hardware estimates</li><li>Plant holder and plant row sketches</li><li>HMI sketches</li></ul></div>
+              </div>
+            </div>
+
+          <section class="part" id="c0-bom">
+            <h4>Bill of Materials</h4>
+            <p class="lead">Parts for the first build: 2 rows, enough to prove out the logic. Items marked "Already own" cost nothing. Item names link to where I plan to buy them.</p>
+            <div class="scroll-x" style="margin-top: 16px">
+              <table class="bomtable">
+                <thead><tr><th>Item</th><th>Use</th><th class="n">Cost + tax</th><th class="n">Qty</th><th class="n">Total</th><th>Comment</th></tr></thead>
+                <tbody>
+                  <tr class="main"><th scope="row"><a href="https://estore.st.com/en/nucleo-f446re-cpn.html">STM32</a></th><td>Main Board</td><td class="n">$25.38</td><td class="n">1</td><td class="n">$25.38</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">STM32 Nucleo-64 development board with STM32F446RE MCU, supports Arduino and ST morpho connectivity</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Icstation-Resistive-Soil-Moisture-Sensor/dp/B076DDWDJK/">Resistive hygrometer</a></th><td>Measure soil humidity</td><td class="n">$15.89</td><td class="n">2</td><td class="n">$31.78</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">2 Sets Resistive Soil Moisture Meter</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Universal-Adjustable-Variable-100V-240V-Converter/dp/B0DMSDX732">12V Power Supply</a></th><td>Power the pump</td><td class="n">$18.12</td><td class="n">1</td><td class="n">$18.12</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">Universal Power Supply Variable 3V~24V 3A 72W Multi Voltage Adapter</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/IRLZ44-IRLZ44N-IRLZ44NPBF-Transistors-Mosfets/dp/B0FPQC8SV8/">IRLZ44N MOSFET Transistor</a></th><td>Powering the pump</td><td class="n">$7.41</td><td class="n">1</td><td class="n">$7.41</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">N-Channel Power MOSFET</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/ilauke-Certified-Refrigerator-Connect-Wastewater/dp/B0GY7Z78LW/">Fridge hose and connectors</a></th><td>Routing the water</td><td class="n">$4.55</td><td class="n">1</td><td class="n">$4.55</td><td>Pump is 7mm OD, but should be able to get a good seal with heat. Fridge lines chosen for the quick disconnect with the 1/4" line</td></tr>
+                  <tr class="desc"><td colspan="6">ilauke NSF Certified 1/4 inch O.D. Refrigerator Water Line Kit 32.8FT</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/uxcell-Silicone-Flexible-Translucent-Transfer/dp/B01MXLBQ5W/">Silicone Tube 20mm ID x 25mm OD</a></th><td>Water from reservoir to pump</td><td class="n">$13.45</td><td class="n">1</td><td class="n">$13.45</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">20mm ID hose</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Ximimark-Sensor-Horizontal-Switch-Arduino/dp/B0B7WPBPBC/">3 pc Water Level Sensor</a></th><td>Check reservoir fluid level</td><td class="n">$9.53</td><td class="n">1</td><td class="n">$9.53</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">Ximimark 3 pc Water Level Sensor Horizontal PP Side Mount Float Switch for Tank Pool Arduino</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/GREDIA-Connect-Food-Grade-Flowmeter-Counter/dp/B07RD4JXLY/">Flow Rate Sensor</a></th><td>Measure flow rate per row</td><td class="n">$17.62</td><td class="n">1</td><td class="n">$17.62</td><td>Initial build with only 2 rows, enough to prove out the logic</td></tr>
+                  <tr class="desc"><td colspan="6">1/4&quot; Quick Connect Water Flow Sensor Food-Grade Switch Hall Effect Flowmeter Fluid Meter Counter 0.3-6L/min (Pack of 2)</td></tr>
+                  <tr class="main"><th scope="row">Windshield Washer Pump</th><td></td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own</td></tr>
+                  <tr class="desc"><td colspan="6">ACI Washer Pump - 173686</td></tr>
+                  <tr class="main"><th scope="row">Anything that holds water</th><td>Water Reservoir</td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Bucket</td></tr>
+                  <tr class="main"><th scope="row">Analog Stick</th><td>User Input for HMI</td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Control HMI - instead of purchasing D-Pad</td></tr>
+                  <tr class="main"><th scope="row">Buttons</th><td>User Input for HMI</td><td class="n">$0.00</td><td class="n">2</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Control HMI - instead of purchasing</td></tr>
+                  <tr class="main"><th scope="row">LCD Display</th><td>User Output for HMI</td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Control HMI - instead of purchasing</td></tr>
+                  <tr class="main"><th scope="row">4-Digit Display</th><td>User Output for HMI</td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Control HMI - instead of purchasing</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/DIGITEN-Solenoid-Connect-normally-Closed/dp/B016MP1HX0/">Normally Closed 1/4&quot; Valve</a></th><td>Allow water to flow for the plan</td><td class="n">$7.94</td><td class="n">4</td><td class="n">$31.76</td><td>4 needed to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">DC 12V 1/4&quot; Inlet Feed Water Solenoid Valve Quick Connect N/C normally Closed</td></tr>
+                  <tr class="main"><th scope="row">Warning LED</th><td>Fault/Warning system</td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own, to prove out</td></tr>
+                  <tr class="desc"><td colspan="6">Red</td></tr>
+                  <tr class="main"><th scope="row">Wood For Structure</th><td>Mounting Everything</td><td class="n">$60.00</td><td class="n">1</td><td class="n">$60.00</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">Wood to use to install everything onto</td></tr>
+                  <tr class="main"><th scope="row">Screws</th><td></td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own</td></tr>
+                  <tr class="desc"><td colspan="6">For mounting</td></tr>
+                  <tr class="main"><th scope="row">PLA</th><td></td><td class="n">$20.00</td><td class="n">1</td><td class="n">$20.00</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">Creating the physical plant holders</td></tr>
+                  <tr class="main"><th scope="row">Washers, connection points, etc</th><td></td><td class="n">$25.00</td><td class="n">1</td><td class="n">$25.00</td><td></td></tr>
+                </tbody>
+                <tfoot><tr><th scope="row" colspan="4">Total, rows listed</th><td class="n">$264.60</td><td></td></tr></tfoot>
+              </table>
+            </div>
+          </section>
+
+          <section class="part" id="c0-res">
+            <h4>Resources</h4>
             <p class="lead">Links I am using to learn STM32 firmware.</p>
             <ul class="list links-list" style="margin-top: 20px">
               <li><a href="https://www.st.com/resource/en/product_training/stm32l4_system_gpio.pdf">STM32L4 system and GPIO training (ST, PDF)</a></li>
@@ -521,6 +668,31 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <li><a href="https://www.compilenrun.com/docs/category/stm32-tutorial/">STM32 tutorial (CompileNRun)</a></li>
               <li><a href="https://www.st.com/resource/en/application_note/an4894-how-to-use-eeprom-emulation-on-stm32-mcus-stmicroelectronics.pdf">AN4894: How to use EEPROM emulation on STM32 MCUs (ST, PDF)</a></li>
             </ul>
+                    </section>
+          </article>
+
+          <article class="chapter" id="c0-exec" data-chapter>
+            <span class="eyebrow">Phase 3</span>
+            <h3>Execution</h3>
+            <p class="lead">The build itself. New updates are added at the bottom.</p>
+            <div class="label">Updates</div>
+            <ol class="entries" data-updates>
+              <li class="empty">No updates yet. New updates are added here as dated entries, newest last.</li>
+            </ol>
+          </article>
+
+          <article class="chapter" id="c0-mc" data-chapter>
+            <span class="eyebrow">Phase 4</span>
+            <h3>Monitoring & Control</h3>
+            <p class="lead">Checking the work against the requirements.</p>
+            <p class="lead">Nothing here yet. Test results and checks against the requirements will be added here.</p>
+          </article>
+
+          <article class="chapter" id="c0-close" data-chapter>
+            <span class="eyebrow">Phase 5</span>
+            <h3>Closure</h3>
+            <p class="lead">Wrap-up, results and lessons learned.</p>
+            <p class="lead">Not started. The wrap-up, final results and lessons learned will be added here.</p>
           </article>
         </div>
       </div>
@@ -539,36 +711,26 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         </ul>
       </div>
 
-      <div class="board">
-        <div class="bt">Kanban board</div>
-        <div class="row" style="--n:3">
-          <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
-          <div class="panel col-prog"><h4>In Progress<span>1</span></h4><ul class="list"><li>Body design V3 in CAD</li></ul></div>
-          <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Initial sketches and goal</li><li>Requirements</li><li>Donor phone chosen and torn down</li><li>Outer screen software</li><li>Parts list ($135.80 so far)</li></ul></div>
-        </div>
-      </div>
 
       <div class="chapters">
-        <aside class="rail" aria-label="RAZR updates">
-          <div class="rt">Updates</div>
+        <aside class="rail" aria-label="Project phases">
+          <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c1-intro"><a href="#c1-intro">Intro</a></li>
-            <li data-rail="c1-idea"><a href="#c1-idea">The idea</a></li>
-            <li data-rail="c1-req"><a href="#c1-req">Requirements</a></li>
-            <li data-rail="c1-mule"><a href="#c1-mule">The donor phone</a></li>
-            <li data-rail="c1-teardown"><a href="#c1-teardown">Teardown</a></li>
-            <li data-rail="c1-software"><a href="#c1-software">Outer screen software</a></li>
-            <li data-rail="c1-body"><a href="#c1-body">Body design</a></li>
-            <li data-rail="c1-parts"><a href="#c1-parts">Parts and cost</a></li>
-            <li data-rail="c1-recovery"><a href="#c1-recovery">Recovery and references</a></li>
-            <li data-rail="c1-next"><a href="#c1-next">What is next</a></li>
+            <li data-rail="c1-init"><a href="#c1-init">Initiation</a></li>
+            <li data-rail="c1-plan"><a href="#c1-plan">Planning</a></li>
+            <li data-rail="c1-exec"><a href="#c1-exec">Execution</a></li>
+            <li data-rail="c1-mc"><a href="#c1-mc">Monitoring & Control</a></li>
+            <li data-rail="c1-close"><a href="#c1-close">Closure</a></li>
           </ol>
         </aside>
 
         <div class="content">
-          <article class="chapter" id="c1-intro" data-chapter>
-            <span class="eyebrow">Update 1</span>
-            <h3>Intro</h3>
+          <article class="chapter" id="c1-init" data-chapter>
+            <span class="eyebrow">Phase 1</span>
+            <h3>Initiation</h3>
+
+          <section class="part" id="c1-intro">
+            <h4>Intro</h4>
 
           <div class="label">Notes from the sketchbook</div>
           <p class="note">Full notebook: <a href="https://drive.google.com/file/d/1E1YdGZxQlou4Xevd5c7-vfD_76FqWapn/view?usp=sharing">open the BOOX notebook</a></p>
@@ -607,11 +769,10 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <div><dt>Parts cost so far</dt><dd>$135.80</dd></div>
             <div><dt>Status</dt><dd>Body design V3 in progress</dd></div>
           </dl>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c1-idea" data-chapter>
-            <span class="eyebrow">Update 2</span>
-            <h3>The idea</h3>
+          <section class="part" id="c1-idea">
+            <h4>The idea</h4>
             <p class="lead">Make a modern QWERTY keyboard device that slides out. It keeps a small screen and modern hardware, and uses BlackBerry keyboards because they felt good to type on.</p>
             <ul class="list" style="margin-top: 20px">
               <li>Small screen, modern internals.</li>
@@ -655,11 +816,10 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               </div>
             </div>
             <p style="margin-top: 20px; color: var(--muted)">The full sketches and notes are in the BOOX file: <a href="https://drive.google.com/file/d/1E1YdGZxQlou4Xevd5c7-vfD_76FqWapn/view?usp=sharing">sketches and notes</a>.</p>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c1-req" data-chapter>
-            <span class="eyebrow">Update 3</span>
-            <h3>Requirements</h3>
+          <section class="part" id="c1-req">
+            <h4>Requirements</h4>
             <p class="lead">Two design requirements drive the build. The constraints below come from the donor phone and shape how each requirement can be met.</p>
             <div class="row" style="--n:2">
               <div class="panel">
@@ -689,11 +849,24 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
                 <li>How does the open and close sensor work?</li>
               </ul>
             </div>
+                    </section>
           </article>
 
-          <article class="chapter" id="c1-mule" data-chapter>
-            <span class="eyebrow">Update 4</span>
-            <h3>The donor phone</h3>
+          <article class="chapter" id="c1-plan" data-chapter>
+            <span class="eyebrow">Phase 2</span>
+            <h3>Planning</h3>
+            <p class="lead">The plan: task board, parts, references and what comes next.</p>
+            <div class="board">
+              <div class="bt">Kanban board</div>
+              <div class="row" style="--n:3">
+                <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
+                <div class="panel col-prog"><h4>In Progress<span>1</span></h4><ul class="list"><li>Body design V3 in CAD</li></ul></div>
+                <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list"><li>Initial sketches and goal</li><li>Requirements</li><li>Donor phone chosen and torn down</li><li>Outer screen software</li><li>Parts list ($135.80 so far)</li></ul></div>
+              </div>
+            </div>
+
+          <section class="part" id="c1-mule">
+            <h4>The donor phone</h4>
             <p class="lead">The development phone is a test unit, called the mule. It was bought broken on purpose to keep cost down.</p>
             <div class="row" style="--n:3">
               <div class="panel">
@@ -719,11 +892,60 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
                 </ul>
               </div>
             </div>
+                    </section>
+
+          <section class="part" id="c1-parts">
+            <h4>Parts and cost</h4>
+            <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
+            <div class="bom" role="table" aria-label="Bill of materials">
+              <div class="brow" role="row"><span class="nm">Motorola Razr 2025+</span><span class="cost">$79.50</span><span class="nt">Main phone · <a class="src" href="https://www.ebay.com/itm/267690048563">listing</a></span><div class="bar"><i style="width: 100%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">BlackBerry Q10 keyboard</span><span class="cost">$21.27</span><div class="bar"><i style="width: 26.8%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">Hirose BM14B(0.8)-24DS-0.4V(53)</span><span class="cost">$11.21</span><span class="nt">Keyboard breakout board · <a class="src" href="https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/BM14B-0-8-60DS-0-4V-53/4552386">source</a></span><div class="bar"><i style="width: 14.1%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">Arduino Pro Micro</span><span class="cost">$10.59</span><span class="nt"><a class="src" href="https://www.amazon.com/diymore-ATmega32U4-Replace-ATmega328-Leonardo/dp/B01KJR41J4">source</a></span><div class="bar"><i style="width: 13.3%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">USB-C female breakout boards</span><span class="cost">$6.35</span><span class="nt">For the charging side · <a class="src" href="https://www.amazon.com/Breakout-Type-C-Serial-BreakoutFemale-Connector/dp/B0GVK4TZXN">source</a></span><div class="bar"><i style="width: 8%"></i></div></div>
+              <div class="brow" role="row"><span class="nm">USB-C male breakout boards</span><span class="cost">$6.88</span><span class="nt">For connecting to the phone · <a class="src" href="https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B">source</a></span><div class="bar"><i style="width: 8.7%"></i></div></div>
+              <div class="total"><span>Total</span><span>$135.80</span></div>
+            </div>
+                    </section>
+
+          <section class="part" id="c1-recovery">
+            <h4>Recovery and references</h4>
+            <p class="lead">Changing how the phone behaves carries some risk of bricking it, so there is a recovery path, and there are similar builds to learn from.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Recovery plan</h4>
+                <p>If the phone will not boot, restore it with <a href="https://en-us.support.motorola.com/app/softwarefix/">Motorola's software fix and rescue tool</a>. Hardware-button bootloader access is the fallback if ADB cannot reach it.</p>
+              </div>
+              <div class="panel">
+                <h4>Similar builds</h4>
+                <ul class="links-list">
+                  <li><a href="https://github.com/Dakkaron/Fairberry/tree/main">Fairberry</a></li>
+                  <li><a href="https://github.com/Archfx/RAZR">A public GitHub project with the same goal</a>. Next step is to study its process and learn from it.</li>
+                </ul>
+              </div>
+            </div>
+                    </section>
+
+          <section class="part" id="c1-next">
+            <h4>What is next</h4>
+            <ul class="list" style="margin-top: 8px; font-size: 17px">
+              <li>Finish the V3 fixes: keyboard spacing, a longer body, and the charging port position.</li>
+              <li>Print the main board to check fit under the screen.</li>
+              <li>Confirm with the SDK whether the screen can default to the flipped orientation.</li>
+              <li>Find out whether the screen can be sourced without the camera humps.</li>
+              <li>Study the public RAZR project's process.</li>
+              <li>Revision 2: add the extra keyboard buttons and the mouse roller, and decide on the final finish.</li>
+            </ul>
+                    </section>
           </article>
 
-          <article class="chapter" id="c1-teardown" data-chapter>
-            <span class="eyebrow">Update 5</span>
-            <h3>Teardown</h3>
+          <article class="chapter" id="c1-exec" data-chapter>
+            <span class="eyebrow">Phase 3</span>
+            <h3>Execution</h3>
+            <p class="lead">The build itself. New updates are added at the bottom.</p>
+
+          <section class="part" id="c1-teardown">
+            <h4>Teardown</h4>
             <p class="lead">Before drawing anything, the phone was taken apart and photographed in sections to understand the stack and the ribbon routing.</p>
             <div class="row" style="--n:3">
               <figure class="slot"><span>Photo to add: upper half</span></figure>
@@ -740,11 +962,10 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <li><a href="https://www.youtube.com/watch?v=8VKDCjBO2k0">Teardown video 2</a></li>
               <li><a href="https://drive.google.com/drive/folders/1h7Ko4w_jTH2l9OD9yN8HZ1M8j7sgBpr1?usp=drive_link">Internals: screenshots from teardown videos and online references</a></li>
             </ul>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c1-software" data-chapter>
-            <span class="eyebrow">Update 6</span>
-            <h3>Outer screen software</h3>
+          <section class="part" id="c1-software">
+            <h4>Outer screen software</h4>
             <p class="lead">With the inner screen removed, the phone has to run entirely on the outer screen. By default, Android on the Razr blocks many apps there.</p>
             <div class="row" style="--n:2">
               <div class="panel">
@@ -810,18 +1031,29 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               <li><a href="https://developer.android.com/tools/releases/platform-tools">Android Platform Tools</a></li>
               <li><a href="https://en-us.support.motorola.com/app/usb-drivers">Motorola USB drivers</a></li>
             </ul>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c1-body" data-chapter>
-            <span class="eyebrow">Update 7</span>
-            <h3>Body design</h3>
+          <section class="part" id="c1-body">
+            <h4>Body design</h4>
             <p class="lead">The body is modeled in CAD and printed. Version 3 is in progress. The recording below walks around the current assembly in Onshape.</p>
             <figure class="figure">
               <figcaption>Screen recording of the V3 assembly in Onshape, shown from the side, front and top. The slider mate joins the two halves.</figcaption>
               <video class="video" id="cad-video" src="demo.mp4" poster="poster.jpg" controls muted loop playsinline preload="metadata" aria-label="Screen recording of the V3 body assembly in Onshape, viewed from the side, front and top"></video>
             </figure>
             <p style="margin-top: 16px"><a href="https://cad.onshape.com/documents/51dd4e57e4c8c3349e2b81be/w/5f7d954e8cba4436397dca66/e/ce9da926a45f0d3afeef535f">Open the CAD model in Onshape</a></p>
-            <div class="callout">
+                    </section>
+            <div class="label">Updates</div>
+            <ol class="entries" data-updates>
+              <li class="empty">No updates yet. New updates are added here as dated entries, newest last.</li>
+            </ol>
+          </article>
+
+          <article class="chapter" id="c1-mc" data-chapter>
+            <span class="eyebrow">Phase 4</span>
+            <h3>Monitoring & Control</h3>
+            <p class="lead">Checking the work against the requirements.</p>
+            <p class="lead">Where the V3 design does not yet meet the requirements.</p>
+            <div class="callout" id="c1-fixes">
               <b>Fixes needed against the requirements</b>
               <ul class="list">
                 <li>Keyboard spacing is off.</li>
@@ -834,51 +1066,11 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             </div>
           </article>
 
-          <article class="chapter" id="c1-parts" data-chapter>
-            <span class="eyebrow">Update 8</span>
-            <h3>Parts and cost</h3>
-            <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
-            <div class="bom" role="table" aria-label="Bill of materials">
-              <div class="brow" role="row"><span class="nm">Motorola Razr 2025+</span><span class="cost">$79.50</span><span class="nt">Main phone · <a class="src" href="https://www.ebay.com/itm/267690048563">listing</a></span><div class="bar"><i style="width: 100%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">BlackBerry Q10 keyboard</span><span class="cost">$21.27</span><div class="bar"><i style="width: 26.8%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">Hirose BM14B(0.8)-24DS-0.4V(53)</span><span class="cost">$11.21</span><span class="nt">Keyboard breakout board · <a class="src" href="https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/BM14B-0-8-60DS-0-4V-53/4552386">source</a></span><div class="bar"><i style="width: 14.1%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">Arduino Pro Micro</span><span class="cost">$10.59</span><span class="nt"><a class="src" href="https://www.amazon.com/diymore-ATmega32U4-Replace-ATmega328-Leonardo/dp/B01KJR41J4">source</a></span><div class="bar"><i style="width: 13.3%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">USB-C female breakout boards</span><span class="cost">$6.35</span><span class="nt">For the charging side · <a class="src" href="https://www.amazon.com/Breakout-Type-C-Serial-BreakoutFemale-Connector/dp/B0GVK4TZXN">source</a></span><div class="bar"><i style="width: 8%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">USB-C male breakout boards</span><span class="cost">$6.88</span><span class="nt">For connecting to the phone · <a class="src" href="https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B">source</a></span><div class="bar"><i style="width: 8.7%"></i></div></div>
-              <div class="total"><span>Total</span><span>$135.80</span></div>
-            </div>
-          </article>
-
-          <article class="chapter" id="c1-recovery" data-chapter>
-            <span class="eyebrow">Update 9</span>
-            <h3>Recovery and references</h3>
-            <p class="lead">Changing how the phone behaves carries some risk of bricking it, so there is a recovery path, and there are similar builds to learn from.</p>
-            <div class="row" style="--n:2">
-              <div class="panel">
-                <h4>Recovery plan</h4>
-                <p>If the phone will not boot, restore it with <a href="https://en-us.support.motorola.com/app/softwarefix/">Motorola's software fix and rescue tool</a>. Hardware-button bootloader access is the fallback if ADB cannot reach it.</p>
-              </div>
-              <div class="panel">
-                <h4>Similar builds</h4>
-                <ul class="links-list">
-                  <li><a href="https://github.com/Dakkaron/Fairberry/tree/main">Fairberry</a></li>
-                  <li><a href="https://github.com/Archfx/RAZR">A public GitHub project with the same goal</a>. Next step is to study its process and learn from it.</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="chapter" id="c1-next" data-chapter>
-            <span class="eyebrow">Update 10</span>
-            <h3>What is next</h3>
-            <ul class="list" style="margin-top: 8px; font-size: 17px">
-              <li>Finish the V3 fixes: keyboard spacing, a longer body, and the charging port position.</li>
-              <li>Print the main board to check fit under the screen.</li>
-              <li>Confirm with the SDK whether the screen can default to the flipped orientation.</li>
-              <li>Find out whether the screen can be sourced without the camera humps.</li>
-              <li>Study the public RAZR project's process.</li>
-              <li>Revision 2: add the extra keyboard buttons and the mouse roller, and decide on the final finish.</li>
-            </ul>
+          <article class="chapter" id="c1-close" data-chapter>
+            <span class="eyebrow">Phase 5</span>
+            <h3>Closure</h3>
+            <p class="lead">Wrap-up, results and lessons learned.</p>
+            <p class="lead">Not started. The wrap-up, final results and lessons learned will be added here.</p>
           </article>
         </div>
       </div>
@@ -897,20 +1089,6 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           <li>Future plans to the project involve integrating an active ESP System into BeamNG, using a wet bench with pressure transducers and Lua programs to integrate brake pressures, and Canalyzer for CAN communication.</li>
         </ul>
       </div>
-      <div class="board">
-        <div class="bt">Kanban board</div>
-        <div class="row" style="--n:3">
-          <div class="panel col-next"><h4>To Do<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
-          <div class="panel col-prog"><h4>In Progress<span>2</span></h4><ul class="list"><li>Roads, decals and friction by surface</li><li>Fixes after the 0.39 update</li></ul></div>
-          <div class="panel col-done"><h4>Done<span>4</span></h4><ul class="list"><li>Base map from real map data</li><li>PBR textures and terrain types</li><li>Early terrain painting and trees</li><li>Spawn points</li></ul></div>
-        </div>
-      </div>
-      <dl class="facts">
-        <div><dt>Type</dt><dd>Simulation environment</dd></div>
-        <div><dt>Tools</dt><dd>BeamNG, MapNG, PBR Forge, MS Paint</dd></div>
-        <div><dt>Current focus</dt><dd>Roads, decals, and friction by surface</dd></div>
-        <div><dt>Status</dt><dd>Map in progress, missions next</dd></div>
-      </dl>
 
       <div class="show" id="bn-show" role="group" aria-roledescription="carousel" aria-label="BeamNG highlights">
         <div class="slides">
@@ -931,24 +1109,30 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       </div>
 
       <div class="chapters">
-        <aside class="rail" aria-label="BeamNG updates">
-          <div class="rt">Updates</div>
+        <aside class="rail" aria-label="Project phases">
+          <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c2-req"><a href="#c2-req">Requirements</a></li>
-            <li data-rail="c2-data"><a href="#c2-data">Base map data</a></li>
-            <li data-rail="c2-edit"><a href="#c2-edit">Editing the base map</a></li>
-            <li data-rail="c2-build"><a href="#c2-build">Terrain and environment</a></li>
-            <li data-rail="c2-spawn"><a href="#c2-spawn">Spawn points</a></li>
-            <li data-rail="c2-miss"><a href="#c2-miss">Missions</a></li>
-            <li data-rail="c2-issues"><a href="#c2-issues">Open issues</a></li>
-            <li data-rail="c2-dil"><a href="#c2-dil">Driver-in-the-loop plan</a></li>
+            <li data-rail="c2-init"><a href="#c2-init">Initiation</a></li>
+            <li data-rail="c2-plan"><a href="#c2-plan">Planning</a></li>
+            <li data-rail="c2-exec"><a href="#c2-exec">Execution</a></li>
+            <li data-rail="c2-mc"><a href="#c2-mc">Monitoring & Control</a></li>
+            <li data-rail="c2-close"><a href="#c2-close">Closure</a></li>
           </ol>
         </aside>
 
         <div class="content">
-          <article class="chapter" id="c2-req" data-chapter>
-            <span class="eyebrow">Update 1</span>
-            <h3>Requirements</h3>
+          <article class="chapter" id="c2-init" data-chapter>
+            <span class="eyebrow">Phase 1</span>
+            <h3>Initiation</h3>
+            <dl class="facts">
+              <div><dt>Type</dt><dd>Simulation environment</dd></div>
+              <div><dt>Tools</dt><dd>BeamNG, MapNG, PBR Forge, MS Paint</dd></div>
+              <div><dt>Current focus</dt><dd>Roads, decals, and friction by surface</dd></div>
+              <div><dt>Status</dt><dd>Map in progress, missions next</dd></div>
+      </dl>
+
+          <section class="part" id="c2-req">
+            <h4>Requirements</h4>
             <p class="lead">The near-term requirement is to learn how BeamNG levels and mods are made. The longer-term requirement is a driver-in-the-loop system that uses a real ESP brake system.</p>
             <div class="row" style="--n:2">
               <div class="panel">
@@ -970,11 +1154,24 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               </div>
             </div>
             <p style="margin-top: 20px; color: var(--muted)">Background on the tire model work: <a href="https://www.beamng.com/game/news/blog/tire-physics-development-sneak-peek/">BeamNG tire physics development</a>.</p>
+                    </section>
           </article>
 
-          <article class="chapter" id="c2-data" data-chapter>
-            <span class="eyebrow">Update 2</span>
-            <h3>Base map data</h3>
+          <article class="chapter" id="c2-plan" data-chapter>
+            <span class="eyebrow">Phase 2</span>
+            <h3>Planning</h3>
+            <p class="lead">The plan: task board, parts, references and what comes next.</p>
+            <div class="board">
+              <div class="bt">Kanban board</div>
+              <div class="row" style="--n:3">
+                <div class="panel col-next"><h4>To Do<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
+                <div class="panel col-prog"><h4>In Progress<span>2</span></h4><ul class="list"><li>Roads, decals and friction by surface</li><li>Fixes after the 0.39 update</li></ul></div>
+                <div class="panel col-done"><h4>Done<span>4</span></h4><ul class="list"><li>Base map from real map data</li><li>PBR textures and terrain types</li><li>Early terrain painting and trees</li><li>Spawn points</li></ul></div>
+              </div>
+            </div>
+
+          <section class="part" id="c2-data">
+            <h4>Base map data</h4>
             <p class="lead">The first question was where to get real-world terrain. The open question was whether the resolution would be good enough to drive on, or look terrible.</p>
             <div class="row" style="--n:3">
               <div class="panel">
@@ -1008,11 +1205,90 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               <b>Constraint</b>
               <p>BeamNG's level system uses the satellite image as a base, limited to 5 m per pixel. It looks rough up close, but works as generic ground cover and for distant views. The baked-in global shadows also need to be removed.</p>
             </div>
+                    </section>
+
+          <section class="part" id="c2-miss">
+            <h4>Missions</h4>
+            <p class="lead">Missions are the way to introduce the simulator at work. Two types are planned, both for driver training.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Introduction drive</h4>
+                <ul class="list">
+                  <li>Drive around all of Flat Rock.</li>
+                  <li>Gets people used to BeamNG.</li>
+                  <li>Shows areas people do not normally go to, including a hill jump.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>ESP disconnected</h4>
+                <ul class="list">
+                  <li>Control the vehicle when the ESP is disconnected during a split-friction stop.</li>
+                  <li>Replicates part of level 2 training, where quite a few people had a hard time saving the vehicle.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="label">Resources for Missions and Scenarios:</div>
+            <div class="row first" style="--n:2">
+              <div class="panel">
+                <h4>Missions</h4>
+                <p>You drive to them on the map, in free mode.</p>
+                <ul class="links-list" style="margin-top: 10px">
+                  <li><a href="https://beamng.fandom.com/wiki/Missions">BeamNG wiki: Missions</a></li>
+                  <li><a href="https://documentation.beamng.com/modding/gamemodes/missions/">Missions documentation</a></li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Scenarios</h4>
+                <p>Loaded from the main menu, with a custom track, vehicle and scenario.</p>
+                <ul class="links-list" style="margin-top: 10px">
+                  <li><a href="https://www.beamng.com/threads/introduction-to-scenarios-creation.14700/">Introduction to scenario creation</a></li>
+                  <li><a href="https://www.beamng.com/forums/scenarios.47/">Scenarios forum</a></li>
+                  <li><a href="https://www.beamng.com/resources/categories/scenarios.8/">Scenario resources</a></li>
+                </ul>
+              </div>
+            </div>
+                    </section>
+
+          <section class="part" id="c2-dil">
+            <h4>Driver-in-the-loop plan</h4>
+            <p class="lead">This phase is further down the line. It would become a work project and require the BeamNG.tech license. For now it is a learning project.</p>
+            <div class="row" style="--n:2">
+              <div class="panel">
+                <h4>Why BeamNG fits</h4>
+                <ul class="list">
+                  <li>A soft-body physics system that runs at 2000 Hz.</li>
+                  <li>Easy vehicle customization with a lot of community support, including the unusual vehicles in use at work.</li>
+                  <li>A built-in <a href="https://documentation.beamng.com/beamng_tech/interfaces/can-bus/">CAN interface</a>.</li>
+                  <li>Frequent updates, including an upcoming tire model change.</li>
+                  <li><a href="https://documentation.beamng.com/beamng_tech/interfaces/lua/">Lua scripting</a> for telemetry output and for modifying incoming sensor signals.</li>
+                  <li>Third-party tools and <a href="https://documentation.beamng.com/beamng_tech/interfaces/matlab-simulink/">MATLAB and Simulink</a>, through the <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/">co-simulation editor</a>.</li>
+                  <li>Many <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/available_signals_window/">vehicle signals</a> that can be saved and overlaid with ESP data.</li>
+                  <li>A <a href="https://documentation.beamng.com/beamng_tech/tools/scriptaieditor/">script editor</a> for maneuver runs and variations, and a built-in <a href="https://documentation.beamng.com/beamng_tech/sensors/">sensor system</a>.</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <h4>Needed to connect the ESP</h4>
+                <ul class="reqs">
+                  <li><span class="id">N1</span><span>A wet bench with brake pressure transducers.</span></li>
+                  <li><span class="id">N2</span><span>CANalyzer for the CAN inputs to the system.</span></li>
+                  <li><span class="id">N3</span><span>Lua scripts to export ESP inputs from BeamNG and import brake torque into it.</span></li>
+                  <li><span class="id">N4</span><span>MATLAB for the UDP interface from the Lua scripts, and Simulink to convert ESP inputs into voltages and brake pressure into brake torque.</span></li>
+                  <li><span class="id">N5</span><span>A DAQ interface to output to and import from the ESP. The model is not chosen yet.</span></li>
+                  <li><span class="id">N6</span><span>A solid sim rig: direct-drive wheel, gas, clutch, load cell brake, shifter, and a StreamDeck for all other functions.</span></li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top: 20px; color: var(--muted)">Reference: an <a href="https://documentation.beamng.com/beamng_tech/hil_and_dil/hil/">example hardware-in-the-loop system using an external shifter</a>.</p>
+                    </section>
           </article>
 
-          <article class="chapter" id="c2-edit" data-chapter>
-            <span class="eyebrow">Update 3</span>
-            <h3>Editing the base map</h3>
+          <article class="chapter" id="c2-exec" data-chapter>
+            <span class="eyebrow">Phase 3</span>
+            <h3>Execution</h3>
+            <p class="lead">The build itself. New updates are added at the bottom.</p>
+
+          <section class="part" id="c2-edit">
+            <h4>Editing the base map</h4>
             <div class="label">Active notes</div>
             <ul class="list">
               <li>Global shadows baked onto the base texture, need to remove.</li>
@@ -1025,11 +1301,10 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               <figcaption>This is the resolution, it's rough:</figcaption>
               <img src="beamng-paint-smooth.jpg" width="1321" height="940" alt="MS Paint open on a zoomed in section of the base terrain texture, showing large blurry pixels of road, grass and trees." loading="lazy">
             </figure>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c2-build" data-chapter>
-            <span class="eyebrow">Update 4</span>
-            <h3>Terrain and environment</h3>
+          <section class="part" id="c2-build">
+            <h4>Terrain and environment</h4>
             <p class="lead">The map is built up in layers: PBR textures first, then terrain painting, smoothing, objects, roads and decals.</p>
             <div class="label">PBR textures</div>
             <p class="prose">BeamNG recently moved to physically based rendering. A texture is described by a set of image maps that tell the engine how light behaves on it.</p>
@@ -1095,11 +1370,10 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               <figure class="slot"><span>Video to add: early driving after terrain smoothing and new terrain types</span></figure>
               <figure class="slot"><span>Image to add: after the 0.39 update broke the grass and forest, then the fixes</span></figure>
             </div>
-          </article>
+                    </section>
 
-          <article class="chapter" id="c2-spawn" data-chapter>
-            <span class="eyebrow">Update 5</span>
-            <h3>Spawn points</h3>
+          <section class="part" id="c2-spawn">
+            <h4>Spawn points</h4>
             <p style="margin-top: 20px"><b>Notes:</b></p>
             <p style="margin-top: 8px; color: var(--muted)">Spawns to choose</p>
             <ul class="list" style="margin-top: 8px">
@@ -1129,98 +1403,25 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
               <figcaption>In-Game Menu:</figcaption>
               <img src="beamng-spawn-ingame-menu.jpg" width="2136" height="1133" alt="BeamNG in-game map over Bosch Flat Rock with a Points of Interest list of quicktravel points: 102 Building Parking Lot, 20/30% Hills, ESP Runup and VDA, each marked on the map." loading="lazy">
             </figure>
+                    </section>
+            <div class="label">Updates</div>
+            <ol class="entries" data-updates>
+              <li class="empty">No updates yet. New updates are added here as dated entries, newest last.</li>
+            </ol>
           </article>
 
-          <article class="chapter" id="c2-miss" data-chapter>
-            <span class="eyebrow">Update 6</span>
-            <h3>Missions</h3>
-            <p class="lead">Missions are the way to introduce the simulator at work. Two types are planned, both for driver training.</p>
-            <div class="row" style="--n:2">
-              <div class="panel">
-                <h4>Introduction drive</h4>
-                <ul class="list">
-                  <li>Drive around all of Flat Rock.</li>
-                  <li>Gets people used to BeamNG.</li>
-                  <li>Shows areas people do not normally go to, including a hill jump.</li>
-                </ul>
-              </div>
-              <div class="panel">
-                <h4>ESP disconnected</h4>
-                <ul class="list">
-                  <li>Control the vehicle when the ESP is disconnected during a split-friction stop.</li>
-                  <li>Replicates part of level 2 training, where quite a few people had a hard time saving the vehicle.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="label">Resources for Missions and Scenarios:</div>
-            <div class="row first" style="--n:2">
-              <div class="panel">
-                <h4>Missions</h4>
-                <p>You drive to them on the map, in free mode.</p>
-                <ul class="links-list" style="margin-top: 10px">
-                  <li><a href="https://beamng.fandom.com/wiki/Missions">BeamNG wiki: Missions</a></li>
-                  <li><a href="https://documentation.beamng.com/modding/gamemodes/missions/">Missions documentation</a></li>
-                </ul>
-              </div>
-              <div class="panel">
-                <h4>Scenarios</h4>
-                <p>Loaded from the main menu, with a custom track, vehicle and scenario.</p>
-                <ul class="links-list" style="margin-top: 10px">
-                  <li><a href="https://www.beamng.com/threads/introduction-to-scenarios-creation.14700/">Introduction to scenario creation</a></li>
-                  <li><a href="https://www.beamng.com/forums/scenarios.47/">Scenarios forum</a></li>
-                  <li><a href="https://www.beamng.com/resources/categories/scenarios.8/">Scenario resources</a></li>
-                </ul>
-              </div>
-            </div>
+          <article class="chapter" id="c2-mc" data-chapter>
+            <span class="eyebrow">Phase 4</span>
+            <h3>Monitoring & Control</h3>
+            <p class="lead">Checking the work against the requirements.</p>
+            <p class="lead">Nothing here yet. Test results and checks against the requirements will be added here.</p>
           </article>
 
-          <article class="chapter" id="c2-issues" data-chapter>
-            <span class="eyebrow">Update 7</span>
-            <h3>Open issues</h3>
-            <div class="callout" style="margin-top: 0">
-              <b>Game update 0.39</b>
-              <p>The update broke most of the groundcover and forest assets, along with several smaller items. Forest and main grass have been fixed so far.</p>
-            </div>
-            <div class="label">To do</div>
-            <ul class="list" style="font-size: 17px">
-              <li>Complete the road and decal work, and learn how to control friction by the selected road surface.</li>
-              <li>Add missions and scenarios.</li>
-              <li>Clean up the base map further.</li>
-              <li>Once the map is good enough, move on to making a vehicle.</li>
-            </ul>
-          </article>
-
-          <article class="chapter" id="c2-dil" data-chapter>
-            <span class="eyebrow">Update 8</span>
-            <h3>Driver-in-the-loop plan</h3>
-            <p class="lead">This phase is further down the line. It would become a work project and require the BeamNG.tech license. For now it is a learning project.</p>
-            <div class="row" style="--n:2">
-              <div class="panel">
-                <h4>Why BeamNG fits</h4>
-                <ul class="list">
-                  <li>A soft-body physics system that runs at 2000 Hz.</li>
-                  <li>Easy vehicle customization with a lot of community support, including the unusual vehicles in use at work.</li>
-                  <li>A built-in <a href="https://documentation.beamng.com/beamng_tech/interfaces/can-bus/">CAN interface</a>.</li>
-                  <li>Frequent updates, including an upcoming tire model change.</li>
-                  <li><a href="https://documentation.beamng.com/beamng_tech/interfaces/lua/">Lua scripting</a> for telemetry output and for modifying incoming sensor signals.</li>
-                  <li>Third-party tools and <a href="https://documentation.beamng.com/beamng_tech/interfaces/matlab-simulink/">MATLAB and Simulink</a>, through the <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/">co-simulation editor</a>.</li>
-                  <li>Many <a href="https://documentation.beamng.com/beamng_tech/tools/cosimulationeditor/available_signals_window/">vehicle signals</a> that can be saved and overlaid with ESP data.</li>
-                  <li>A <a href="https://documentation.beamng.com/beamng_tech/tools/scriptaieditor/">script editor</a> for maneuver runs and variations, and a built-in <a href="https://documentation.beamng.com/beamng_tech/sensors/">sensor system</a>.</li>
-                </ul>
-              </div>
-              <div class="panel">
-                <h4>Needed to connect the ESP</h4>
-                <ul class="reqs">
-                  <li><span class="id">N1</span><span>A wet bench with brake pressure transducers.</span></li>
-                  <li><span class="id">N2</span><span>CANalyzer for the CAN inputs to the system.</span></li>
-                  <li><span class="id">N3</span><span>Lua scripts to export ESP inputs from BeamNG and import brake torque into it.</span></li>
-                  <li><span class="id">N4</span><span>MATLAB for the UDP interface from the Lua scripts, and Simulink to convert ESP inputs into voltages and brake pressure into brake torque.</span></li>
-                  <li><span class="id">N5</span><span>A DAQ interface to output to and import from the ESP. The model is not chosen yet.</span></li>
-                  <li><span class="id">N6</span><span>A solid sim rig: direct-drive wheel, gas, clutch, load cell brake, shifter, and a StreamDeck for all other functions.</span></li>
-                </ul>
-              </div>
-            </div>
-            <p style="margin-top: 20px; color: var(--muted)">Reference: an <a href="https://documentation.beamng.com/beamng_tech/hil_and_dil/hil/">example hardware-in-the-loop system using an external shifter</a>.</p>
+          <article class="chapter" id="c2-close" data-chapter>
+            <span class="eyebrow">Phase 5</span>
+            <h3>Closure</h3>
+            <p class="lead">Wrap-up, results and lessons learned.</p>
+            <p class="lead">Not started. The wrap-up, final results and lessons learned will be added here.</p>
           </article>
         </div>
       </div>
