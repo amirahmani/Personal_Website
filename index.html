@@ -30,7 +30,7 @@ body {
   color: var(--fg);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.45;
   margin: 0;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -45,7 +45,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     rgb(var(--g2) / 0.55) var(--hz),
     rgb(var(--g1) / 0.55) 100%);
 }
-.wrap { max-width: 1080px; margin: 0 auto; }
+.wrap { max-width: 1240px; margin: 0 auto; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; margin: 0; line-height: 1.08; }
 p { margin: 0; }
 a { color: var(--accent); text-underline-offset: 3px; }
@@ -53,7 +53,7 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 
 /* sticky bar */
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bar); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--glass-line); }
-.top .inner { max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding: 10px 0; }
+.top .inner { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding: 10px 0; }
 .top .who { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin-right: auto; }
 .top nav { display: flex; flex-wrap: wrap; gap: 0 20px; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: 14px; padding: 6px 0; border-bottom: 2px solid transparent; }
@@ -105,7 +105,7 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .sk figcaption b { color: var(--fg); font-weight: 600; }
 .video { display: block; width: 100%; aspect-ratio: 2550 / 1238; border: 1px solid var(--glass-line); border-radius: 10px; background: #05050a; }
 
-.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--muted); }
+.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--muted); }
 .list li { padding-left: 18px; position: relative; }
 .list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 1px; background: var(--accent); }
 .reqs { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; color: var(--muted); }
@@ -122,6 +122,31 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .specs th, .specs td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--glass-line); font-weight: 400; vertical-align: top; }
 .specs th { color: var(--faint); width: 34%; padding-right: 16px; }
 .specs td { color: var(--muted); }
+.gantt { min-width: 980px; --lw: 400px; }
+.gantt .gr { display: grid; grid-template-columns: var(--lw) 1fr; align-items: center; height: 26px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.gantt .ghead { height: 30px; border-bottom: 1px solid var(--glass-line); }
+.gantt .gl { display: flex; gap: 10px; min-width: 0; padding-right: 12px; font-size: 12.5px; color: var(--muted); }
+.gantt .gn { width: 20px; text-align: right; font-family: var(--font-mono); color: var(--faint); flex: none; }
+.gantt .gt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gantt .gt i { font-style: normal; color: var(--faint); font-family: var(--font-mono); font-size: 11px; }
+.gantt .gtrack { position: relative; height: 100%; }
+.gantt .gaxis span { position: absolute; top: 8px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
+.gantt .gaxis span:first-child { transform: none; }
+.gantt .gaxis span:last-child { transform: translateX(-100%); }
+.gantt .gbody { position: relative; }
+.gantt .gover { position: absolute; left: var(--lw); right: 0; top: 0; bottom: 0; pointer-events: none; }
+.gantt .gw { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,.10); }
+.gantt .gtoday { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #ff6b6b; opacity: .8; z-index: 2; }
+.gb { position: absolute; top: 6px; height: 14px; min-width: 6px; border-radius: 4px; background: var(--accent); opacity: .85; }
+.gb.done { background: #cdb4ff; opacity: .75; }
+.gantt-key { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+.gantt-key span { display: inline-flex; align-items: center; gap: 8px; }
+.gantt-key .gb { position: static; display: inline-block; width: 22px; height: 10px; min-width: 0; }
+.gtoday-k { display: inline-block; width: 2px; height: 14px; background: #ff6b6b; }
+.part .rh { font-family: var(--font-display); font-size: 20px; margin: 36px 0 4px; font-weight: 600; }
+#c0-regs .rh:first-of-type { margin-top: 8px; }
+#c0-regs .label { margin: 20px 0 12px; }
+.faintp { color: var(--faint); margin: 0; }
 .scroll-x { overflow-x: auto; width: 100%; }
 
 /* chapters */
@@ -249,7 +274,10 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .board .panel { padding: 14px; background: rgba(0,0,0,0.28); }
 .board .panel h4 { padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--glass-line); }
 .board .panel h4 span { border: 1px solid var(--glass-line); border-radius: 999px; padding: 0 8px; }
-.board .list { gap: 8px; }
+.board .list { gap: 6px; }
+.board .kscroll { max-height: 440px; overflow-y: auto; padding-right: 8px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.3) transparent; overscroll-behavior: contain; }
+.board .iid { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--faint); margin-bottom: 1px; }
+.board .bt .upd { margin-left: 10px; letter-spacing: .04em; text-transform: none; color: var(--muted); }
 .board .list li { padding: 10px 12px; border: 1px solid var(--glass-line); border-radius: 8px; background: var(--glass); color: var(--fg); }
 .board .list li::before { display: none; }
 .board .col-prog li { border-left: 3px solid var(--accent); }
@@ -457,7 +485,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <div class="brow"><span class="nm">Pump / motor</span><span class="nt">Moves the water. An auto windshield washer pump should be reliable enough and common enough.</span></div>
               <div class="brow"><span class="nm">Valves</span><span class="nt">For each module and each row. Normally closed!</span></div>
               <div class="brow"><span class="nm">Tubing</span><span class="nt">Auto windshield washer diameter, to keep it consistent and cheap.</span></div>
-              <div class="brow"><span class="nm">Plant holder</span><span class="nt">A module to hold plants.</span></div>
+              <div class="brow"><span class="nm">Plant pod</span><span class="nt">A module to hold plants.</span></div>
               <div class="brow"><span class="nm">Plant row</span><span class="nt">A row of plants. Width is undefined so far, possibly varying widths.</span></div>
               <div class="brow"><span class="nm">Water tank</span><span class="nt">Holds the water. It needs to be easy to fill and hold enough for a week or two.</span></div>
               <div class="brow"><span class="nm">LCD screen</span><span class="nt">To display info and set profiles.</span></div>
@@ -472,7 +500,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
           </section>
 
           <section class="part" id="c0-holder">
-            <h4>Plant Holder</h4>
+            <h4>Plant Pod</h4>
             <figure class="sk hand">
               <figcaption><b>Initial idea.</b> Move the water outlet to a corner, but up until the soil line so it does not interfere with plant growth. Move the hygrometers to the opposite side of the hose: it will add time to read, but will be more accurate to the total soil moisture level. Maybe add a reading delay.</figcaption>
               <img src="plant-holder.png" width="1500" height="1854" alt="Sketch of a planter box with a water output, hygrometers and a valve, and notes about where to move each." loading="lazy">
@@ -598,13 +626,34 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <h3>Planning</h3>
             <p class="lead">The plan: task board, parts, references and what comes next.</p>
             <div class="board">
-              <div class="bt">Kanban board</div>
+              <div class="bt">Kanban board <span class="upd">Updated Nov 2, 2026 · from the GitHub project</span></div>
               <div class="row" style="--n:3">
-                <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Confirm I²C as the communication protocol</li><li>Settle the plant holder open points</li><li>Pick the task cycle rate (20 Hz or 100 Hz)</li><li>Build 2 shelves with 3 plants</li><li>Write the firmware in Rust</li></ul></div>
-          <div class="panel col-prog"><h4>In Progress<span>3</span></h4><ul class="list"><li>Firmware and embedded SW notes</li><li>Electrical: I/O count and power</li><li>Tuning and modeling notes</li></ul></div>
-          <div class="panel col-done"><h4>Done<span>7</span></h4><ul class="list"><li>Intro and concept sketch</li><li>Initial requirements</li><li>System diagram</li><li>Mechanical and fluid layout</li><li>Hardware estimates</li><li>Plant holder and plant row sketches</li><li>HMI sketches</li></ul></div>
+                <div class="panel col-next"><h4>To Do<span>34</span></h4><ul class="list kscroll" tabindex="0" aria-label="To Do items, scrollable"><li><span class="iid">#22</span>System: Plant Wall: Testing &amp; Validation</li><li><span class="iid">#29</span>Sub-System: Mechanical: Build</li><li><span class="iid">#30</span>Sub-System: Mechanical: Testing &amp; Verification</li><li><span class="iid">#31</span>Sub-System: Mechanical: Integration</li><li><span class="iid">#53</span>Component; Mechanical: Plant Row: Build</li><li><span class="iid">#54</span>Component; Mechanical: Plant Row: Testing and Verification</li><li><span class="iid">#55</span>Component; Mechanical: Plant Row: Integration</li><li><span class="iid">#57</span>Component; Mechanical: Plant Pod: Build</li><li><span class="iid">#58</span>Component; Mechanical: Plant Pod: Testing &amp; Verification</li><li><span class="iid">#59</span>Component; Mechanical: Plant Pod: Integration</li><li><span class="iid">#60</span>Component; Mechanical: Water: Build</li><li><span class="iid">#62</span>Component; Mechanical: Water: Testing &amp; Verification</li><li><span class="iid">#63</span>Component; Mechanical: Water: Integration</li><li><span class="iid">#36</span>Sub-System: Electrical: Build</li><li><span class="iid">#37</span>Sub-System: Electrical: Testing &amp; Verification</li><li><span class="iid">#38</span>Sub-System: Electrical: Integration</li><li><span class="iid">#45</span>Component; Electrical: HMI: Build</li><li><span class="iid">#46</span>Component; Electrical: HMI: Testing and Verification</li><li><span class="iid">#47</span>Component; Electrical: HMI: Integration</li><li><span class="iid">#49</span>Component; Electrical: Main Board: Build</li><li><span class="iid">#50</span>Component; Electrical: Main Board: Testing &amp; Verification</li><li><span class="iid">#51</span>Component; Electrical: Main Board: Integration</li><li><span class="iid">#41</span>Sub-System: Software: Build</li><li><span class="iid">#42</span>Sub-System: Software: Testing &amp; Integration</li><li><span class="iid">#43</span>Sub-System: Software: Integration</li><li><span class="iid">#65</span>Component; Software: HMI: Build</li><li><span class="iid">#66</span>Component; Software: HMI: Testing &amp; Verification</li><li><span class="iid">#67</span>Component; Software: HMI: Integration</li><li><span class="iid">#69</span>Component; Software: HMI: Build</li><li><span class="iid">#70</span>Component; Software: HMI: Testing &amp; Verification</li><li><span class="iid">#71</span>Component; Software: HMI: Integration</li><li><span class="iid">#73</span>Component; Software: Water Controls: Build</li><li><span class="iid">#74</span>Component; Software: Water Controls: Testing &amp; Verification</li><li><span class="iid">#75</span>Component; Software: Water Controls: Integration</li></ul></div>
+                <div class="panel col-prog"><h4>In Progress<span>11</span></h4><ul class="list kscroll" tabindex="0" aria-label="In Progress items, scrollable"><li><span class="iid">#33</span>Sub-System: Mechanical: Design</li><li><span class="iid">#52</span>Component; Mechanical: Plant Row: Design</li><li><span class="iid">#56</span>Component; Mechanical: Plant Pod: Design</li><li><span class="iid">#61</span>Component; Mechanical: Water: Design</li><li><span class="iid">#40</span>Sub-System: Software: Design</li><li><span class="iid">#72</span>Component; Software: Water Controls: Design</li><li><span class="iid">#64</span>Component; Software: HMI: Design</li><li><span class="iid">#68</span>Component; Software: Lighting: Design</li><li><span class="iid">#35</span>Sub-System: Electrical: Design</li><li><span class="iid">#44</span>Component; Electrical: HMI: Design</li><li><span class="iid">#48</span>Component; Electrical: Main Board: Design</li></ul></div>
+                <div class="panel col-done"><h4>Done<span>5</span></h4><ul class="list kscroll" tabindex="0" aria-label="Done items, scrollable"><li><span class="iid">#20</span>System: Plant Wall: Concept</li><li><span class="iid">#19</span>System: Plant Wall: Requirements</li><li><span class="iid">#27</span>Sub-System: Mechanical: Requirements</li><li><span class="iid">#39</span>Sub-System: Software: Requirements</li><li><span class="iid">#34</span>Sub-System: Electrical: Requirements</li></ul></div>
               </div>
             </div>
+
+          <section class="part" id="c0-scope">
+            <h4>Scope</h4>
+            <p class="lead">This project is meant to be a sprint during the month of November. Expectations:</p>
+            <ul class="list" style="margin-top: 20px"><li>Electrical system fully functioning</li><li>Plant pods functioning, at least 3 created</li><li>Plant rows functioning, at least 2 created</li><li>Watering control loop fully functioning</li><li>Lighting set to On/Off, individual plant control not in scope</li><li>HMI functioning to select water amount</li><li>Fault LED functioning for low fluid sensor</li></ul>
+          </section>
+
+          <section class="part" id="c0-sched">
+            <h4>Schedule</h4>
+            <p class="lead">Monthly roadmap from my GitHub project: 38 items from Oct 30 to Nov 30, 2026. Each sub-system and component follows Design, Build, Testing &amp; Verification, then Integration, and System Testing &amp; Validation closes the month. Bars are read from a roadmap screenshot taken Nov 2, so the dates are approximate.</p>
+            <div class="gantt-key"><span><i class="gb done"></i>Complete</span><span><i class="gb"></i>Open</span><span><i class="gtoday-k"></i>Today, Nov 2</span></div>
+            <div class="scroll-x" style="margin-top: 16px">
+              <div class="gantt" role="img" aria-label="Gantt chart of the 38 Plant Wall roadmap items between Oct 30 and Nov 30, 2026">
+                <div class="gr ghead"><div class="gl"></div><div class="gtrack gaxis"><span style="left:1.562%">Oct 30</span><span style="left:32.812%">Nov 9</span><span style="left:54.688%">Nov 16</span><span style="left:76.562%">Nov 23</span><span style="left:98.438%">Nov 30</span></div></div>
+                <div class="gbody">
+                  <div class="gover"><span class="gw" style="left:31.250%"></span><span class="gw" style="left:53.125%"></span><span class="gw" style="left:75.000%"></span><span class="gw" style="left:96.875%"></span><span class="gtoday" style="left:10.938%"></span></div>
+                  <div class="gr"><div class="gl"><span class="gn">1</span><span class="gt">Sub-System: Mechanical: Design <i>#33</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Sub-System: Mechanical: Design #33"></span></div></div><div class="gr"><div class="gl"><span class="gn">2</span><span class="gt">Component; Mechanical: Plant Row: Design <i>#52</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Component; Mechanical: Plant Row: Design #52"></span></div></div><div class="gr"><div class="gl"><span class="gn">3</span><span class="gt">Component; Mechanical: Plant Pod: Design <i>#56</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Component; Mechanical: Plant Pod: Design #56"></span></div></div><div class="gr"><div class="gl"><span class="gn">4</span><span class="gt">System: Plant Wall: Concept <i>#20</i></span></div><div class="gtrack"><span class="gb done" style="left:0.000%;width:9.375%" title="System: Plant Wall: Concept #20"></span></div></div><div class="gr"><div class="gl"><span class="gn">5</span><span class="gt">System: Plant Wall: Requirements <i>#19</i></span></div><div class="gtrack"><span class="gb done" style="left:6.250%;width:3.125%" title="System: Plant Wall: Requirements #19"></span></div></div><div class="gr"><div class="gl"><span class="gn">6</span><span class="gt">Sub-System: Mechanical: Requirements <i>#27</i></span></div><div class="gtrack"><span class="gb done" style="left:6.250%;width:3.125%" title="Sub-System: Mechanical: Requirements #27"></span></div></div><div class="gr"><div class="gl"><span class="gn">7</span><span class="gt">Sub-System: Software: Requirements <i>#39</i></span></div><div class="gtrack"><span class="gb done" style="left:6.250%;width:3.125%" title="Sub-System: Software: Requirements #39"></span></div></div><div class="gr"><div class="gl"><span class="gn">8</span><span class="gt">Sub-System: Electrical: Requirements <i>#34</i></span></div><div class="gtrack"><span class="gb done" style="left:6.250%;width:3.125%" title="Sub-System: Electrical: Requirements #34"></span></div></div><div class="gr"><div class="gl"><span class="gn">9</span><span class="gt">System: Plant Wall: Testing &amp; Validation <i>#22</i></span></div><div class="gtrack"><span class="gb" style="left:78.125%;width:21.875%" title="System: Plant Wall: Testing &amp; Validation #22"></span></div></div><div class="gr"><div class="gl"><span class="gn">10</span><span class="gt">Sub-System: Mechanical: Build <i>#29</i></span></div><div class="gtrack"><span class="gb" style="left:15.625%;width:46.875%" title="Sub-System: Mechanical: Build #29"></span></div></div><div class="gr"><div class="gl"><span class="gn">11</span><span class="gt">Sub-System: Mechanical: Testing &amp; Verification <i>#30</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Sub-System: Mechanical: Testing &amp; Verification #30"></span></div></div><div class="gr"><div class="gl"><span class="gn">12</span><span class="gt">Sub-System: Mechanical: Integration <i>#31</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Sub-System: Mechanical: Integration #31"></span></div></div><div class="gr"><div class="gl"><span class="gn">13</span><span class="gt">Component; Mechanical: Plant Row: Build <i>#53</i></span></div><div class="gtrack"><span class="gb" style="left:15.625%;width:46.875%" title="Component; Mechanical: Plant Row: Build #53"></span></div></div><div class="gr"><div class="gl"><span class="gn">14</span><span class="gt">Component; Mechanical: Plant Row: Testing and Verification <i>#54</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Component; Mechanical: Plant Row: Testing and Verification #54"></span></div></div><div class="gr"><div class="gl"><span class="gn">15</span><span class="gt">Component; Mechanical: Plant Row: Integration <i>#55</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Component; Mechanical: Plant Row: Integration #55"></span></div></div><div class="gr"><div class="gl"><span class="gn">16</span><span class="gt">Component; Mechanical: Plant Pod: Build <i>#57</i></span></div><div class="gtrack"><span class="gb" style="left:15.625%;width:46.875%" title="Component; Mechanical: Plant Pod: Build #57"></span></div></div><div class="gr"><div class="gl"><span class="gn">17</span><span class="gt">Component; Mechanical: Plant Pod: Testing &amp; Verification <i>#58</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Component; Mechanical: Plant Pod: Testing &amp; Verification #58"></span></div></div><div class="gr"><div class="gl"><span class="gn">18</span><span class="gt">Component; Mechanical: Plant Pod: Integration <i>#59</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Component; Mechanical: Plant Pod: Integration #59"></span></div></div><div class="gr"><div class="gl"><span class="gn">19</span><span class="gt">Component; Mechanical: Water: Design <i>#61</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Component; Mechanical: Water: Design #61"></span></div></div><div class="gr"><div class="gl"><span class="gn">20</span><span class="gt">Component; Mechanical: Water: Build <i>#60</i></span></div><div class="gtrack"><span class="gb" style="left:15.625%;width:46.875%" title="Component; Mechanical: Water: Build #60"></span></div></div><div class="gr"><div class="gl"><span class="gn">21</span><span class="gt">Component; Mechanical: Water: Testing &amp; Verification <i>#62</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Component; Mechanical: Water: Testing &amp; Verification #62"></span></div></div><div class="gr"><div class="gl"><span class="gn">22</span><span class="gt">Component; Mechanical: Water: Integration <i>#63</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Component; Mechanical: Water: Integration #63"></span></div></div><div class="gr"><div class="gl"><span class="gn">23</span><span class="gt">Sub-System: Electrical: Design <i>#35</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Sub-System: Electrical: Design #35"></span></div></div><div class="gr"><div class="gl"><span class="gn">24</span><span class="gt">Sub-System: Electrical: Build <i>#36</i></span></div><div class="gtrack"><span class="gb" style="left:18.750%;width:43.750%" title="Sub-System: Electrical: Build #36"></span></div></div><div class="gr"><div class="gl"><span class="gn">25</span><span class="gt">Sub-System: Electrical: Testing &amp; Verification <i>#37</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Sub-System: Electrical: Testing &amp; Verification #37"></span></div></div><div class="gr"><div class="gl"><span class="gn">26</span><span class="gt">Sub-System: Electrical: Integration <i>#38</i></span></div><div class="gtrack"><span class="gb" style="left:78.125%;width:3.125%" title="Sub-System: Electrical: Integration #38"></span></div></div><div class="gr"><div class="gl"><span class="gn">27</span><span class="gt">Component; Electrical: HMI: Design <i>#44</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Component; Electrical: HMI: Design #44"></span></div></div><div class="gr"><div class="gl"><span class="gn">28</span><span class="gt">Component; Electrical: HMI: Build <i>#45</i></span></div><div class="gtrack"><span class="gb" style="left:18.750%;width:3.125%" title="Component; Electrical: HMI: Build #45"></span></div></div><div class="gr"><div class="gl"><span class="gn">29</span><span class="gt">Component; Electrical: HMI: Testing and Verification <i>#46</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Component; Electrical: HMI: Testing and Verification #46"></span></div></div><div class="gr"><div class="gl"><span class="gn">30</span><span class="gt">Component; Electrical: HMI: Integration <i>#47</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Component; Electrical: HMI: Integration #47"></span></div></div><div class="gr"><div class="gl"><span class="gn">31</span><span class="gt">Component; Electrical: Main Board: Design <i>#48</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Component; Electrical: Main Board: Design #48"></span></div></div><div class="gr"><div class="gl"><span class="gn">32</span><span class="gt">Component; Electrical: Main Board: Build <i>#49</i></span></div><div class="gtrack"><span class="gb" style="left:18.750%;width:3.125%" title="Component; Electrical: Main Board: Build #49"></span></div></div><div class="gr"><div class="gl"><span class="gn">33</span><span class="gt">Component; Electrical: Main Board: Testing &amp; Verification <i>#50</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Component; Electrical: Main Board: Testing &amp; Verification #50"></span></div></div><div class="gr"><div class="gl"><span class="gn">34</span><span class="gt">Component; Electrical: Main Board: Integration <i>#51</i></span></div><div class="gtrack"><span class="gb" style="left:75.000%;width:3.125%" title="Component; Electrical: Main Board: Integration #51"></span></div></div><div class="gr"><div class="gl"><span class="gn">35</span><span class="gt">Sub-System: Software: Design <i>#40</i></span></div><div class="gtrack"><span class="gb" style="left:9.375%;width:6.250%" title="Sub-System: Software: Design #40"></span></div></div><div class="gr"><div class="gl"><span class="gn">36</span><span class="gt">Sub-System: Software: Build <i>#41</i></span></div><div class="gtrack"><span class="gb" style="left:18.750%;width:43.750%" title="Sub-System: Software: Build #41"></span></div></div><div class="gr"><div class="gl"><span class="gn">37</span><span class="gt">Sub-System: Software: Testing &amp; Integration <i>#42</i></span></div><div class="gtrack"><span class="gb" style="left:62.500%;width:12.500%" title="Sub-System: Software: Testing &amp; Integration #42"></span></div></div><div class="gr"><div class="gl"><span class="gn">38</span><span class="gt">Sub-System: Software: Integration <i>#43</i></span></div><div class="gtrack"><span class="gb" style="left:78.125%;width:3.125%" title="Sub-System: Software: Integration #43"></span></div></div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section class="part" id="c0-bom">
             <h4>Bill of Materials</h4>
@@ -650,10 +699,13 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
                   <tr class="main"><th scope="row">Screws</th><td></td><td class="n">$0.00</td><td class="n">1</td><td class="n">$0.00</td><td>Already own</td></tr>
                   <tr class="desc"><td colspan="6">For mounting</td></tr>
                   <tr class="main"><th scope="row">PLA</th><td></td><td class="n">$20.00</td><td class="n">1</td><td class="n">$20.00</td><td></td></tr>
-                  <tr class="desc"><td colspan="6">Creating the physical plant holders</td></tr>
+                  <tr class="desc"><td colspan="6">Creating the physical plant pods</td></tr>
                   <tr class="main"><th scope="row">Washers, connection points, etc</th><td></td><td class="n">$25.00</td><td class="n">1</td><td class="n">$25.00</td><td></td></tr>
+                  <tr class="main"><th scope="row">LED for the plants to grow</th><td></td><td class="n">$50.00</td><td class="n">1</td><td class="n">$50.00</td><td></td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/YW-YSD-2532-12-Plastic-Soup-Container/dp/B06Y6JWQTD/">Food Containers</a></th><td>Plant pot base</td><td class="n">$10.31</td><td class="n">1</td><td class="n">$10.31</td><td></td></tr>
+                  <tr class="desc"><td colspan="6">YW Plastic Soup Food Container with Lids (12), 32 oz, 12 Pack, Clear</td></tr>
                 </tbody>
-                <tfoot><tr><th scope="row" colspan="4">Total, rows listed</th><td class="n">$264.60</td><td></td></tr></tfoot>
+                <tfoot><tr><th scope="row" colspan="4">Total, rows listed</th><td class="n">$324.91</td><td></td></tr></tfoot>
               </table>
             </div>
           </section>
@@ -675,6 +727,10 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <span class="eyebrow">Phase 3</span>
             <h3>Execution</h3>
             <p class="lead">The build itself. New updates are added at the bottom.</p>
+            <section class="part" id="c0-regs">
+              <h4>Requirements</h4>
+<h5 class="rh">System: Plant Wall</h5><div class="label">Main Plant Wall System Requirements</div><ul class="list"><li>Limited user inputs needed<ul class="list" style="margin-top:8px"><li>Plant the plant in the Plant Pod, connect the hygrometer wire</li><li>Plant Pod simple to move from one Plant Row to another</li><li>Select how much water, and, light(TBD), feed time</li><li>Fill the water reservoir when LED flashes for it</li><li>Empty the drip tray if needed</li></ul></li><li>Safety: if the power goes out, water doesn’t flow</li><li>Prove out with 2 rows, 3 plant pods</li></ul><div class="label">Future Requirements:</div><ul class="list"><li>Visual: I want it to physically look good</li><li>Lights per pod with proper control loops and light guiding</li><li>5 plants per row</li><li>Water tank to feed for minimum of 1 week with full fill</li></ul><h5 class="rh">Sub-System: Mechanical</h5><div class="label">Main Mechanical Subsystem Requirements:</div><ul class="list"><li>Use of common hardware for ease of repair</li><li>Valves to be normally closed to limit power draw, or allow water though when power loss</li><li>Easy refill option</li><li>Pod install/uninstall to be quick and easy</li></ul><div class="label">Future Requirements</div><ul class="list"><li>Adjustable height for the plant row to accommodate different sized plants</li><li>Look good</li></ul><h5 class="rh">Sub-System: Electrical</h5><div class="label">Main Electrical Subsystem Requirements:</div><ul class="list"><li>12V power for valves</li><li>12V power for pump</li><li>3.3-12V power for Hygrometers</li><li>5-24V for flow meter</li><li>HMI<ul class="list" style="margin-top:8px"><li>Clock using 4 digit 7 segment display</li><li>LCD display for user interaction</li><li>D-pad or Analog stick for user control</li><li>2x buttons for user control</li></ul></li></ul><div class="label">Future Requirements</div><p class="faintp">None listed yet.</p><h5 class="rh">Sub-System: Software</h5><div class="label">Main Software Subsystem Requirements:</div><ul class="list"><li>Built in RUST</li><li>Control row lights based on timer for prove out project</li><li>Control loop from Hygrometer:<ul class="list" style="margin-top:8px"><li>Control pump for water flow</li><li>Control valves for individual plant pod control</li><li>Flow rate input for modeling and knowledge of water amount - removes need for valves at every row</li><li>Hygrometer input for soil humidity level</li></ul></li><li>HMI:<ul class="list" style="margin-top:8px"><li>Settings are able to be saved</li><li>Select watering amount</li><li>Select lighting, in time</li><li>Current time shown</li><li>Selectable time of day to water</li></ul></li></ul><div class="label">Future Requirements:</div><ul class="list"><li>Selectable profiles for the type of plant it is</li><li>Control loop for lighting with sensor for lighting amount</li></ul>
+            </section>
             <div class="label">Updates</div>
             <ol class="entries" data-updates>
               <li class="empty">No updates yet. New updates are added here as dated entries, newest last.</li>
