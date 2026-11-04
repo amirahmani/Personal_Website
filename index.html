@@ -161,6 +161,14 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .rail a { color: var(--faint); text-decoration: none; display: block; line-height: 1.35; }
 .rail li.done a { color: var(--muted); }
 .rail li.active a { color: var(--fg); font-weight: 500; }
+.rail { max-height: calc(100vh - 120px); overflow-y: auto; scrollbar-width: thin; padding-right: 4px; }
+.rail .sub { display: grid; gap: 3px; margin-top: 6px; padding-left: 16px; }
+.rail li > a:first-child { font-weight: 700; }
+.rail .sub a { font-size: 12.5px; line-height: 1.3; padding: 2px 0; color: var(--faint); }
+.rail .sub a:hover { color: var(--fg); }
+.rail li .sub a { color: var(--faint); font-weight: 400; }
+.rail li .sub a:hover { color: var(--fg); }
+.rail li .sub a.on { color: var(--accent); }
 .chapter { padding-top: 8px; margin-top: 88px; scroll-margin-top: 88px; min-width: 0; }
 .chapter:first-child { margin-top: 0; }
 .chapter > h3 { font-size: clamp(34px, 5vw, 52px); margin: 10px 0 18px; line-height: 1.05; }
@@ -307,6 +315,15 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .entries .empty { color: var(--faint); border: 1px dashed var(--glass-line); border-radius: 10px; padding: 16px 18px; }
 .entries .entry { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 16px 18px; }
 .entries .entry time { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+.entries .entry.has-img { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 40%); gap: 20px 24px; align-items: start; }
+.entries .entry .ef { margin: 0; }
+.entries .entry .ef img { width: 100%; height: auto; display: block; border: 1px solid var(--glass-line); border-radius: 8px; }
+@media (max-width: 760px) { .entries .entry.has-img { grid-template-columns: minmax(0, 1fr); } }
+img.zoomable { cursor: zoom-in; }
+.lb { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.88); padding: 24px; cursor: zoom-out; }
+.lb.open { display: flex; }
+.lb img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; object-fit: contain; background: #fff0; border-radius: 6px; box-shadow: 0 10px 50px rgba(0,0,0,.6); }
+.lb button { position: absolute; top: 14px; right: 16px; font: inherit; font-size: 14px; color: var(--fg); background: var(--glass); border: 1px solid var(--glass-line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
 .entries .entry h4 { font-size: 18px; margin: 6px 0 8px; }
 .entries .entry p { color: var(--muted); }
 
@@ -398,9 +415,9 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c0-init"><a href="#c0-init">Initiation</a></li>
-            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a></li>
-            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a></li>
+            <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-req" data-sub="c0-req">Initial Requirements</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a></div></li>
+            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">Bill of Materials</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
+            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
             <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a></li>
             <li data-rail="c0-close"><a href="#c0-close">Closure</a></li>
           </ol>
@@ -625,7 +642,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <span class="eyebrow">Phase 2</span>
             <h3>Planning</h3>
             <p class="lead">The plan: task board, parts, references and what comes next.</p>
-            <div class="board">
+            <div class="board" id="c0-board" style="scroll-margin-top: 88px">
               <div class="bt">Kanban board <span class="upd">Updated Nov 2, 2026 · from the GitHub project</span></div>
               <div class="row" style="--n:3">
                 <div class="panel col-next"><h4>To Do<span>34</span></h4><ul class="list kscroll" tabindex="0" aria-label="To Do items, scrollable"><li><span class="iid">#22</span>System: Plant Wall: Testing &amp; Validation</li><li><span class="iid">#29</span>Sub-System: Mechanical: Build</li><li><span class="iid">#30</span>Sub-System: Mechanical: Testing &amp; Verification</li><li><span class="iid">#31</span>Sub-System: Mechanical: Integration</li><li><span class="iid">#53</span>Component; Mechanical: Plant Row: Build</li><li><span class="iid">#54</span>Component; Mechanical: Plant Row: Testing and Verification</li><li><span class="iid">#55</span>Component; Mechanical: Plant Row: Integration</li><li><span class="iid">#57</span>Component; Mechanical: Plant Pod: Build</li><li><span class="iid">#58</span>Component; Mechanical: Plant Pod: Testing &amp; Verification</li><li><span class="iid">#59</span>Component; Mechanical: Plant Pod: Integration</li><li><span class="iid">#60</span>Component; Mechanical: Water: Build</li><li><span class="iid">#62</span>Component; Mechanical: Water: Testing &amp; Verification</li><li><span class="iid">#63</span>Component; Mechanical: Water: Integration</li><li><span class="iid">#36</span>Sub-System: Electrical: Build</li><li><span class="iid">#37</span>Sub-System: Electrical: Testing &amp; Verification</li><li><span class="iid">#38</span>Sub-System: Electrical: Integration</li><li><span class="iid">#45</span>Component; Electrical: HMI: Build</li><li><span class="iid">#46</span>Component; Electrical: HMI: Testing and Verification</li><li><span class="iid">#47</span>Component; Electrical: HMI: Integration</li><li><span class="iid">#49</span>Component; Electrical: Main Board: Build</li><li><span class="iid">#50</span>Component; Electrical: Main Board: Testing &amp; Verification</li><li><span class="iid">#51</span>Component; Electrical: Main Board: Integration</li><li><span class="iid">#41</span>Sub-System: Software: Build</li><li><span class="iid">#42</span>Sub-System: Software: Testing &amp; Integration</li><li><span class="iid">#43</span>Sub-System: Software: Integration</li><li><span class="iid">#65</span>Component; Software: HMI: Build</li><li><span class="iid">#66</span>Component; Software: HMI: Testing &amp; Verification</li><li><span class="iid">#67</span>Component; Software: HMI: Integration</li><li><span class="iid">#69</span>Component; Software: HMI: Build</li><li><span class="iid">#70</span>Component; Software: HMI: Testing &amp; Verification</li><li><span class="iid">#71</span>Component; Software: HMI: Integration</li><li><span class="iid">#73</span>Component; Software: Water Controls: Build</li><li><span class="iid">#74</span>Component; Software: Water Controls: Testing &amp; Verification</li><li><span class="iid">#75</span>Component; Software: Water Controls: Integration</li></ul></div>
@@ -736,7 +753,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
               <p class="lead">Dated notes on how the build is going. Each entry is stamped with its date, and new entries are added at the bottom.</p>
               <ol class="entries" data-updates style="margin-top: 20px">
                 <li class="entry"><time datetime="2026-11-02">11/02/2026</time><h4>System: Requirements; Mechanical: Design</h4><ul class="list"><li>Initial system and subsystem requirements defined</li><li>Initial CAD work done on the mechanical portion</li><li>Digging into available components and recreating initial Pod design</li></ul></li>
-                <li class="entry"><time datetime="2026-11-03">11/03/2026</time><h4>HMI: Electrical, Software</h4><ul class="list"><li>Created initial HMI component selection</li><li>Created initial Software start point<ul class="list" style="margin-top: 6px"><li>Using TinkerCAD for simulation</li><li>Using Arduino for familiarly with C</li></ul></li><li>To make the build simpler, going to do the initial hardware builds with Arduino and C code to verify the hardware setup and system behavior, then move it over to the STM32 &amp; RUST. This will allow me to separate the project inputs, use TinkerCAD to simulate in the meantime, and make it easier to learn and troubleshoot.</li></ul></li>
+                <li class="entry has-img"><div class="eb"><time datetime="2026-11-03">11/03/2026</time><h4>HMI: Electrical, Software</h4><ul class="list"><li>Created initial HMI component selection</li><li>Created initial Software start point<ul class="list" style="margin-top: 6px"><li>Using TinkerCAD for simulation</li><li>Using Arduino for familiarly with C</li></ul></li><li>To make the build simpler, going to do the initial hardware builds with Arduino and C code to verify the hardware setup and system behavior, then move it over to the STM32 &amp; RUST. This will allow me to separate the project inputs, use TinkerCAD to simulate in the meantime, and make it easier to learn and troubleshoot.</li></ul></div><figure class="ef"><img src="journal-1103-tinkercad.jpg" width="1800" height="919" alt="TinkerCAD simulation named Plant_Wall: an Arduino Uno wired to a 16x2 LCD and five push buttons, with the C++ code open beside it."></figure></li>
               </ol>
             </section>
           </article>
@@ -776,9 +793,9 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c1-init"><a href="#c1-init">Initiation</a></li>
-            <li data-rail="c1-plan"><a href="#c1-plan">Planning</a></li>
-            <li data-rail="c1-exec"><a href="#c1-exec">Execution</a></li>
+            <li data-rail="c1-init"><a href="#c1-init">Initiation</a><div class="sub"><a href="#c1-intro" data-sub="c1-intro">Intro</a><a href="#c1-idea" data-sub="c1-idea">The idea</a><a href="#c1-req" data-sub="c1-req">Requirements</a></div></li>
+            <li data-rail="c1-plan"><a href="#c1-plan">Planning</a><div class="sub"><a href="#c1-board" data-sub="c1-board">Kanban board</a><a href="#c1-mule" data-sub="c1-mule">The donor phone</a><a href="#c1-parts" data-sub="c1-parts">Parts and cost</a><a href="#c1-recovery" data-sub="c1-recovery">Recovery and references</a><a href="#c1-next" data-sub="c1-next">What is next</a></div></li>
+            <li data-rail="c1-exec"><a href="#c1-exec">Execution</a><div class="sub"><a href="#c1-teardown" data-sub="c1-teardown">Teardown</a><a href="#c1-software" data-sub="c1-software">Outer screen software</a><a href="#c1-body" data-sub="c1-body">Body design</a></div></li>
             <li data-rail="c1-mc"><a href="#c1-mc">Monitoring & Control</a></li>
             <li data-rail="c1-close"><a href="#c1-close">Closure</a></li>
           </ol>
@@ -916,7 +933,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
             <span class="eyebrow">Phase 2</span>
             <h3>Planning</h3>
             <p class="lead">The plan: task board, parts, references and what comes next.</p>
-            <div class="board">
+            <div class="board" id="c1-board" style="scroll-margin-top: 88px">
               <div class="bt">Kanban board</div>
               <div class="row" style="--n:3">
                 <div class="panel col-next"><h4>To Do<span>5</span></h4><ul class="list"><li>Fix keyboard spacing and lengthen the body about 6 mm</li><li>Move the charging port</li><li>Confirm screen flip with the SDK</li><li>Print the main board to check fit</li><li>Find a screen without camera bumps</li></ul></div>
@@ -1172,9 +1189,9 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c2-init"><a href="#c2-init">Initiation</a></li>
-            <li data-rail="c2-plan"><a href="#c2-plan">Planning</a></li>
-            <li data-rail="c2-exec"><a href="#c2-exec">Execution</a></li>
+            <li data-rail="c2-init"><a href="#c2-init">Initiation</a><div class="sub"><a href="#c2-req" data-sub="c2-req">Requirements</a></div></li>
+            <li data-rail="c2-plan"><a href="#c2-plan">Planning</a><div class="sub"><a href="#c2-board" data-sub="c2-board">Kanban board</a><a href="#c2-data" data-sub="c2-data">Base map data</a><a href="#c2-miss" data-sub="c2-miss">Missions</a><a href="#c2-dil" data-sub="c2-dil">Driver-in-the-loop plan</a></div></li>
+            <li data-rail="c2-exec"><a href="#c2-exec">Execution</a><div class="sub"><a href="#c2-edit" data-sub="c2-edit">Editing the base map</a><a href="#c2-build" data-sub="c2-build">Terrain and environment</a><a href="#c2-spawn" data-sub="c2-spawn">Spawn points</a></div></li>
             <li data-rail="c2-mc"><a href="#c2-mc">Monitoring & Control</a></li>
             <li data-rail="c2-close"><a href="#c2-close">Closure</a></li>
           </ol>
@@ -1221,7 +1238,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             <span class="eyebrow">Phase 2</span>
             <h3>Planning</h3>
             <p class="lead">The plan: task board, parts, references and what comes next.</p>
-            <div class="board">
+            <div class="board" id="c2-board" style="scroll-margin-top: 88px">
               <div class="bt">Kanban board</div>
               <div class="row" style="--n:3">
                 <div class="panel col-next"><h4>To Do<span>4</span></h4><ul class="list"><li>Missions and scenarios</li><li>Clean up the base map</li><li>Vehicle creation</li><li>Driver in the loop with ESP</li></ul></div>
@@ -1582,6 +1599,13 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
     }
     var started = chapters[0].getBoundingClientRect().top <= 180;
     var finished = chapters[chapters.length - 1].getBoundingClientRect().bottom < 120;
+    var subs = Array.prototype.slice.call(view.querySelectorAll('[data-sub]'));
+    var onSub = null;
+    subs.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute('data-sub'));
+      if (el && el.getBoundingClientRect().top <= 180) onSub = a;
+    });
+    subs.forEach(function (a) { a.classList.toggle('on', a === onSub && started && !finished); });
     items.forEach(function (li, k) {
       li.classList.toggle('active', started && !finished && k === active);
       li.classList.toggle('done', started && (finished || k < active));
@@ -1666,6 +1690,26 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
   box.addEventListener('focusin', function () { held = true; });
   box.addEventListener('focusout', function () { held = false; });
   timer = setInterval(tick, 4500);
+})();
+</script>
+<script>
+(function () {
+  var lb = document.createElement('div');
+  lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Expanded image');
+  lb.innerHTML = '<img alt=""><button type="button">Close</button>';
+  document.body.appendChild(lb);
+  var big = lb.querySelector('img'), btn = lb.querySelector('button'), from = null;
+  function open(img) { from = img; big.src = img.currentSrc || img.src; big.alt = img.alt || ''; lb.classList.add('open'); btn.focus(); }
+  function close() { lb.classList.remove('open'); big.removeAttribute('src'); if (from) from.focus(); }
+  function ok(img) { return img.tagName === 'IMG' && !img.closest('.card, .top, .lb, a, button'); }
+  var imgs = document.querySelectorAll('img');
+  for (var k = 0; k < imgs.length; k++) if (ok(imgs[k])) { imgs[k].classList.add('zoomable'); imgs[k].tabIndex = 0; imgs[k].setAttribute('role', 'button'); }
+  document.addEventListener('click', function (e) { if (e.target.classList && e.target.classList.contains('zoomable')) open(e.target); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('open')) close();
+    else if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('zoomable')) { e.preventDefault(); open(e.target); }
+  });
+  lb.addEventListener('click', close);
 })();
 </script>
 
