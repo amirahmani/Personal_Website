@@ -1,0 +1,661 @@
+{
+ "updated": "2026-11-10T10:39:49Z",
+ "source": "issues",
+ "project": {
+  "title": "Plant Wall",
+  "url": "https://github.com/users/amirahmani/projects/1"
+ },
+ "repo": "https://github.com/amirahmani/Plant_Wall",
+ "items": [
+  {
+   "number": 33,
+   "title": "Sub-System: Mechanical: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/33",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 52,
+   "title": "Component; Mechanical: Plant Row: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/52",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 56,
+   "title": "Component; Mechanical: Plant Pod: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/56",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 20,
+   "title": "System: Plant Wall: Concept",
+   "state": "closed",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/20",
+   "status": "Done",
+   "start": "2026-10-30",
+   "end": "2026-11-01",
+   "fields": {
+    "Status": "Done"
+   }
+  },
+  {
+   "number": 19,
+   "title": "System: Plant Wall: Requirements",
+   "state": "closed",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/19",
+   "status": "Done",
+   "start": "2026-11-01",
+   "end": "2026-11-01",
+   "fields": {
+    "Status": "Done"
+   }
+  },
+  {
+   "number": 27,
+   "title": "Sub-System: Mechanical: Requirements",
+   "state": "closed",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/27",
+   "status": "Done",
+   "start": "2026-11-01",
+   "end": "2026-11-01",
+   "fields": {
+    "Status": "Done"
+   }
+  },
+  {
+   "number": 39,
+   "title": "Sub-System: Software: Requirements",
+   "state": "closed",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/39",
+   "status": "Done",
+   "start": "2026-11-01",
+   "end": "2026-11-01",
+   "fields": {
+    "Status": "Done"
+   }
+  },
+  {
+   "number": 34,
+   "title": "Sub-System: Electrical: Requirements",
+   "state": "closed",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/34",
+   "status": "Done",
+   "start": "2026-11-01",
+   "end": "2026-11-01",
+   "fields": {
+    "Status": "Done"
+   }
+  },
+  {
+   "number": 22,
+   "title": "System: Plant Wall: Testing & Validation",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/22",
+   "status": "Todo",
+   "start": "2026-11-24",
+   "end": "2026-11-30",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 29,
+   "title": "Sub-System: Mechanical: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/29",
+   "status": "Todo",
+   "start": "2026-11-04",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 30,
+   "title": "Sub-System: Mechanical: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/30",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 31,
+   "title": "Sub-System: Mechanical: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/31",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 53,
+   "title": "Component; Mechanical: Plant Row: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/53",
+   "status": "Todo",
+   "start": "2026-11-04",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 54,
+   "title": "Component; Mechanical: Plant Row: Testing and Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/54",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 55,
+   "title": "Component; Mechanical: Plant Row: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/55",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 57,
+   "title": "Component; Mechanical: Plant Pod: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/57",
+   "status": "Todo",
+   "start": "2026-11-04",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 58,
+   "title": "Component; Mechanical: Plant Pod: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/58",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 59,
+   "title": "Component; Mechanical: Plant Pod: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/59",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 61,
+   "title": "Component; Mechanical: Water: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/61",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 60,
+   "title": "Component; Mechanical: Water: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/60",
+   "status": "Todo",
+   "start": "2026-11-04",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 62,
+   "title": "Component; Mechanical: Water: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/62",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 63,
+   "title": "Component; Mechanical: Water: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/63",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 35,
+   "title": "Sub-System: Electrical: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/35",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 36,
+   "title": "Sub-System: Electrical: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/36",
+   "status": "Todo",
+   "start": "2026-11-05",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 37,
+   "title": "Sub-System: Electrical: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/37",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 38,
+   "title": "Sub-System: Electrical: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/38",
+   "status": "Todo",
+   "start": "2026-11-24",
+   "end": "2026-11-24",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 44,
+   "title": "Component; Electrical: HMI: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/44",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 45,
+   "title": "Component; Electrical: HMI: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/45",
+   "status": "Todo",
+   "start": "2026-11-05",
+   "end": "2026-11-05",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 46,
+   "title": "Component; Electrical: HMI: Testing and Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/46",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 47,
+   "title": "Component; Electrical: HMI: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/47",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 48,
+   "title": "Component; Electrical: Main Board: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/48",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 49,
+   "title": "Component; Electrical: Main Board: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/49",
+   "status": "Todo",
+   "start": "2026-11-05",
+   "end": "2026-11-05",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 50,
+   "title": "Component; Electrical: Main Board: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/50",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 51,
+   "title": "Component; Electrical: Main Board: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/51",
+   "status": "Todo",
+   "start": "2026-11-23",
+   "end": "2026-11-23",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 40,
+   "title": "Sub-System: Software: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/40",
+   "status": "In Progress",
+   "start": "2026-11-02",
+   "end": "2026-11-03",
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 41,
+   "title": "Sub-System: Software: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/41",
+   "status": "Todo",
+   "start": "2026-11-05",
+   "end": "2026-11-18",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 42,
+   "title": "Sub-System: Software: Testing & Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/42",
+   "status": "Todo",
+   "start": "2026-11-19",
+   "end": "2026-11-22",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 43,
+   "title": "Sub-System: Software: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/43",
+   "status": "Todo",
+   "start": "2026-11-24",
+   "end": "2026-11-24",
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 65,
+   "title": "Component; Software: HMI: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/65",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 66,
+   "title": "Component; Software: HMI: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/66",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 67,
+   "title": "Component; Software: HMI: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/67",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 69,
+   "title": "Component; Software: HMI: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/69",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 70,
+   "title": "Component; Software: HMI: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/70",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 71,
+   "title": "Component; Software: HMI: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/71",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 73,
+   "title": "Component; Software: Water Controls: Build",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/73",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 74,
+   "title": "Component; Software: Water Controls: Testing & Verification",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/74",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 75,
+   "title": "Component; Software: Water Controls: Integration",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/75",
+   "status": "Todo",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "Todo"
+   }
+  },
+  {
+   "number": 72,
+   "title": "Component; Software: Water Controls: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/72",
+   "status": "In Progress",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 64,
+   "title": "Component; Software: HMI: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/64",
+   "status": "In Progress",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "In Progress"
+   }
+  },
+  {
+   "number": 68,
+   "title": "Component; Software: Lighting: Design",
+   "state": "open",
+   "url": "https://github.com/amirahmani/Plant_Wall/issues/68",
+   "status": "In Progress",
+   "start": null,
+   "end": null,
+   "fields": {
+    "Status": "In Progress"
+   }
+  }
+ ],
+ "commits": [
+  {
+   "sha": "d71fc5f",
+   "date": "2026-11-09T21:22:47Z",
+   "message": "Merge pull request #76 from amirahmani/project-export",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/d71fc5f9a9edc2e3428df62393b2e0a61e8e2663"
+  },
+  {
+   "sha": "c23569b",
+   "date": "2026-11-08T22:13:59Z",
+   "message": "Add Action that exports the project board for the website",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/c23569b728a571472b79915f4018bab937cf411b"
+  },
+  {
+   "sha": "9f17625",
+   "date": "2026-11-08T20:04:13Z",
+   "message": "Uploaded cargo w/ actual stuff in it",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/9f17625bb5f60bc49b275c5bec3acaa8010b06c5"
+  },
+  {
+   "sha": "56018db",
+   "date": "2026-11-08T20:03:18Z",
+   "message": "Create config.toml",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/56018dbdf8a4ef88568514ba6aaea9414027e49f"
+  },
+  {
+   "sha": "cbbe944",
+   "date": "2026-11-08T20:02:49Z",
+   "message": "Added cargo.toml",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/cbbe944e96b01a69b60277ca4ab4c9f2ea2a168b"
+  },
+  {
+   "sha": "da39c96",
+   "date": "2026-11-08T20:00:56Z",
+   "message": "Adding initial source",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/da39c96b9a445834967e3074d6a3be77a94169f2"
+  },
+  {
+   "sha": "9521b5e",
+   "date": "2026-11-08T19:56:11Z",
+   "message": "Delete Software/Arduino/README.md",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/9521b5e3fb4087ffc8f0679d8391ede2d8ddb885"
+  },
+  {
+   "sha": "1741a91",
+   "date": "2026-11-04T04:10:38Z",
+   "message": "Create README.md",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/1741a912138629607c9df1ffa8dadf96244be2dc"
+  }
+ ]
+}
