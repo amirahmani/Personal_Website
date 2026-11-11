@@ -253,6 +253,13 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .card .cover { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: radial-gradient(90% 80% at 50% 108%, rgb(var(--cg) / 0.85), transparent 70%), linear-gradient(180deg, rgb(var(--cb)), rgb(var(--cg) / 0.35)); border-bottom: 1px solid rgb(var(--cg) / 0.6); }
 .card .cover img, .card .cover svg { position: absolute; inset: 18px; display: block; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; }
 .card .cover img { background: #fff; border-radius: 6px; border: 1px solid rgba(255,255,255,0.28); }
+.card .cover.pair { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr 1fr; gap: 12px; padding: 16px; aspect-ratio: 4 / 5; }
+.card .cover.pair figure { margin: 0; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.card .cover.pair .ph { position: relative; flex: 1; min-height: 0; }
+.card .cover.pair .ph img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card .cover.pair img.fit { object-fit: contain; background: #fff; }
+.card .cover.pair img.fill { object-fit: cover; background: none; }
+.card .cover.pair { aspect-ratio: 1 / 1; }
 .card .cover .l { stroke: var(--c); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .card .cover .soft { stroke: var(--c); opacity: .38; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .card .cover .dash { stroke: var(--fg); opacity: .8; fill: none; stroke-width: 1.2; stroke-dasharray: 4 6; stroke-linecap: round; }
@@ -273,6 +280,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 @media (max-width: 800px) {
   .cards { grid-template-columns: minmax(0, 1fr); }
   .card .cover { aspect-ratio: 16 / 10; }
+  .card .cover.pair { aspect-ratio: 1 / 1; }
   }
 
 
@@ -385,27 +393,27 @@ img.zoomable { cursor: zoom-in; }
 
       <div class="cards" role="list">
         <a class="card c-plant" role="listitem" href="#plant">
-          <div class="cover"><img src="plant-concept.png" width="1500" height="1220" alt="Hand sketch of the plant wall: a water tank on top, stacked planter rows with lights, and a pump and tube down one side"></div>
+          <div class="cover pair"><figure><div class="ph"><img class="fit" src="plant-concept.png" alt="Initial hand sketch of the plant wall: a tank on top, stacked planter rows with lights and a pump down one side"></div></figure><figure><div class="ph"><img class="fill" src="cover-plant-latest.jpg" alt="Latest: the HMI running on a 16x2 LCD wired to a breadboard, showing row, plant, water and light values"></div></figure></div>
           <div class="body">
-            <div class="num"><span>Project 01</span><span class="pill">Execution</span></div>
+            <div class="num"><span>Project 01</span><span class="pill">Phase: Execution</span></div>
             <h3>Autonomous Plant Wall</h3>
             <p>A self watering, self lighting plant wall, planned from the first sketches.</p>
             <span class="go">View project →</span>
           </div>
         </a>
         <a class="card c-razr" role="listitem" href="#razr">
-          <div class="cover"><img src="razr-cover.png" width="900" height="650" alt="Hand sketch of a RAZR phone sliding up to reveal a keyboard"></div>
+          <div class="cover pair"><figure><div class="ph"><img class="fit" src="razr-cover.png" alt="Initial hand sketch of a RAZR phone sliding up to reveal a keyboard"></div></figure><figure><div class="ph"><img class="fill" src="cover-razr-latest.jpg" alt="Latest: the donor RAZR torn apart, with its boards, cameras and batteries laid out on a table"></div></figure></div>
           <div class="body">
-            <div class="num"><span>Project 02</span><span class="pill">Execution</span></div>
+            <div class="num"><span>Project 02</span><span class="pill">Phase: Execution</span></div>
             <h3>Motorola RAZR with a slide-out QWERTY keyboard</h3>
             <p>Retrofitting a flip RAZR with a BlackBerry keyboard.</p>
             <span class="go">View project →</span>
           </div>
         </a>
         <a class="card c-beamng" role="listitem" href="#beamng">
-          <div class="cover photo"><img src="beamng-overview.jpg" width="1380" height="1072" alt="Aerial view of the BeamNG map: a proving ground with painted terrain and trees"></div>
+          <div class="cover pair"><figure><div class="ph"><img class="fill" src="cover-beamng-initial.jpg" alt="Initial: the raw real-world terrain preview in MapNG"></div></figure><figure><div class="ph"><img class="fill" src="cover-beamng-latest.jpg" alt="Latest: a car jumping the hills on the BeamNG test track"></div></figure></div>
           <div class="body">
-            <div class="num"><span>Project 03</span><span class="pill">Execution</span></div>
+            <div class="num"><span>Project 03</span><span class="pill">Phase: Execution</span></div>
             <h3>Creating a test track for BeamNG</h3>
             <p>A custom track built for BeamNG.</p>
             <span class="go">View project →</span>
