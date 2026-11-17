@@ -161,6 +161,14 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .scroll-x { overflow-x: auto; width: 100%; }
 
 /* chapters */
+.latest { max-width: 820px; margin: 36px auto 0; }
+.latest .label { margin: 0 0 14px; font-size: 22px; }
+.latest figure { margin: 0; }
+.latest figcaption { font-size: 14px; color: var(--faint); margin: 0 0 8px; }
+.latest figcaption b { color: var(--fg); font-weight: 600; }
+.latest img, .latest video { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; border: 1px solid var(--glass-line); border-radius: 10px; background: #05050a; }
+.latest .more { margin: 10px 0 0; font-size: 14px; }
+.v-plant .sk img { width: 80%; }
 .chapters { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 56px; margin-top: 56px; }
 .rail { position: sticky; top: 96px; align-self: start; font-size: 14px; }
 .rail .rt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px; }
@@ -337,6 +345,7 @@ footer { margin-top: 80px; padding-block: 24px 48px; border-top: 1px solid var(-
 .entries .entry.has-img { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 40%); gap: 20px 24px; align-items: start; }
 .entries .entry .ef { margin: 0; }
 .entries .entry .ef video { width: 100%; height: auto; display: block; border: 1px solid var(--glass-line); border-radius: 8px; background: #000; }
+.entries .entry .ef img + img { margin-top: 12px; }
 .entries .entry .ef img { width: 100%; height: auto; display: block; border: 1px solid var(--glass-line); border-radius: 8px; }
 @media (max-width: 760px) { .entries .entry.has-img { grid-template-columns: minmax(0, 1fr); } }
 img.zoomable { cursor: zoom-in; }
@@ -357,6 +366,9 @@ img.zoomable { cursor: zoom-in; }
 .bomtable tr.desc td { padding: 0 0 7px; color: var(--faint); font-size: 13px; border-bottom: 1px solid var(--glass-line); }
 .bomtable tr.main:not(:has(+ tr.desc)) td, .bomtable tr.main:not(:has(+ tr.desc)) th { padding-bottom: 7px; border-bottom: 1px solid var(--glass-line); }
 .bomtable tfoot th, .bomtable tfoot td { color: var(--fg); font-weight: 700; border-bottom: 0; padding-top: 10px; }
+.bomtable th, .bomtable td, .bomtable tfoot th, .bomtable tfoot td { border: 1px solid var(--glass-line); padding-left: 12px; }
+.bomtable tr.main:has(+ tr.desc) > * { border-bottom: 0; }
+.bomtable tr.desc > td { border-top: 0; padding: 0 12px 8px; }
 
 /* photos */
 .ph { margin: 0; width: 100%; min-width: 0; }
@@ -431,13 +443,22 @@ img.zoomable { cursor: zoom-in; }
       </div>
 
 
+      <div class="latest" id="c0-latest">
+        <div class="label">Latest update</div>
+        <figure>
+          <figcaption><b>11/16/2026.</b> HMI enclosure with the LCD, LED and analog stick, next to the Valves, Pump and Fault LED breadboards.</figcaption>
+          <img src="journal-1116-hmi-enclosure.jpg" width="1274" height="959" alt="The printed HMI enclosure with the LCD, red LED and analog stick, wired to the STM32 Nucleo and two breadboards with MOSFETs labelled Valves and Pump, and a Fault LED.">
+        </figure>
+        <p class="more"><a href="#c0-journal">See it in the Journal</a></p>
+      </div>
+
       <div class="chapters">
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
             <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a></div></li>
-            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">Bill of Materials</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
-            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
+            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">eBOM</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
+            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-abom" data-sub="c0-abom">aBOM</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
             <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a></li>
             <li data-rail="c0-close"><a href="#c0-close">Closure</a></li>
           </ol>
@@ -508,22 +529,27 @@ img.zoomable { cursor: zoom-in; }
 
           <section class="part" id="c0-hw">
             <h4>Hardware Estimates</h4>
-            <div class="bom">
-              <div class="brow"><span class="nm">Primary Board</span><span class="nt">STM32 Nucleo-64 development board with STM32F446RE MCU, good for learning, gives me a chance to create my own firmware and software from scratch. It controls the whole thing.</span></div>
-              <div class="brow"><span class="nm">Pump / motor</span><span class="nt">Moves the water. An auto windshield washer pump should be reliable enough and common enough.</span></div>
-              <div class="brow"><span class="nm">Valves</span><span class="nt">For each module and each row. Normally closed!</span></div>
-              <div class="brow"><span class="nm">Tubing</span><span class="nt">Auto windshield washer diameter, to keep it consistent and cheap.</span></div>
-              <div class="brow"><span class="nm">Plant pod</span><span class="nt">A module to hold plants.</span></div>
-              <div class="brow"><span class="nm">Plant row</span><span class="nt">A row of plants. Width is undefined so far, possibly varying widths.</span></div>
-              <div class="brow"><span class="nm">Water tank</span><span class="nt">Holds the water. It needs to be easy to fill and hold enough for a week or two.</span></div>
-              <div class="brow"><span class="nm">LCD screen</span><span class="nt">To display info and set profiles.</span></div>
-              <div class="brow"><span class="nm">D-pad</span><span class="nt">Controls the HMI to enter profiles.</span></div>
-              <div class="brow"><span class="nm">Button(s)</span><span class="nt">ENTER for the menu, a circle button to enter settings.</span></div>
-              <div class="brow"><span class="nm">Flow rate sensor</span><span class="nt">Each row instead?</span></div>
-              <div class="brow"><span class="nm">LED</span><span class="nt">For lights to feed from.</span></div>
-              <div class="brow"><span class="nm">Water level sensor</span><span class="nt">To not run out of water or empty the tubes.</span></div>
-              <div class="brow"><span class="nm">Small LED</span><span class="nt">HMI warning: low light, fault, etc.</span></div>
-              <div class="brow"><span class="nm">4 digit, 7 segment display</span><span class="nt">I have one, so I want to use it for the clock.</span></div>
+            <div class="scroll-x" style="margin-top: 16px">
+              <table class="bomtable">
+                <thead><tr><th>Item</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr class="main"><th scope="row">Primary Board</th><td>STM32 Nucleo-64 development board with STM32F446RE MCU, good for learning, gives me a chance to create my own firmware and software from scratch. It controls the whole thing.</td></tr>
+                  <tr class="main"><th scope="row">Pump / motor</th><td>Moves the water. An auto windshield washer pump should be reliable enough and common enough.</td></tr>
+                  <tr class="main"><th scope="row">Valves</th><td>For each module and each row. Normally closed!</td></tr>
+                  <tr class="main"><th scope="row">Tubing</th><td>Auto windshield washer diameter, to keep it consistent and cheap.</td></tr>
+                  <tr class="main"><th scope="row">Plant pod</th><td>A module to hold plants.</td></tr>
+                  <tr class="main"><th scope="row">Plant row</th><td>A row of plants. Width is undefined so far, possibly varying widths.</td></tr>
+                  <tr class="main"><th scope="row">Water tank</th><td>Holds the water. It needs to be easy to fill and hold enough for a week or two.</td></tr>
+                  <tr class="main"><th scope="row">LCD screen</th><td>To display info and set profiles.</td></tr>
+                  <tr class="main"><th scope="row">D-pad</th><td>Controls the HMI to enter profiles.</td></tr>
+                  <tr class="main"><th scope="row">Button(s)</th><td>ENTER for the menu, a circle button to enter settings.</td></tr>
+                  <tr class="main"><th scope="row">Flow rate sensor</th><td>Each row instead?</td></tr>
+                  <tr class="main"><th scope="row">LED</th><td>For lights to feed from.</td></tr>
+                  <tr class="main"><th scope="row">Water level sensor</th><td>To not run out of water or empty the tubes.</td></tr>
+                  <tr class="main"><th scope="row">Small LED</th><td>HMI warning: low light, fault, etc.</td></tr>
+                  <tr class="main"><th scope="row">4 digit, 7 segment display</th><td>I have one, so I want to use it for the clock.</td></tr>
+                </tbody>
+              </table>
             </div>
           </section>
 
@@ -675,7 +701,7 @@ img.zoomable { cursor: zoom-in; }
           </section>
 
           <section class="part" id="c0-bom">
-            <h4>Bill of Materials</h4>
+            <h4>eBOM</h4>
             <p class="lead">Parts for the first build: 2 rows, enough to prove out the logic. Items marked "Already own" cost nothing. Item names link to where I plan to buy them.</p>
             <div class="scroll-x" style="margin-top: 16px">
               <table class="bomtable">
@@ -750,6 +776,19 @@ img.zoomable { cursor: zoom-in; }
 <h4>Requirements</h4>
 <h5 class="rh">System: Plant Wall</h5><div class="label">Main Plant Wall System Requirements</div><ul class="list"><li class="rq"><span class="id">rSys1</span><div>Limited user inputs needed<ul class="list" style="margin-top:8px"><li>Plant the plant in the Plant Pod, connect the hygrometer wire</li><li>Plant Pod simple to move from one Plant Row to another</li><li>Select how much water, and, light(TBD), feed time</li><li>Fill the water reservoir when LED flashes for it</li><li>Empty the drip tray if needed</li></ul></div></li><li class="rq"><span class="id">rSys2</span><div>Safety: if the power goes out, water doesn’t flow</div></li><li class="rq"><span class="id">rSys3</span><div>Prove out with 2 rows, 3 plant pods</div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSys4</span><div>Visual: I want it to physically look good</div></li><li class="rq"><span class="id">rSys5</span><div>Lights per pod with proper control loops and light guiding</div></li><li class="rq"><span class="id">rSys6</span><div>5 plants per row</div></li><li class="rq"><span class="id">rSys7</span><div>Water tank to feed for minimum of 1 week with full fill</div></li></ul><h5 class="rh">Sub-System: Mechanical</h5><div class="label">Main Mechanical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rMech1</span><div>Use of common hardware for ease of repair</div></li><li class="rq"><span class="id">rMech2</span><div>Valves to be normally closed to limit power draw, or allow water though when power loss</div></li><li class="rq"><span class="id">rMech3</span><div>Easy refill option</div></li><li class="rq"><span class="id">rMech4</span><div>Pod install/uninstall to be quick and easy</div></li></ul><div class="label">Future Requirements</div><ul class="list"><li class="rq"><span class="id">rMech5</span><div>Adjustable height for the plant row to accommodate different sized plants</div></li><li class="rq"><span class="id">rMech6</span><div>Look good</div></li></ul><h5 class="rh">Sub-System: Electrical</h5><div class="label">Main Electrical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rElec1</span><div>12V power for valves</div></li><li class="rq"><span class="id">rElec2</span><div>12V power for pump</div></li><li class="rq"><span class="id">rElec3</span><div>3.3-12V power for Hygrometers</div></li><li class="rq"><span class="id">rElec4</span><div>5-24V for flow meter</div></li><li class="rq"><span class="id">rElec5</span><div>HMI<ul class="list" style="margin-top:8px"><li>Clock using 4 digit 7 segment display</li><li>LCD display for user interaction</li><li>D-pad or Analog stick for user control</li><li>2x buttons for user control</li></ul></div></li></ul><div class="label">Future Requirements</div><p class="faintp">None listed yet.</p><h5 class="rh">Sub-System: Software</h5><div class="label">Main Software Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw1</span><div>Built in RUST</div></li><li class="rq"><span class="id">rSw2</span><div>Control row lights based on timer for prove out project</div></li><li class="rq"><span class="id">rSw3</span><div>Control loop from Hygrometer:<ul class="list" style="margin-top:8px"><li>Control pump for water flow</li><li>Control valves for individual plant pod control</li><li>Flow rate input for modeling and knowledge of water amount - removes need for valves at every row</li><li>Hygrometer input for soil humidity level</li></ul></div></li><li class="rq"><span class="id">rSw4</span><div>HMI:<ul class="list" style="margin-top:8px"><li>Settings are able to be saved</li><li>Select watering amount</li><li>Select lighting, in time</li><li>Current time shown</li><li>Selectable time of day to water</li></ul></div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw5</span><div>Selectable profiles for the type of plant it is</div></li><li class="rq"><span class="id">rSw6</span><div>Control loop for lighting with sensor for lighting amount</div></li></ul>
 </section>
+            <section class="part" id="c0-abom">
+            <h4>aBOM</h4>
+            <p class="lead">As-built bill of materials, filled in as the build comes together. Compare against the eBOM in Planning.</p>
+            <div class="scroll-x" style="margin-top: 16px">
+              <table class="bomtable">
+                <thead><tr><th>Item</th><th>Use</th><th class="n">Cost + tax</th><th class="n">Qty</th><th class="n">Total</th><th>Comment</th></tr></thead>
+                <tbody>
+                  <tr class="main"><td colspan="6" style="padding: 28px 0; color: var(--faint)">No entries yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
             <section class="part" id="c0-journal">
               <h4>Journal</h4>
               <p class="lead">Dated notes on how the build is going. Each entry is stamped with its date, and new entries are added at the bottom.</p>
@@ -759,7 +798,14 @@ img.zoomable { cursor: zoom-in; }
                 <li class="entry has-img"><div class="eb"><time datetime="2026-11-04">11/04/2026</time><h4>HMI: Software (C)</h4><ul class="list"><li>Tested Arduino with I2C LCD, learning about drivers</li><li>Swapping from Arduino to STM32</li><li>Installing STM’s SW and interface</li><li>Learned about GPIO interface, STM’s internals, etc</li><li>Unable to connect to the STM32 in the IDE, but can in the CubeProgrammer?<ul class="list" style="margin-top: 6px"><li>Updated drivers</li><li>Reinstalled SW</li><li>Tried different USB ports and cables</li></ul></li></ul></div><figure class="ef"><img src="journal-1104-arduino-lcd.jpg" width="1500" height="1992" alt="An Arduino Uno wired to a breadboard and a 16x2 LCD with ribbon cables on a white desk."></figure></li>
                 <li class="entry has-img"><div class="eb"><time datetime="2026-11-05">11/05/2026</time><h4>HMI: Software (C)</h4><ul class="list"><li>Got the STM32 connected! Turned out to be the USB ports - laptop only had USB-C, and the dock was where the issue was. Found a USB-C to USB-A adapter, connection successful</li><li>Followed and created initial internal LED flashing project, worked!</li></ul></div><figure class="ef"><img src="journal-1105-nucleo.jpg" width="1500" height="1992" alt="An STM32 Nucleo board powered over USB, with its status LEDs lit, on a space-themed desk mat."></figure></li>
                 <li class="entry"><time datetime="2026-11-07">11/07/2026</time><h4>HMI: Electrical, Software (C, RUST)</h4><ul class="list"><li>Got LED’s to work with the STM32 in C</li><li>Working on setting up Analog</li><li>Decided to fully swap to RUST here:<ul class="list" style="margin-top: 6px"><li>Installed Ubuntu on PC with SSD</li></ul></li><li>Created basic LED function in RUST</li></ul></li>
-                <li class="entry has-img"><div class="eb"><time datetime="2026-11-08">11/08/2026</time><h4>HMI - Electrical, Software (RUST)</h4><ul class="list"><li>Tested Analog input with LED’s</li><li>Added I2C LCD 16x2 display</li><li>Set up scrolling function with the analog stick for the screen</li><li>Set up initial display (row #, plant #, water level, light level)</li><li>Set up adjustable values for the light and water level, fully selected through the analog</li><li>Added flashing cursor to know where the user is</li></ul></div><figure class="ef"><video controls muted playsinline preload="metadata" poster="journal-1108-hmi-poster.jpg" width="1280" height="720" aria-label="Demo of the HMI: an analog stick scrolls the LCD and changes the water and light values, with a flashing cursor."><source src="journal-1108-hmi.mp4" type="video/mp4"></video></figure></li>
+                <li class="entry has-img"><div class="eb"><time datetime="2026-11-08">11/08/2026</time><h4>HMI - Electrical, Software (RUST)</h4><ul class="list"><li>Tested Analog input with LED’s</li><li>Added I2C LCD 16x2 display</li><li>Set up scrolling function with the analog stick for the screen</li><li>Set up initial display (row #, plant #, water level, light level)</li><li>Set up adjustable values for the light and water level, fully selected through the analog</li><li>Added flashing cursor to know where the user is</li><li>Github suspension with no information - site and repo gone, unable to access. Opened ticket, no information yet</li></ul></div><figure class="ef"><video controls muted playsinline preload="metadata" poster="journal-1108-hmi-poster.jpg" width="1280" height="720" aria-label="Demo of the HMI: an analog stick scrolls the LCD and changes the water and light values, with a flashing cursor."><source src="journal-1108-hmi.mp4" type="video/mp4"></video></figure></li>
+                <li class="entry"><time datetime="2026-11-09">11/09/2026</time><h4>Control SW</h4><ul class="list"><li>My Github is back! No reply to ticket, just worked again. Weird.</li><li>Starting to implement control loop:<ul class="list" style="margin-top: 6px"><li>Hydrometers wiring, may change to capacitive</li><li>Hydrometer calibration planning</li><li>Pump: wiring with MOSFET</li><li>Valve: Wiring, calibration planning</li><li>Flow meter: wiring for hall effect, sensor calibration planning</li></ul></li><li>Feed forward control planning:<ul class="list" style="margin-top: 6px"><li>Flow meter and valve control means I can tune the water output to the plant ahead of time, and not have to wait for the soil to be saturated to know the saturation level.</li></ul></li></ul></li>
+                <li class="entry"><time datetime="2026-11-10">11/10/2026</time><ul class="list" style="margin-top: 10px"><li>Investigating data logging for better calibration ability<ul class="list" style="margin-top: 6px"><li>Using STM32 USB interface to log .MF4 files</li><li>Will need script to do this (possibly open source already exists)</li><li>A2L file to define the inputs</li><li>Or, a different way to datalog, still investigating</li></ul></li><li>Planning implementation of parameter file (.dcm) to make tuning easy</li></ul></li>
+                <li class="entry"><time datetime="2026-11-11">11/11/2026</time><h4>Control SW (RUST), Electrical</h4><ul class="list"><li>Saving data using the flash - STM32 has 512k, modified to 384k to keep space for the saved plant settings.</li></ul></li>
+                <li class="entry"><time datetime="2026-11-12">11/12/2026</time><h4>Control - SW (RUST), Mechanical - HMI</h4><ul class="list"><li>Creating the control loop in the SW:<ul class="list" style="margin-top: 6px"><li>Use flow rate to calculate ratio of watering amount and the humidity levels</li><li>Can use a PID controller (really just P should be sufficient for this) but following a constant target</li><li>Otherwise can use simple 75% way of doing it<ul class="list" style="margin-top: 6px"><li>water expected 75% of the expected amount</li><li>Then recalculate difference, water the additional 90%</li><li>Then recalculate difference, water the rest?</li><li>unsure of values and timings for these<ul class="list" style="margin-top: 6px"><li>1 min enough beteween</li></ul></li></ul></li><li>Rate of water flow -&gt; hygrometer value increase is unknown</li></ul></li><li>Redoing the breadboard and connections to be cleaner<ul class="list" style="margin-top: 6px"><li>Connected each side of the STM32 to a seperate breadboard</li></ul></li><li>Logic notes:<ul class="list" style="margin-top: 6px"><li>Mosfets needed:<ul class="list" style="margin-top: 6px"><li>1x for motor</li><li>1x for valve<ul class="list" style="margin-top: 6px"><li>By adding logic to only allow one of these to run at a time, all pins for the valve outputs can go into the same mosfet gate</li><li>This allows the flow to also be consistent across valves (at least in a smaller band) due to the pressure only being able to go in one direction</li></ul></li></ul></li></ul></li><li>Designed first CAD model for the HMI and it's components</li></ul></li>
+                <li class="entry has-img"><div class="eb"><time datetime="2026-11-14">11/14/2026</time><h4>Mechanical: HMI</h4><ul class="list"><li>V1 printed and tested for spacing and sizing</li></ul></div><figure class="ef"><img src="journal-1114-hmi-v1.jpg" width="1274" height="959" alt="The V1 printed HMI enclosure with the LCD, red LED and analog stick fitted, with handwritten notes on it about the I2C, a reset button, and the enclosure being 1mm taller." loading="lazy"></figure></li>
+                <li class="entry has-img"><div class="eb"><time datetime="2026-11-15">11/15/2026</time><ul class="list" style="margin-top: 10px"><li>HMI enclosure V2 updated</li></ul></div><figure class="ef"><img src="journal-1115-breadboards.jpg" width="722" height="959" alt="The STM32 Nucleo wired to two breadboards with MOSFETs, with the printed HMI enclosure with its LCD, LED and analog stick in front." loading="lazy"></figure></li>
+                <li class="entry has-img"><div class="eb"><time datetime="2026-11-16">11/16/2026</time><h4>Control Loop - Electrical, Mechanical - HMI, Plant Pod, Plant Wall</h4><ul class="list"><li>Wired Flow rate sensor with 3 pin plug</li><li>Set up Hydrometer inputs w/ MOSFETs, ordered add'l diodes</li><li>Plant pod planning, changing scope, drainage</li><li>New plant wall location additional requirements</li><li>Printed HMI enclosure, V2, test fit with LCD, Analog button, LED</li><li>Updated to V3 with ordered M4 screws, clip in lower portion w/ screw holes to attaching to wall, and slight modifications to spacing for PCB, decreased radius for analog stick, lowered analog stick into enclosure</li></ul></div><figure class="ef"><img src="journal-1116-hmi-enclosure.jpg" width="1274" height="959" alt="The printed HMI enclosure with the LCD, red LED and analog stick, wired to the STM32 Nucleo and two breadboards with MOSFETs labelled Valves and Pump, and a Fault LED."><img src="journal-1116-hmi-print.jpg" width="722" height="959" alt="The printed HMI enclosure base on the 3D printer bed, a tan frame with screw posts and a mount for the analog stick, with its brim outline on blue tape." loading="lazy"></figure></li>
               </ol>
             </section>
           </article>
@@ -794,6 +840,15 @@ img.zoomable { cursor: zoom-in; }
         </ul>
       </div>
 
+
+      <div class="latest" id="c1-latest">
+        <div class="label">Latest update</div>
+        <figure>
+          <figcaption><b>Teardown.</b> Rear half opened up: cameras, board and ribbon cables.</figcaption>
+          <img src="razr-teardown-rear.jpg" width="1100" height="828" alt="The opened rear half of the donor RAZR with cameras, board and ribbon cables">
+        </figure>
+        <p class="more"><a href="#c1-teardown">See it in the Teardown</a></p>
+      </div>
 
       <div class="chapters">
         <aside class="rail" aria-label="Project phases">
@@ -980,16 +1035,21 @@ img.zoomable { cursor: zoom-in; }
           <section class="part" id="c1-parts">
             <h4>Parts and cost</h4>
             <p class="lead">The phone is the biggest line. The rest is small electronics to connect the keyboard and carry charging through.</p>
-            <div class="bom" role="table" aria-label="Bill of materials">
-              <div class="brow" role="row"><span class="nm">Motorola Razr 2025+</span><span class="cost">$79.50</span><span class="nt">Main phone · <a class="src" href="https://www.ebay.com/itm/267690048563">listing</a></span><div class="bar"><i style="width: 100%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">BlackBerry Q10 keyboard</span><span class="cost">$21.27</span><div class="bar"><i style="width: 26.8%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">Hirose BM14B(0.8)-24DS-0.4V(53)</span><span class="cost">$11.21</span><span class="nt">Keyboard breakout board · <a class="src" href="https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/BM14B-0-8-60DS-0-4V-53/4552386">source</a></span><div class="bar"><i style="width: 14.1%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">Arduino Pro Micro</span><span class="cost">$10.59</span><span class="nt"><a class="src" href="https://www.amazon.com/diymore-ATmega32U4-Replace-ATmega328-Leonardo/dp/B01KJR41J4">source</a></span><div class="bar"><i style="width: 13.3%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">USB-C female breakout boards</span><span class="cost">$6.35</span><span class="nt">For the charging side · <a class="src" href="https://www.amazon.com/Breakout-Type-C-Serial-BreakoutFemale-Connector/dp/B0GVK4TZXN">source</a></span><div class="bar"><i style="width: 8%"></i></div></div>
-              <div class="brow" role="row"><span class="nm">USB-C male breakout boards</span><span class="cost">$6.88</span><span class="nt">For connecting to the phone · <a class="src" href="https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B">source</a></span><div class="bar"><i style="width: 8.7%"></i></div></div>
-              <div class="total"><span>Total</span><span>$135.80</span></div>
+            <div class="scroll-x" style="margin-top: 16px">
+              <table class="bomtable">
+                <thead><tr><th>Item</th><th>Note</th><th class="n">Cost</th></tr></thead>
+                <tbody>
+                  <tr class="main"><th scope="row">Motorola Razr 2025+</th><td>Main phone · <a class="src" href="https://www.ebay.com/itm/267690048563">listing</a></td><td class="n">$79.50</td></tr>
+                  <tr class="main"><th scope="row">BlackBerry Q10 keyboard</th><td></td><td class="n">$21.27</td></tr>
+                  <tr class="main"><th scope="row">Hirose BM14B(0.8)-24DS-0.4V(53)</th><td>Keyboard breakout board · <a class="src" href="https://www.digikey.com/en/products/detail/hirose-electric-co-ltd/BM14B-0-8-60DS-0-4V-53/4552386">source</a></td><td class="n">$11.21</td></tr>
+                  <tr class="main"><th scope="row">Arduino Pro Micro</th><td><a class="src" href="https://www.amazon.com/diymore-ATmega32U4-Replace-ATmega328-Leonardo/dp/B01KJR41J4">source</a></td><td class="n">$10.59</td></tr>
+                  <tr class="main"><th scope="row">USB-C female breakout boards</th><td>For the charging side · <a class="src" href="https://www.amazon.com/Breakout-Type-C-Serial-BreakoutFemale-Connector/dp/B0GVK4TZXN">source</a></td><td class="n">$6.35</td></tr>
+                  <tr class="main"><th scope="row">USB-C male breakout boards</th><td>For connecting to the phone · <a class="src" href="https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B">source</a></td><td class="n">$6.88</td></tr>
+                </tbody>
+                <tfoot><tr><th scope="row" colspan="2">Total</th><td class="n">$135.80</td></tr></tfoot>
+              </table>
             </div>
-                    </section>
+          </section>
 
           <section class="part" id="c1-recovery">
             <h4>Recovery and references</h4>
@@ -1189,6 +1249,15 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
           </figure>
         </div>
         <div class="dots" aria-label="Choose image"><button type="button" class="on" aria-label="Image 1"></button><button type="button" aria-label="Image 2"></button><button type="button" aria-label="Image 3"></button></div>
+      </div>
+
+      <div class="latest" id="c2-latest">
+        <div class="label">Latest update</div>
+        <figure>
+          <figcaption><b>In-Game Menu.</b> Quicktravel spawn points over the Bosch Flat Rock map.</figcaption>
+          <img src="beamng-spawn-ingame-menu.jpg" width="2136" height="1133" alt="BeamNG in-game map over Bosch Flat Rock with a Points of Interest list of quicktravel points: 102 Building Parking Lot, 20/30% Hills, ESP Runup and VDA.">
+        </figure>
+        <p class="more"><a href="#c2-spawn">See it in Spawn points</a></p>
       </div>
 
       <div class="chapters">

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T10:39:49Z",
+ "updated": "2026-11-16T10:40:30Z",
  "source": "issues",
  "project": {
   "title": "Plant Wall",
@@ -10,13 +10,13 @@
   {
    "number": 33,
    "title": "Sub-System: Mechanical: Design",
-   "state": "open",
+   "state": "closed",
    "url": "https://github.com/amirahmani/Plant_Wall/issues/33",
-   "status": "In Progress",
+   "status": "Done",
    "start": "2026-11-02",
    "end": "2026-11-03",
    "fields": {
-    "Status": "In Progress"
+    "Status": "Done"
    }
   },
   {
@@ -466,13 +466,13 @@
   {
    "number": 65,
    "title": "Component; Software: HMI: Build",
-   "state": "open",
+   "state": "closed",
    "url": "https://github.com/amirahmani/Plant_Wall/issues/65",
-   "status": "Todo",
+   "status": "Done",
    "start": null,
    "end": null,
    "fields": {
-    "Status": "Todo"
+    "Status": "Done"
    }
   },
   {
@@ -586,13 +586,13 @@
   {
    "number": 64,
    "title": "Component; Software: HMI: Design",
-   "state": "open",
+   "state": "closed",
    "url": "https://github.com/amirahmani/Plant_Wall/issues/64",
-   "status": "In Progress",
+   "status": "Done",
    "start": null,
    "end": null,
    "fields": {
-    "Status": "In Progress"
+    "Status": "Done"
    }
   },
   {
@@ -609,6 +609,12 @@
   }
  ],
  "commits": [
+  {
+   "sha": "8db162f",
+   "date": "2026-11-11T04:19:48Z",
+   "message": "Enhance README with parameter and datalog sections",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/8db162f42c8359172fcb8dcac9cb245726e20959"
+  },
   {
    "sha": "d71fc5f",
    "date": "2026-11-09T21:22:47Z",
@@ -650,12 +656,6 @@
    "date": "2026-11-08T19:56:11Z",
    "message": "Delete Software/Arduino/README.md",
    "url": "https://github.com/amirahmani/Plant_Wall/commit/9521b5e3fb4087ffc8f0679d8391ede2d8ddb885"
-  },
-  {
-   "sha": "1741a91",
-   "date": "2026-11-04T04:10:38Z",
-   "message": "Create README.md",
-   "url": "https://github.com/amirahmani/Plant_Wall/commit/1741a912138629607c9df1ffa8dadf96244be2dc"
   }
  ]
 }
