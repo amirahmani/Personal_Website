@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T10:40:30Z",
+ "updated": "2026-11-19T10:39:48Z",
  "source": "issues",
  "project": {
   "title": "Plant Wall",
@@ -610,6 +610,18 @@
  ],
  "commits": [
   {
+   "sha": "c60ffe2",
+   "date": "2026-11-19T04:59:37Z",
+   "message": "build.rs added, cargo.toml updated",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/c60ffe2e448a0f478807b7789d6ead8f091b6a83"
+  },
+  {
+   "sha": "202a264",
+   "date": "2026-11-19T04:58:46Z",
+   "message": "Large updates",
+   "url": "https://github.com/amirahmani/Plant_Wall/commit/202a264469c0e875ad11d14b2a37041ad551d927"
+  },
+  {
    "sha": "8db162f",
    "date": "2026-11-11T04:19:48Z",
    "message": "Enhance README with parameter and datalog sections",
@@ -644,18 +656,6 @@
    "date": "2026-11-08T20:02:49Z",
    "message": "Added cargo.toml",
    "url": "https://github.com/amirahmani/Plant_Wall/commit/cbbe944e96b01a69b60277ca4ab4c9f2ea2a168b"
-  },
-  {
-   "sha": "da39c96",
-   "date": "2026-11-08T20:00:56Z",
-   "message": "Adding initial source",
-   "url": "https://github.com/amirahmani/Plant_Wall/commit/da39c96b9a445834967e3074d6a3be77a94169f2"
-  },
-  {
-   "sha": "9521b5e",
-   "date": "2026-11-08T19:56:11Z",
-   "message": "Delete Software/Arduino/README.md",
-   "url": "https://github.com/amirahmani/Plant_Wall/commit/9521b5e3fb4087ffc8f0679d8391ede2d8ddb885"
   }
  ]
 }
