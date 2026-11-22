@@ -183,6 +183,24 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .latest .lbar button:hover, .latest .lbar button:focus-visible { background: var(--accent); color: #05050a; outline: none; }
 .latest .lcount { min-width: 72px; text-align: center; font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .latest .lslide { transition: none; } }
+.pager { --peek: 88px; --pgap: 20px; margin-top: 28px; }
+@media (max-width: 700px) { .pager { --peek: 36px; } }
+.pager .pg-wrap { position: relative; }
+.pg-track { position: relative; display: flex; gap: var(--pgap); align-items: flex-start; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; transition: height .25s ease; outline: none; }
+.pg-track::-webkit-scrollbar { display: none; }
+.pg-track::after { content: ""; flex: 0 0 calc(var(--peek) - var(--pgap)); }
+.pg-track > .pg-page { flex: 0 0 calc(100% - var(--peek)); box-sizing: border-box; min-width: 0; scroll-snap-align: start; margin-top: 0 !important; transition: opacity .3s ease; }
+.pg-track > .pg-page:not(.on) { opacity: .4; cursor: pointer; }
+.pg-track > .part, .pg-track > .board { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 22px 24px; }
+.pg-track > .part > h4 { border-top: 0; padding-top: 0; }
+.pager .pbar { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 14px 0; font-family: var(--font-mono); font-size: 15px; color: var(--fg); }
+.pager .pbar .pcount b { font-weight: 600; margin-right: 10px; }
+.pager .pbar button, .pager .pedge { width: 56px; height: 44px; border-radius: 10px; border: 2px solid var(--accent); background: var(--glass); color: var(--fg); font-size: 22px; line-height: 1; cursor: pointer; }
+.pager .pbar button:hover, .pager .pbar button:focus-visible, .pager .pedge:hover, .pager .pedge:focus-visible { background: var(--accent); color: #05050a; outline: none; }
+.pager .pbar button:disabled { opacity: .35; cursor: default; background: var(--glass); color: var(--fg); }
+.pager .pedge { position: absolute; top: 120px; right: 6px; z-index: 2; height: 56px; width: 44px; background: rgba(5,5,10,.85); }
+.pager .pedge[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .pg-track { transition: none; } .pg-track > .pg-page { transition: none; } }
 .chapters { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 56px; margin-top: 56px; }
 .rail { position: sticky; top: 96px; align-self: start; font-size: 14px; }
 .rail .rt { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); margin-bottom: 14px; }
@@ -485,9 +503,9 @@ img.zoomable { cursor: zoom-in; }
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a></div></li>
+            <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a></div></li>
             <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">eBOM</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
-            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-abom" data-sub="c0-abom">aBOM</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
+            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs-link" data-sub="c0-regs-link">Requirements</a><a href="#c0-abom" data-sub="c0-abom">aBOM</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
             <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a></li>
             <li data-rail="c0-close"><a href="#c0-close">Closure</a></li>
           </ol>
@@ -804,6 +822,11 @@ img.zoomable { cursor: zoom-in; }
             <section class="part" id="c0-regs">
 <h4>Requirements</h4>
 <h5 class="rh">System: Plant Wall</h5><div class="label">Main Plant Wall System Requirements</div><ul class="list"><li class="rq"><span class="id">rSys1</span><div>Limited user inputs needed<ul class="list" style="margin-top:8px"><li>Plant the plant in the Plant Pod, connect the hygrometer wire</li><li>Plant Pod simple to move from one Plant Row to another</li><li>Select how much water, and, light(TBD), feed time</li><li>Fill the water reservoir when LED flashes for it</li><li>Empty the drip tray if needed</li></ul></div></li><li class="rq"><span class="id">rSys2</span><div>Safety: if the power goes out, water doesn’t flow</div></li><li class="rq"><span class="id">rSys3</span><div>Prove out with 2 rows, 3 plant pods</div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSys4</span><div>Visual: I want it to physically look good</div></li><li class="rq"><span class="id">rSys5</span><div>Lights per pod with proper control loops and light guiding</div></li><li class="rq"><span class="id">rSys6</span><div>5 plants per row</div></li><li class="rq"><span class="id">rSys7</span><div>Water tank to feed for minimum of 1 week with full fill</div></li></ul><h5 class="rh">Sub-System: Mechanical</h5><div class="label">Main Mechanical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rMech1</span><div>Use of common hardware for ease of repair</div></li><li class="rq"><span class="id">rMech2</span><div>Valves to be normally closed to limit power draw, or allow water though when power loss</div></li><li class="rq"><span class="id">rMech3</span><div>Easy refill option</div></li><li class="rq"><span class="id">rMech4</span><div>Pod install/uninstall to be quick and easy</div></li></ul><div class="label">Future Requirements</div><ul class="list"><li class="rq"><span class="id">rMech5</span><div>Adjustable height for the plant row to accommodate different sized plants</div></li><li class="rq"><span class="id">rMech6</span><div>Look good</div></li></ul><h5 class="rh">Sub-System: Electrical</h5><div class="label">Main Electrical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rElec1</span><div>12V power for valves</div></li><li class="rq"><span class="id">rElec2</span><div>12V power for pump</div></li><li class="rq"><span class="id">rElec3</span><div>3.3-12V power for Hygrometers</div></li><li class="rq"><span class="id">rElec4</span><div>5-24V for flow meter</div></li><li class="rq"><span class="id">rElec5</span><div>HMI<ul class="list" style="margin-top:8px"><li>Clock using 4 digit 7 segment display</li><li>LCD display for user interaction</li><li>D-pad or Analog stick for user control</li><li>2x buttons for user control</li></ul></div></li></ul><div class="label">Future Requirements</div><p class="faintp">None listed yet.</p><h5 class="rh">Sub-System: Software</h5><div class="label">Main Software Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw1</span><div>Built in RUST</div></li><li class="rq"><span class="id">rSw2</span><div>Control row lights based on timer for prove out project</div></li><li class="rq"><span class="id">rSw3</span><div>Control loop from Hygrometer:<ul class="list" style="margin-top:8px"><li>Control pump for water flow</li><li>Control valves for individual plant pod control</li><li>Flow rate input for modeling and knowledge of water amount - removes need for valves at every row</li><li>Hygrometer input for soil humidity level</li></ul></div></li><li class="rq"><span class="id">rSw4</span><div>HMI:<ul class="list" style="margin-top:8px"><li>Settings are able to be saved</li><li>Select watering amount</li><li>Select lighting, in time</li><li>Current time shown</li><li>Selectable time of day to water</li></ul></div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw5</span><div>Selectable profiles for the type of plant it is</div></li><li class="rq"><span class="id">rSw6</span><div>Control loop for lighting with sensor for lighting amount</div></li></ul>
+</section>
+            <section class="part" id="c0-regs-link">
+<h4>Requirements</h4>
+<p class="lead">The requirements are now in the Initiation phase, so they sit with the goals they come from.</p>
+<p style="margin-top: 16px"><a href="#c0-regs">Open the Requirements</a></p>
 </section>
             <section class="part" id="c0-abom">
             <h4>aBOM</h4>
@@ -1825,6 +1848,239 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
     else if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('zoomable')) { e.preventDefault(); open(e.target); }
   });
   lb.addEventListener('click', close);
+})();
+</script>
+
+<script>
+(function () {
+  /* requirements live in Initiation; Execution keeps a link to them */
+  var regs = document.getElementById('c0-regs'), goals = document.getElementById('c0-goals');
+  if (regs && goals) goals.parentNode.insertBefore(regs, goals.nextSibling);
+
+  /* flip the process order: Closure first, Initiation last (phase numbers stay as they are) */
+  var conts = document.querySelectorAll('.content');
+  for (var q = 0; q < conts.length; q++) {
+    var chs = Array.prototype.filter.call(conts[q].children, function (x) { return x.hasAttribute('data-chapter'); });
+    if (chs.length < 2) continue;
+    var anchorNext = chs[chs.length - 1].nextSibling;
+    chs.forEach(function (x, k) { x._ord = k; });
+    chs.slice().reverse().forEach(function (x) { conts[q].insertBefore(x, anchorNext); });
+  }
+  var rails = document.querySelectorAll('.rail ol');
+  for (var r = 0; r < rails.length; r++) {
+    var lis = Array.prototype.filter.call(rails[r].children, function (x) { return x.hasAttribute('data-rail'); });
+    if (lis.length < 2) continue;
+    var aN = lis[lis.length - 1].nextSibling;
+    lis.forEach(function (x, k) { x._ord = k; });
+    lis.slice().reverse().forEach(function (x) { rails[r].insertBefore(x, aN); });
+  }
+  function syncDone() {
+    var view = document.querySelector('[data-view]:not([hidden])');
+    if (!view) return;
+    var items = view.querySelectorAll('[data-rail]');
+    var act = null;
+    for (var i = 0; i < items.length; i++) if (items[i].classList.contains('active')) act = items[i];
+    if (!act || act._ord == null) return;
+    for (var j = 0; j < items.length; j++) items[j].classList.toggle('done', items[j]._ord < act._ord);
+  }
+  window.addEventListener('scroll', function () { requestAnimationFrame(syncDone); }, { passive: true });
+  window.addEventListener('hashchange', function () { requestAnimationFrame(syncDone); });
+})();
+</script>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pagers = [];
+
+  function titleOf(page) {
+    if (page.id) {
+      var a = document.querySelector('a[data-sub="' + page.id + '"]');
+      if (a) return a.textContent;
+    }
+    var t = page.querySelector('time');
+    if (t) return t.textContent;
+    var h = page.querySelector('h4');
+    return h ? h.textContent : '';
+  }
+
+  function makeBar() {
+    var el = document.createElement('div');
+    el.className = 'pbar';
+    el.innerHTML = '<button type="button" class="pprev" aria-label="Previous page">&larr;</button><span class="pcount" aria-live="polite"></span><button type="button" class="pnext" aria-label="Next page">&rarr;</button>';
+    return el;
+  }
+
+  function build(track, pages) {
+    var P = { track: track, pages: pages, i: 0, inited: false };
+    var pager = document.createElement('div');
+    pager.className = 'pager';
+    track.parentNode.insertBefore(pager, track);
+    var wrap = document.createElement('div');
+    wrap.className = 'pg-wrap';
+    var top = makeBar(), bottom = makeBar();
+    var edge = document.createElement('button');
+    edge.type = 'button';
+    edge.className = 'pedge';
+    edge.setAttribute('aria-label', 'Next page');
+    edge.innerHTML = '&rarr;';
+    pager.appendChild(top);
+    pager.appendChild(wrap);
+    wrap.appendChild(track);
+    wrap.appendChild(edge);
+    pager.appendChild(bottom);
+    P.pager = pager;
+    track.classList.add('pg-track');
+    track.tabIndex = 0;
+    track.setAttribute('role', 'group');
+    track.setAttribute('aria-roledescription', 'carousel');
+    pages.forEach(function (p) { p.classList.add('pg-page'); p._P = P; });
+
+    function fit() {
+      var h = pages[P.i].offsetHeight;
+      if (h) track.style.height = h + 'px';
+    }
+    function paint() {
+      var n = pages.length;
+      pages.forEach(function (p, k) {
+        var on = k === P.i;
+        p.classList.toggle('on', on);
+        if (!on) { var vs = p.querySelectorAll('video'); for (var v = 0; v < vs.length; v++) vs[v].pause(); }
+      });
+      var label = '<b>' + titleOf(pages[P.i]) + '</b>' + (P.i + 1) + ' / ' + n;
+      [top, bottom].forEach(function (b) {
+        b.querySelector('.pcount').innerHTML = label;
+        b.querySelector('.pprev').disabled = P.i === 0;
+        b.querySelector('.pnext').disabled = P.i === n - 1;
+      });
+      edge.hidden = P.i === n - 1;
+      fit();
+      syncRail();
+    }
+    function go(i, how) {
+      i = Math.max(0, Math.min(pages.length - 1, i));
+      P.i = i;
+      track.scrollTo({ left: pages[i].offsetLeft, behavior: how === 'smooth' && !reduce ? 'smooth' : 'instant' });
+      paint();
+    }
+    function user(i) {
+      go(i, 'smooth');
+      var y = pager.getBoundingClientRect().top;
+      if (y < 90) window.scrollBy({ top: y - 96, behavior: 'instant' });
+    }
+    function init(idx) {
+      if (P.inited || !track.clientWidth) return false;
+      P.inited = true;
+      go(idx == null ? P.start : idx, 'instant');
+      return true;
+    }
+    P.start = pages.length && pages[0].classList.contains('entry') ? pages.length - 1 : 0;
+    P.go = go;
+    P.init = init;
+
+    top.querySelector('.pprev').addEventListener('click', function () { user(P.i - 1); });
+    top.querySelector('.pnext').addEventListener('click', function () { user(P.i + 1); });
+    bottom.querySelector('.pprev').addEventListener('click', function () { user(P.i - 1); });
+    bottom.querySelector('.pnext').addEventListener('click', function () { user(P.i + 1); });
+    edge.addEventListener('click', function () { user(P.i + 1); });
+
+    track.addEventListener('click', function (e) {
+      var pg = e.target.closest ? e.target.closest('.pg-page') : null;
+      if (!pg || pg.parentNode !== track || pg.classList.contains('on')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      user(pages.indexOf(pg));
+    }, true);
+    track.addEventListener('keydown', function (e) {
+      if (e.target !== track) return;
+      if (e.key === 'ArrowLeft') { user(P.i - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { user(P.i + 1); e.preventDefault(); }
+    });
+
+    var sTick = false;
+    track.addEventListener('scroll', function () {
+      if (sTick || !P.inited) return;
+      sTick = true;
+      requestAnimationFrame(function () {
+        sTick = false;
+        var best = 0, bd = 1e9;
+        for (var k = 0; k < pages.length; k++) {
+          var d = Math.abs(pages[k].offsetLeft - track.scrollLeft);
+          if (d < bd) { bd = d; best = k; }
+        }
+        if (best !== P.i) { P.i = best; paint(); }
+      });
+    }, { passive: true });
+
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(function () {
+        if (!P.inited) { init(); if (P.inited) return; }
+        fit();
+      });
+      ro.observe(track);
+      pages.forEach(function (p) { ro.observe(p); });
+    } else {
+      window.addEventListener('resize', function () { init(); fit(); });
+      init();
+    }
+    pagers.push(P);
+    return P;
+  }
+
+  function syncRail() {
+    var view = document.querySelector('[data-view]:not([hidden])');
+    if (!view) return;
+    var subs = view.querySelectorAll('[data-sub]');
+    for (var s = 0; s < subs.length; s++) {
+      var a = subs[s];
+      var el = document.getElementById(a.getAttribute('data-sub'));
+      var pg = el && el.closest ? el.closest('.pg-page') : null;
+      if (!pg || el !== pg) continue;
+      var li = a.closest('[data-rail]');
+      a.classList.toggle('on', pg.classList.contains('on') && !!li && li.classList.contains('active'));
+    }
+  }
+
+  /* phases: every section becomes a page; a journal becomes one page per day */
+  var chapters = document.querySelectorAll('[data-chapter]');
+  for (var c = 0; c < chapters.length; c++) {
+    var ch = chapters[c];
+    var kids = Array.prototype.slice.call(ch.children);
+    var pages = kids.filter(function (k) {
+      if (k.classList.contains('board')) return true;
+      return k.tagName === 'SECTION' && k.classList.contains('part') && !k.querySelector('ol.entries');
+    });
+    if (pages.length >= 2) {
+      var track = document.createElement('div');
+      ch.insertBefore(track, pages[0]);
+      pages.forEach(function (p) { track.appendChild(p); });
+      build(track, pages);
+    }
+    var logs = ch.querySelectorAll('ol.entries');
+    for (var l = 0; l < logs.length; l++) {
+      var ents = Array.prototype.slice.call(logs[l].children).filter(function (x) { return x.classList.contains('entry'); });
+      if (ents.length >= 2) {
+        logs[l].style.display = 'flex';
+        build(logs[l], ents);
+      }
+    }
+  }
+
+  /* links to a page or a journal entry open that page */
+  function openHash() {
+    var h = decodeURIComponent((location.hash || '').replace('#', ''));
+    var el = h ? document.getElementById(h) : null;
+    var pg = el && el.closest ? el.closest('.pg-page') : null;
+    if (!pg) return;
+    var P = pg._P, idx = P.pages.indexOf(pg);
+    if (!P.inited) P.init(idx);
+    P.go(idx, 'instant');
+    var tgt = el === pg ? P.pager : el;
+    window.scrollTo({ top: tgt.getBoundingClientRect().top + window.scrollY - 96, behavior: 'instant' });
+  }
+  window.addEventListener('hashchange', openHash);
+  window.addEventListener('scroll', function () { requestAnimationFrame(syncRail); }, { passive: true });
+  openHash();
 })();
 </script>
 
