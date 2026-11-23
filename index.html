@@ -189,6 +189,64 @@ a:focus-visible, button:focus-visible, .gallery:focus-visible, .code:focus-visib
 .pg-track { position: relative; display: flex; gap: var(--pgap); align-items: flex-start; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; transition: height .25s ease; outline: none; }
 .pg-track::-webkit-scrollbar { display: none; }
 .pg-track::after { content: ""; flex: 0 0 calc(var(--peek) - var(--pgap)); }
+.pg-track.pg-both { scroll-padding-left: var(--peek); }
+.pg-track.pg-both::before { content: ""; flex: 0 0 calc(var(--peek) - var(--pgap)); }
+.pg-track.pg-both > .pg-page { flex-basis: calc(100% - 2 * var(--peek)); }
+.d-sw { --c: #8ab4ff; } .d-ctl { --c: #ffd166; } .d-el { --c: #ff8fa3; } .d-me { --c: #c9a2ff; } .d-tl { --c: #92f0c6; } .d-sy { --c: #d7d7e0; }
+.dtags, .dlegend, .lchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.dtags { margin: 8px 0 6px; }
+.dlegend { gap: 8px; margin: 18px 0 0; }
+.lchips { margin-top: 16px; }
+.dtag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg); border: 1px solid var(--c); border-radius: 999px; padding: 2px 10px 2px 8px; }
+.dtag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.lscroll { overflow-x: auto; margin-top: 16px; border: 1px solid var(--glass-line); border-radius: 10px; padding: 14px 10px 8px; background: rgba(0,0,0,.25); scrollbar-width: thin; }
+.lgrid { display: grid; grid-template-columns: 130px repeat(21, 64px); grid-template-rows: 24px repeat(5, 84px); min-width: max-content; }
+.lgrid .lh, .lgrid .ld { font-family: var(--font-mono); font-size: 11px; color: var(--faint); text-align: center; align-self: start; }
+.lgrid .lh { text-align: left; }
+.lgrid .ll { grid-column: 1; align-self: start; font-size: 13px; font-weight: 600; line-height: 1.2; color: var(--c); }
+.lgrid .lline { align-self: start; margin: 6px 32px 0; height: 2px; background: var(--c); opacity: .55; }
+.lgrid .ln { align-self: start; display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: var(--fg); font-size: 11px; line-height: 1.2; text-align: center; padding: 0 2px; position: relative; z-index: 1; }
+.lgrid .ln i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px #05050a; }
+.lgrid .ln:hover i, .lgrid .ln:focus-visible i { box-shadow: 0 0 0 3px #05050a, 0 0 0 5px var(--c); }
+.lgrid .ln:hover span { text-decoration: underline; }
+.jstrip { position: relative; height: 46px; margin: 6px 0 8px; }
+.jstrip .jline { position: absolute; left: 10px; right: 10px; top: 13px; height: 2px; background: var(--glass-line); }
+.jstrip .jtrack { position: absolute; left: 10px; right: 10px; top: 0; height: 28px; }
+.jstrip .jdot { position: absolute; top: 6px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 0; padding: 0; background: var(--c, #d7d7e0); cursor: pointer; opacity: .75; box-shadow: 0 0 0 3px #05050a; transition: transform .2s ease; }
+.jstrip .jdot:hover, .jstrip .jdot:focus-visible { opacity: 1; }
+.jstrip .jdot.on { opacity: 1; transform: scale(1.6); box-shadow: 0 0 0 3px #05050a, 0 0 0 5px #eeedf4; }
+.jstrip .jend { position: absolute; top: 30px; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+@media (prefers-reduced-motion: reduce) { .jstrip .jdot { transition: none; } }
+.fp tbody tr > th:first-child { box-shadow: inset 4px 0 0 var(--c); }
+.fp thead th + th::before { content: "\2192"; margin-right: 8px; color: var(--faint); }
+.fp .src { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--faint); }
+.fp .src a { color: inherit; }
+.introgrid .latest { max-width: none; margin: 0 0 56px; }
+.introgrid .latest:last-child { margin-bottom: 0; }
+#c0-summary .sk img { background: #fff; border: 0; max-height: none; border-radius: 6px; }
+.v-plant .head .sub { max-width: none; }
+.pager .pedge { width: 64px; height: 96px; font-size: 36px; right: 8px; top: 180px; }
+.pg-track > .pg-page { min-height: 440px; max-height: 680px; overflow-y: auto; scrollbar-width: thin; }
+.fp tr.grp > th { text-align: left; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); background: rgba(255,255,255,.04); box-shadow: none; }
+.fp td.na { color: var(--faint); }
+.rtrack { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--faint); }
+.rtrack .st { display: inline-flex; gap: 6px; align-items: center; border: 1px solid var(--glass-line); border-radius: 999px; padding: 1px 9px; color: var(--muted); }
+.rtrack .st-ip { border-color: #ffd166; color: #ffd166; }
+.rtrack .st-ok { border-color: #92f0c6; color: #92f0c6; }
+.rtrack a { color: inherit; }
+.rprog { margin: 0 0 20px; padding: 14px 16px; border: 1px solid var(--glass-line); border-radius: 10px; background: rgba(0,0,0,.25); }
+.rprog .rbar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.08); }
+.rprog .rbar i { display: block; height: 100%; }
+.rprog .b-ok { background: #92f0c6; }
+.rprog .b-ip { background: #ffd166; }
+.rprog .rtxt { margin-top: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.rprog p { margin-top: 6px; font-size: 13px; color: var(--faint); }
+.bomtotal { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 16px; padding: 12px 16px; border: 1px solid var(--glass-line); border-radius: 10px; background: rgba(0,0,0,.25); }
+.bomtotal .k { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.bomtotal .v { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--accent); }
+.bomtotal .n { font-size: 13px; color: var(--muted); }
+.pager .pedge.pedge-l { right: auto; left: 8px; }
+@media (max-width: 700px) { .pager .pedge { width: 44px; height: 80px; font-size: 28px; right: 2px; } .pager .pedge.pedge-l { right: auto; left: 2px; } }
 .pg-track > .pg-page { flex: 0 0 calc(100% - var(--peek)); box-sizing: border-box; min-width: 0; scroll-snap-align: start; margin-top: 0 !important; transition: opacity .3s ease; }
 .pg-track > .pg-page:not(.on) { opacity: .4; cursor: pointer; }
 .pg-track > .part, .pg-track > .board { border: 1px solid var(--glass-line); border-radius: 10px; background: var(--glass); padding: 22px 24px; }
@@ -471,9 +529,45 @@ img.zoomable { cursor: zoom-in; }
         <a class="back" href="#home">← All projects</a><br>
         <span class="eyebrow">Project 01</span><span class="pill live">Execution</span>
         <h2>Autonomous Plant Wall</h2>
-        <p class="sub">I want a plant wall that looks after itself, because I am terrible at taking care of plants. This is my planning journal so far, section by section, from my sketchbook.</p>
+        <p class="sub">I want a plant wall that looks after itself, because I am terrible at taking care of plants. Follow me through my journey of designing, learning, improving, and creating :)</p>
       </div>
 
+
+      <div class="chapters introgrid" id="c0-intro-top">
+        <aside class="rail" aria-label="Project introduction">
+          <div class="rt">Intro</div>
+          <ol>
+            <li data-irail="c0-summary"><a href="#c0-summary">Summary</a></li>
+            <li data-irail="c0-links"><a href="#c0-links">Links</a></li>
+            <li data-irail="c0-latest"><a href="#c0-latest">Slideshow of Updates</a></li>
+            <li data-irail="c0-learn"><a href="#c0-learn">Learning Path</a></li>
+            <li data-irail="c0-first"><a href="#c0-first">Roadblocks</a></li>
+          </ol>
+        </aside>
+        <div class="content">
+      <div class="latest" id="c0-summary">
+        <div class="label">Summary</div>
+        <p>From a hand sketch of a tank, stacked planter rows and valves to a working HMI: the build moved from an Arduino to an STM32 programmed in Rust, with an LCD and analog stick menu, a control loop plan, a 3D printed HMI enclosure through three versions, a KiCad schematic, a hand soldered HMI PCB and a wiring harness. Capacitive moisture sensors replaced the first ones, a calibration menu was added, and the HMI enclosure was closed up and considered complete for the prove out section. The full schematic for the project was drawn in KiCad. The <a href="#j-2026-11-02">journal</a> has each step.</p>
+        <div class="row" style="--n:2; margin-top: 20px">
+          <figure class="sk">
+            <figcaption><b>Initial sketch.</b> The first concept: a water tank on top, stacked planter rows with lights, and a valve at each layer.</figcaption>
+            <img src="plant-concept.png" alt="Initial hand sketch of the plant wall: a tank on top, stacked planter rows with lights and a pump down one side" loading="lazy">
+          </figure>
+          <figure class="sk">
+            <figcaption><b>Latest.</b> The HMI enclosure wired to a capacitive moisture sensor in a dry plant pot, with the readings on its LCD.</figcaption>
+            <img src="cover-plant-latest3.jpg" alt="Latest: the HMI enclosure wired to a capacitive moisture sensor in a dry plant pot, with the readings on its LCD" loading="lazy">
+          </figure>
+        </div>
+      </div>
+
+      <div class="latest" id="c0-links">
+        <div class="label">Links</div>
+        <ul class="list links-list">
+          <li><a href="https://drive.google.com/file/d/1kl6QKHEIeUdE1FEalC4yS5pAjoq6SP7s/view?usp=sharing">BOOX notebook with the sketches</a></li>
+          <li><a href="https://github.com/amirahmani/Plant_Wall/tree/main">GitHub: Plant_Wall repository</a></li>
+          <li><a href="https://github.com/users/amirahmani/projects/1/views/1">GitHub: roadmap</a></li>
+        </ul>
+      </div>
 
       <div class="latest" id="c0-latest">
         <div class="label">Slideshow of Updates</div>
@@ -494,8 +588,106 @@ img.zoomable { cursor: zoom-in; }
                       <figure class="lslide"><figcaption><b><a href="#j-2026-11-19">11/19/2026.</a></b> Testing a moisture sensor in a dry plant pot to calibrate it</figcaption><div class="lmedia"><img src="journal-1119-calibration.jpg" width="722" height="959" alt="A dried out potted plant with a capacitive moisture sensor in the soil, wired to the HMI enclosure whose LCD shows the sensor readings, with the STM32 and breadboards behind." loading="lazy"></div></figure>
             <figure class="lslide"><figcaption><b><a href="#j-2026-11-20">11/20/2026.</a></b> Working on the KiCad schematic and the wiring harnesses</figcaption><div class="lmedia"><img src="journal-1120-desk.jpg" width="1274" height="959" alt="A desk with two monitors showing code and the KiCad schematic, wire spools, a wiring harness and a multimeter in front, and a person working at the bench in the background." loading="lazy"></div></figure>
             <figure class="lslide"><figcaption><b><a href="#j-2026-11-21">11/21/2026.</a></b> Full project electrical schematic, V1</figcaption><div class="lmedia"><img src="journal-1121-full-schematic.png" width="1683" height="1185" alt="KiCad schematic of the entire plant wall project, V1: six plant pod blocks (R1P1 to R2P3) each with a grow light and valve driven through MOSFETs, the HMI, the STM32 Nucleo F446, the soil moisture sensor inputs, the power supply and the water reservoir with the pump and level sensor." loading="lazy"></div></figure>
+            <figure class="lslide"><figcaption><b><a href="#j-2026-11-22">11/22/2026.</a></b> Building the main board protoboards that house the STM32</figcaption><div class="lmedia"><img src="journal-1122-protoboards-2.gif" width="540" height="720" alt="Building the main board protoboards for the STM32: headers soldered on, the Nucleo seated on top, and the HMI harness wired to the boards." loading="lazy"></div></figure>
+            <figure class="lslide"><figcaption><b><a href="#j-2026-11-22">11/22/2026.</a></b> The desk during the main board protoboard build, with the HMI, wiring harness and protoboards on the mat</figcaption><div class="lmedia"><img src="journal-1122-desk.jpg" width="1274" height="959" alt="Overhead view of the desk during the build: the HMI enclosure and wiring harness, the two main board protoboards, a soldering iron, wire spools, crimpers and parts bins." loading="lazy"></div></figure>
           </div>
-          <div class="lbar"><button type="button" class="lprev" aria-label="Previous slide">&larr;</button><span class="lcount">1 / 15</span><button type="button" class="lnext" aria-label="Next slide">&rarr;</button></div>
+          <div class="lbar"><button type="button" class="lprev" aria-label="Previous slide">&larr;</button><span class="lcount">1 / 17</span><button type="button" class="lnext" aria-label="Next slide">&rarr;</button></div>
+        </div>
+      </div>
+
+      <div class="latest" id="c0-learn">
+        <div class="label">Learning Path</div>
+        <p>Each dot is a journal day where I learned or built something new. One color is one discipline, here and in the journal. Select a dot to open that day.</p>
+        <div class="lscroll">
+          <div class="lgrid" data-from="2" data-to="22">
+            <div class="ll d-sw" style="grid-row:2">Software<br>Rust and C</div>
+            <div class="lline d-sw" style="grid-row:2;grid-column:3/23"></div>
+            <a class="ln d-sw" style="grid-row:2;grid-column:3" href="#j-2026-11-03"><i></i><span>Arduino and C</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:7" href="#j-2026-11-07"><i></i><span>Switch to Rust</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:8" href="#j-2026-11-08"><i></i><span>Rust: analog and LCD</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:11" href="#j-2026-11-11"><i></i><span>Flash storage</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:17" href="#j-2026-11-17"><i></i><span>Settings menu</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:19" href="#j-2026-11-19"><i></i><span>Calibration logic</span></a>
+            <a class="ln d-sw" style="grid-row:2;grid-column:22" href="#j-2026-11-22"><i></i><span>Unit tests</span></a>
+
+            <div class="ll d-ctl" style="grid-row:3">Embedded and controls<br>STM32</div>
+            <div class="lline d-ctl" style="grid-row:3;grid-column:4/13"></div>
+            <a class="ln d-ctl" style="grid-row:3;grid-column:4" href="#j-2026-11-04"><i></i><span>STM32 and GPIO</span></a>
+            <a class="ln d-ctl" style="grid-row:3;grid-column:5" href="#j-2026-11-05"><i></i><span>First STM32 program</span></a>
+            <a class="ln d-ctl" style="grid-row:3;grid-column:9" href="#j-2026-11-09"><i></i><span>Control loop start</span></a>
+            <a class="ln d-ctl" style="grid-row:3;grid-column:10" href="#j-2026-11-10"><i></i><span>Data logging</span></a>
+            <a class="ln d-ctl" style="grid-row:3;grid-column:12" href="#j-2026-11-12"><i></i><span>Control loop logic</span></a>
+
+            <div class="ll d-el" style="grid-row:4">Electrical and PCB<br>KiCad</div>
+            <div class="lline d-el" style="grid-row:4;grid-column:3/23"></div>
+            <a class="ln d-el" style="grid-row:4;grid-column:3" href="#j-2026-11-03"><i></i><span>TinkerCAD sim</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:16" href="#j-2026-11-16"><i></i><span>MOSFET circuits</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:17" href="#j-2026-11-17"><i></i><span>Learning KiCad</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:18" href="#j-2026-11-18"><i></i><span>First soldered PCB</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:19" href="#j-2026-11-19"><i></i><span>PCB debug</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:20" href="#j-2026-11-20"><i></i><span>Wiring harness</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:21" href="#j-2026-11-21"><i></i><span>Full schematic</span></a>
+            <a class="ln d-el" style="grid-row:4;grid-column:22" href="#j-2026-11-22"><i></i><span>Main board protoboard</span></a>
+
+            <div class="ll d-me" style="grid-row:5">Mechanical<br>CAD and 3D printing</div>
+            <div class="lline d-me" style="grid-row:5;grid-column:2/20"></div>
+            <a class="ln d-me" style="grid-row:5;grid-column:2" href="#j-2026-11-02"><i></i><span>Pod CAD</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:12" href="#j-2026-11-12"><i></i><span>HMI CAD</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:14" href="#j-2026-11-14"><i></i><span>V1 print</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:15" href="#j-2026-11-15"><i></i><span>V2</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:16" href="#j-2026-11-16"><i></i><span>V3</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:17" href="#j-2026-11-17"><i></i><span>V4</span></a>
+            <a class="ln d-me" style="grid-row:5;grid-column:19" href="#j-2026-11-19"><i></i><span>Enclosure sealed</span></a>
+
+            <div class="ll d-tl" style="grid-row:6">Linux and tools</div>
+            <a class="ln d-tl" style="grid-row:6;grid-column:7" href="#j-2026-11-07"><i></i><span>Ubuntu install</span></a>
+            <a class="ln d-tl" style="grid-row:6;grid-column:22" href="#j-2026-11-22"><i></i><span>Claude Code, terminal, GitHub</span></a>
+          </div>
+        </div>
+        <div class="label" style="margin-top: 22px">Skills</div>
+        <div class="lchips">
+          <span class="dtag d-sw">Rust syntax</span><span class="dtag d-sw">C</span>
+          <span class="dtag d-ctl">STM32</span><span class="dtag d-ctl">Control loops</span>
+          <span class="dtag d-el">KiCad</span><span class="dtag d-el">PCB design</span><span class="dtag d-el">Hand soldering</span>
+          <span class="dtag d-me">CAD</span><span class="dtag d-me">3D printing</span>
+          <span class="dtag d-tl">Linux install</span><span class="dtag d-tl">Terminal</span><span class="dtag d-tl">GitHub</span><span class="dtag d-tl">Claude</span><span class="dtag d-tl">Integrations</span>
+        </div>
+      </div>
+
+      <div class="latest" id="c0-first">
+        <div class="label">Roadblocks</div>
+        <p>Roadblocks are the constraints I had to work from and the issues I hit. The links go to the journal day or section where each was written down.</p>
+        <div class="label" style="margin: 22px 0 0">Design Constraints</div>
+        <div class="scroll-x" style="margin-top: 16px">
+          <table class="bomtable fp">
+            <thead><tr><th>Constraint</th><th>Reasoning</th><th>Decision</th></tr></thead>
+            <tbody>
+              <tr class="main d-me"><th scope="row">Low power draw, and no leak if power is lost.</th><td>A normally closed valve uses less power and stays shut without power.</td><td>Normally closed valves for each module and each row.<span class="src"><a href="#c0-goals">Goals</a></span></td></tr>
+              <tr class="main d-ctl"><th scope="row">One pump feeds many valves.</th><td>If only one of the motor and the valve can run at a time, the pressure can only go in one direction, which keeps the flow consistent across valves (at least in a smaller band).</td><td>Logic allows only one to run at a time, so every valve output goes into the same MOSFET gate: 1 MOSFET for the motor and 1 for the valves.<span class="src"><a href="#j-2026-11-12">11/12</a></span></td></tr>
+              <tr class="main d-ctl"><th scope="row">Waiting for the soil to saturate is the only way to know the saturation level.</th><td>With a flow meter and valve control, the water output can be tuned ahead of time, without waiting for the soil.</td><td>Feed forward control. On a new wall location, tapping the water pipe could replace the pump, so the control loop with flow rate matters most.<span class="src"><a href="#j-2026-11-09">11/09</a> · <a href="#j-2026-11-17">11/17</a></span></td></tr>
+              <tr class="main d-el"><th scope="row">The first sensors (HD-38) corrode when powered.</th><td>First attempt: switch the sensor with a P-channel MOSFET and read it once a day, before watering. A sensor that does not corrode when powered on can stay on and give live readings.</td><td>Replaced them with capacitive sensors, removed the MOSFETs and moved to 5V.<span class="src"><a href="#j-2026-11-16">11/16</a> · <a href="#j-2026-11-18">11/18</a> · <a href="#j-2026-11-19">11/19</a></span></td></tr>
+              <tr class="main d-el"><th scope="row">Up to 102 I/O (STM32 max is 114). Logic is 5V, but the pump needs 12V.</th><td>Adding sensors from more rows should be easy, with minimal wiring. I²C at 100 kHz is more than fast enough.</td><td>I²C for the sensors, and the pump switched by a MOSFET from the 12V supply.<span class="src"><a href="#c0-elec">Electrical</a></span></td></tr>
+              <tr class="main d-sw"><th scope="row">The STM32 has 512k of flash, and the plant settings need to be saved.</th><td>Space has to be kept back for the saved settings.</td><td>Program space reduced to 384k, and the flash is used to save the plant settings.<span class="src"><a href="#j-2026-11-11">11/11</a></span></td></tr>
+              <tr class="main d-sw"><th scope="row">New hardware and a new language at the same time.</th><td>Separating the project inputs, simulating in the meantime, and starting with C makes it easier to learn and troubleshoot.</td><td>Hardware built and verified first with an Arduino, C and TinkerCAD, then moved to the STM32 and Rust.<span class="src"><a href="#j-2026-11-03">11/03</a> · <a href="#j-2026-11-07">11/07</a></span></td></tr>
+              <tr class="main d-ctl"><th scope="row">Water amount against soil moisture is unknown, and probably not linear.</th><td>A flow meter lets me compare the actual water out against the calculated amount.</td><td>Use a curve parameter and tune it from the measured data.<span class="src"><a href="#c0-tune">Tuning and modeling</a></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="label" style="margin: 28px 0 0">Issues Faced</div>
+        <div class="scroll-x" style="margin-top: 16px">
+          <table class="bomtable fp">
+            <thead><tr><th>Issue Faced</th><th>Corrective Action</th><th>Lessons Learned</th></tr></thead>
+            <tbody>
+              <tr class="main d-sw"><th scope="row">Analog stick drift (<a href="#j-2026-11-19">11/19</a>)</th><td>Added to the relearn menu: it measures the static offsets and saves them. The cause turned out to be a wiring issue, so the HMI PCB was rewired to add a 3.3V wire and a 9th pin was added to the HMI harness. The analog now works predictably and consistently (<a href="#j-2026-11-22">11/22</a>).</td><td>The offset logic is still useful, so keep it in the firmware.</td></tr>
+              <tr class="main d-el"><th scope="row">The first soldered HMI PCB failed on test: power issues, 2 broken pins, 2 bad solder joints and a burned out LED (<a href="#j-2026-11-19">11/19</a>)</th><td>Fixed the pins and solder joints, and added a connector for the LED.</td><td>Use connectors for the parts that are likely to be replaced. It was the first hand soldered proto-board, so check joints before testing.</td></tr>
+              <tr class="main d-me"><th scope="row">The analog stick was sticking and contacting the case (<a href="#j-2026-11-18">11/18</a>, <a href="#j-2026-11-19">11/19</a>)</th><td>Dropped it 1 mm, offset the center and changed the mount points to reduce contact. The HMI enclosure went through V2 and V3 prints with test fits.</td><td>Test fit the moving parts in printed versions early.</td></tr>
+              <tr class="main d-el"><th scope="row">The first soil moisture sensors (HD-38) were costly and corrode when powered (<a href="#j-2026-11-18">11/18</a>)</th><td>Replaced them with capacitive sensors, which are cheaper, do not corrode when powered on and allow live readings. Removed the MOSFETs and moved to 5V (<a href="#j-2026-11-19">11/19</a>).</td><td>Choose sensors that can stay powered, which also simplified the wiring and logic.</td></tr>
+              <tr class="main d-tl"><th scope="row">GitHub suspension with no information: site and repo gone and not accessible (<a href="#j-2026-11-08">11/08</a>)</th><td>Opened a ticket. No reply came, and the account worked again on <a href="#j-2026-11-09">11/09</a>.</td><td>Keep a copy of the repo and site files outside of GitHub.</td></tr>
+              <tr class="main d-ctl"><th scope="row">The STM32 would not connect in the IDE, but did in CubeProgrammer (<a href="#j-2026-11-04">11/04</a>)</th><td>Updated drivers, reinstalled the software and tried other USB ports and cables. The issue was the dock, and the laptop only had USB-C, so a USB-C to USB-A adapter fixed it (<a href="#j-2026-11-05">11/05</a>).</td><td>Check the physical connection path (ports, dock, adapters) before reinstalling software.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
         </div>
       </div>
 
@@ -503,10 +695,10 @@ img.zoomable { cursor: zoom-in; }
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-regs" data-sub="c0-regs">Requirements</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a></div></li>
-            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">eBOM</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
-            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-regs-link" data-sub="c0-regs-link">Requirements</a><a href="#c0-abom" data-sub="c0-abom">aBOM</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
-            <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a></li>
+            <li data-rail="c0-init"><a href="#c0-init">Initiation</a><div class="sub"><a href="#c0-intro" data-sub="c0-intro">Intro</a><a href="#c0-goals" data-sub="c0-goals">Goals</a><a href="#c0-sys" data-sub="c0-sys">System Diagram</a><a href="#c0-mech" data-sub="c0-mech">Mechanical / Fluid</a><a href="#c0-hw" data-sub="c0-hw">Hardware Estimates</a><a href="#c0-holder" data-sub="c0-holder">Plant Pod</a><a href="#c0-row" data-sub="c0-row">Plant Row</a><a href="#c0-fw" data-sub="c0-fw">Firmware &amp; Embedded SW</a><a href="#c0-elec" data-sub="c0-elec">Electrical</a><a href="#c0-hmi" data-sub="c0-hmi">HMI</a><a href="#c0-tune" data-sub="c0-tune">Tuning and modeling</a><a href="#c0-res" data-sub="c0-res">Resources</a></div></li>
+            <li data-rail="c0-plan"><a href="#c0-plan">Planning</a><div class="sub"><a href="#c0-board" data-sub="c0-board">Kanban board</a><a href="#c0-scope" data-sub="c0-scope">Scope</a><a href="#c0-sched" data-sub="c0-sched">Schedule</a><a href="#c0-bom" data-sub="c0-bom">eBOM</a></div></li>
+            <li data-rail="c0-exec"><a href="#c0-exec">Execution</a><div class="sub"><a href="#c0-abom" data-sub="c0-abom">aBOM</a><a href="#c0-journal" data-sub="c0-journal">Journal</a></div></li>
+            <li data-rail="c0-mc"><a href="#c0-mc">Monitoring & Control</a><div class="sub"><a href="#c0-regs" data-sub="c0-regs">Requirements</a></div></li>
             <li data-rail="c0-close"><a href="#c0-close">Closure</a></li>
           </ol>
         </aside>
@@ -527,12 +719,6 @@ img.zoomable { cursor: zoom-in; }
               <figcaption><b>First concept.</b> A gravity assisted water tank on top (does it need to be if I use a motor?), with the control board and HMI and the pump on the side, and a water tube with a valve at each layer to limit pressure dilution. Lighting is attached under each module and the water tank, and still on the lowest one for manufacturing ease. Open question: height adjustable based on plant type, or consistent so hose length is not a factor?</figcaption>
               <img src="plant-concept-full.png" width="1500" height="1816" alt="Intro page: notes on an autonomous plant wall, then a sketch of the wall with a water tank on top, control board and HMI, pump and water tube on the right, stacked planter rows with lights underneath, and a valve at each layer." loading="lazy">
             </figure>
-            <div class="label">Helpful links</div>
-            <ul class="list links-list">
-              <li><a href="https://drive.google.com/file/d/1kl6QKHEIeUdE1FEalC4yS5pAjoq6SP7s/view?usp=sharing">BOOX notebook with the sketches</a></li>
-              <li><a href="https://github.com/amirahmani/Plant_Wall/tree/main">GitHub: Plant_Wall repository</a></li>
-              <li><a href="https://github.com/users/amirahmani/projects/1/views/1">GitHub: roadmap</a></li>
-            </ul>
           </section>
 
           <section class="part" id="c0-goals">
@@ -796,8 +982,63 @@ img.zoomable { cursor: zoom-in; }
                   <tr class="main"><th scope="row">LED for the plants to grow</th><td></td><td class="n">$50.00</td><td class="n">1</td><td class="n">$50.00</td><td></td></tr>
                   <tr class="main"><th scope="row"><a href="https://www.amazon.com/YW-YSD-2532-12-Plastic-Soup-Container/dp/B06Y6JWQTD/">Food Containers</a></th><td>Plant pot base</td><td class="n">$10.31</td><td class="n">1</td><td class="n">$10.31</td><td></td></tr>
                   <tr class="desc"><td colspan="6">YW Plastic Soup Food Container with Lids (12), 32 oz, 12 Pack, Clear</td></tr>
-                </tbody>
+                  </tbody>
                 <tfoot><tr><th scope="row" colspan="4">Total, rows listed</th><td class="n">$324.91</td><td></td></tr></tfoot>
+              </table>
+            </div>
+          </section>
+
+          <section class="part" id="c0-abom">
+            <h4>aBOM</h4>
+            <p class="lead">As bought: the parts from my Amazon orders, with the actual cost + tax, quantities and delivery dates. The eBOM above stays as the plan.</p>
+            <div class="scroll-x" style="margin-top: 16px">
+              <table class="bomtable">
+                <thead><tr><th>Item</th><th>Use</th><th class="n">Cost + tax</th><th class="n">Qty</th><th class="n">Total</th><th>Comment</th></tr></thead>
+                <tbody>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Icstation-Resistive-Soil-Moisture-Sensor/dp/B076DDWDJK/">Resistive hygrometer (returned)</a></th><td>Measure soil humidity</td><td class="n">$15.89</td><td class="n">0</td><td class="n">$0.00</td><td>2 sets were bought at $15.89 each. Return started, refund pending. Replaced by the capacitive sensors</td></tr>
+                  <tr class="desc"><td colspan="6">2 Sets Resistive Soil Moisture Meter, Icstation Soil Hygrometer Sensor Test Kit with Corrosion Resistant Probe, Digital Analog Signal Output</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Universal-Adjustable-Variable-100V-240V-Converter/dp/B0DMSDX732">12V Power Supply</a></th><td>Power the pump</td><td class="n">$18.12</td><td class="n">1</td><td class="n">$18.12</td><td>Delivered 11/8</td></tr>
+                  <tr class="desc"><td colspan="6">Wefomey Universal Power Supply Variable 3V~24V 3A 72W Multi Voltage Adapter, Adjustable AC DC Charger with 14 Tips, Polarity Converter</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/IRLZ44-IRLZ44N-IRLZ44NPBF-Transistors-Mosfets/dp/B0FPQC8SV8/">IRLZ44N MOSFET Transistor</a></th><td>Powering the pump and valves</td><td class="n">$7.41</td><td class="n">2</td><td class="n">$14.82</td><td>Two packs of 12: delivered 11/8 and 11/21 (the 11/19 order, $7.41). The first pack is priced the same, assumed</td></tr>
+                  <tr class="desc"><td colspan="6">12PCS IRLZ44 IRLZ44N IRLZ44NPBF MOSFET Transistors 47A 55V TO-220. N-Channel Power MOSFET</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/ilauke-Certified-Refrigerator-Connect-Wastewater/dp/B0GY7Z78LW/">Fridge hose and connectors</a></th><td>Routing the water</td><td class="n">$12.71</td><td class="n">1</td><td class="n">$12.71</td><td>Delivered 11/2 (11/1 order)</td></tr>
+                  <tr class="desc"><td colspan="6">ilauke NSF Certified 1/4 inch O.D. Refrigerator Water Line Kit 32.8FT, LLDPE Refrigerator Water Line with 12 Push-to-Connect Fittings</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/Ximimark-Sensor-Horizontal-Switch-Arduino/dp/B0B7WPBPBC/">3 pc Water Level Sensor</a></th><td>Check reservoir fluid level</td><td class="n">$9.53</td><td class="n">1</td><td class="n">$9.53</td><td>Delivered 11/8</td></tr>
+                  <tr class="desc"><td colspan="6">Ximimark 3 pc Water Level Sensor Horizontal PP Side Mount Float Switch for Tank Pool Arduino</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/GREDIA-Connect-Food-Grade-Flowmeter-Counter/dp/B07RD4JXLY/">Flow Rate Sensor</a></th><td>Measure flow rate per row</td><td class="n">$17.62</td><td class="n">1</td><td class="n">$17.62</td><td>Pack of 2. Delivered 11/9</td></tr>
+                  <tr class="desc"><td colspan="6">1/4&quot; Quick Connect Water Flow Sensor Food-Grade Switch Hall Effect Flowmeter Fluid Meter Counter 0.3-6L/min (Pack of 2)</td></tr>
+                  <tr class="main"><th scope="row"><a href="https://www.amazon.com/DIGITEN-Solenoid-Connect-normally-Closed/dp/B016MP1HX0/">Normally Closed 1/4&quot; Valve</a></th><td>Allow water to flow for the plan</td><td class="n">$7.94</td><td class="n">6</td><td class="n">$47.64</td><td>6 bought: 2 delivered 11/8, and 4 delivered 11/18 ($31.76 order). The first 2 are priced the same, assumed</td></tr>
+                  <tr class="desc"><td colspan="6">DC 12V 1/4&quot; Inlet Feed Water Solenoid Valve Quick Connect N/C normally Closed</td></tr>
+                  <tr class="main"><th scope="row">PLA</th><td>Plant pods</td><td class="n">$29.67</td><td class="n">1</td><td class="n">$29.67</td><td>Arriving 11/23. $27.99 before tax</td></tr>
+                  <tr class="desc"><td colspan="6">OVV3D Wood PLA Filament 1.75mm, White Oakwood, more than 30% real wood fiber, matte and frosted, 1kg</td></tr>
+                  <tr class="main"><th scope="row">LED for the plants to grow</th><td>Plant lighting</td><td class="n">$10.59</td><td class="n">1</td><td class="n">$10.59</td><td>Delivered 11/18</td></tr>
+                  <tr class="desc"><td colspan="6">Grow Light Strip, waterproof, full spectrum, white and red, 120 LEDs, with auto ON/OFF timer</td></tr>
+                  <tr class="main"><th scope="row">Capacitive soil moisture sensors</th><td>Measure soil humidity</td><td class="n">$12.71</td><td class="n">1</td><td class="n">$12.71</td><td>Pack of 10. Replaces the resistive hygrometers. Delivered 11/19</td></tr>
+                  <tr class="desc"><td colspan="6">AITRIP 10 Pack Capacitive Soil Moisture Sensor, Corrosion Resistant, for Arduino Moisture Detection</td></tr>
+                  <tr class="main"><th scope="row">Solder wire</th><td>Soldering</td><td class="n">$5.08</td><td class="n">1</td><td class="n">$5.08</td><td>Delivered 11/22</td></tr>
+                  <tr class="desc"><td colspan="6">Acual Solder Wire, Lead Free, Rosin Core Flux, 1mm, Sn99 Ag0.3 Cu0.7</td></tr>
+                  <tr class="main"><th scope="row">Soldering iron kit</th><td>Soldering</td><td class="n">$10.58</td><td class="n">1</td><td class="n">$10.58</td><td>Delivered 11/18</td></tr>
+                  <tr class="desc"><td colspan="6">Soldering Iron Kit, 80W 110V, Fast Heat up, LCD Digital Adjustable Temperature</td></tr>
+                  <tr class="main"><th scope="row">Crimp connectors and terminals kit</th><td>Wire connections</td><td class="n">$5.29</td><td class="n">1</td><td class="n">$5.29</td><td>Delivered 11/17</td></tr>
+                  <tr class="desc"><td colspan="6">260PCS Crimp Connectors and Terminals Kit, Heat Shrink, Assorted Full Insulated Wire Insulated Electrical Connector, Spade Ring Fork</td></tr>
+                  <tr class="main"><th scope="row">1N4007 diodes</th><td>Diodes for the MOSFET circuits</td><td class="n">$4.34</td><td class="n">1</td><td class="n">$4.34</td><td>Pack of 20. Delivered 11/17</td></tr>
+                  <tr class="desc"><td colspan="6">Gratux Diode 1N4007 DO-41 Axial Guard Junction Standard Rectifier</td></tr>
+                  <tr class="main"><th scope="row">Perf boards and jumper wires</th><td>Protoboards and breadboard connections</td><td class="n">$15.56</td><td class="n">1</td><td class="n">$15.56</td><td>One order, two items. Delivered 11/14</td></tr>
+                  <tr class="desc"><td colspan="6">QSYZAIL 54 Pcs Double Sided PCB Perf Board Kit in 5 Sizes. VIBICCK 120pcs Multicolored Dupont Wire Breadboard Jumper Ribbon Cables, 40pin Male to Female, 40pin M/M, 40pin F/F</td></tr>
+                  <tr class="main"><th scope="row">22 AWG solid wire kit</th><td>Wiring</td><td class="n">$17.16</td><td class="n">1</td><td class="n">$17.16</td><td>6 colors. Delivered 11/8</td></tr>
+                  <tr class="desc"><td colspan="6">TUOFENG 22 AWG Solid Wire Kit, 6 Colors, 30 ft Each, Tinned Copper</td></tr>
+                  <tr class="main"><th scope="row">22 AWG wire, black</th><td>Wiring</td><td class="n">$6.56</td><td class="n">1</td><td class="n">$6.56</td><td>Arriving 11/23. $6.19 before tax</td></tr>
+                  <tr class="desc"><td colspan="6">22 AWG Solid Copper Wire, 100ft Black UL1007 Tinned Hookup Wire Spool</td></tr>
+                  <tr class="main"><th scope="row">22 AWG wire, red</th><td>Wiring</td><td class="n">$7.20</td><td class="n">1</td><td class="n">$7.20</td><td>Arriving 11/23. $6.79 before tax</td></tr>
+                  <tr class="desc"><td colspan="6">22 AWG Solid Copper Hookup Wire, 100 ft Red Spool, UL1007 PVC Insulated</td></tr>
+                  <tr class="main"><th scope="row">Wire harness tape</th><td>Wiring harness</td><td class="n">$6.35</td><td class="n">1</td><td class="n">$6.35</td><td>Delivered 11/8</td></tr>
+                  <tr class="desc"><td colspan="6">High Temp Wire Harness Tape, 2 Rolls, 100 FT, Automotive Wire Loom Tape, polyester cloth, hand-tearable</td></tr>
+                  <tr class="main"><th scope="row">12 AWG wire, red and black</th><td>Wiring</td><td class="n">$10.59</td><td class="n">1</td><td class="n">$10.59</td><td>Delivered 11/8</td></tr>
+                  <tr class="desc"><td colspan="6">25FT Electrical Wire, 2 Pack, 12 Gauge, Red and Black, 12AWG CCA, 12V/24V DC Cable, Low Voltage PVC, Copper Clad Aluminum</td></tr>
+                  <tr class="main"><th scope="row">M4 screws</th><td>HMI enclosure</td><td class="n">$2.32</td><td class="n">1</td><td class="n">$2.32</td><td>Pack of 80. Delivered 11/17</td></tr>
+                  <tr class="desc"><td colspan="6">Virello 80Pcs M4x8mm Phillips Flat Head Screws, Stainless Steel Machine Screws</td></tr>
+                </tbody>
+                <tfoot><tr><th scope="row" colspan="4">Total, rows listed</th><td class="n">$264.44</td><td></td></tr></tfoot>
               </table>
             </div>
           </section>
@@ -819,14 +1060,10 @@ img.zoomable { cursor: zoom-in; }
             <span class="eyebrow">Phase 3</span>
             <h3>Execution</h3>
             <p class="lead">The build itself: requirements and a dated journal.</p>
+            <script>(function(){var a=document.getElementById('c0-abom'),s=document.currentScript;if(a&&s&&s.parentNode)s.parentNode.insertBefore(a,s);})();</script>
             <section class="part" id="c0-regs">
 <h4>Requirements</h4>
 <h5 class="rh">System: Plant Wall</h5><div class="label">Main Plant Wall System Requirements</div><ul class="list"><li class="rq"><span class="id">rSys1</span><div>Limited user inputs needed<ul class="list" style="margin-top:8px"><li>Plant the plant in the Plant Pod, connect the hygrometer wire</li><li>Plant Pod simple to move from one Plant Row to another</li><li>Select how much water, and, light(TBD), feed time</li><li>Fill the water reservoir when LED flashes for it</li><li>Empty the drip tray if needed</li></ul></div></li><li class="rq"><span class="id">rSys2</span><div>Safety: if the power goes out, water doesn’t flow</div></li><li class="rq"><span class="id">rSys3</span><div>Prove out with 2 rows, 3 plant pods</div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSys4</span><div>Visual: I want it to physically look good</div></li><li class="rq"><span class="id">rSys5</span><div>Lights per pod with proper control loops and light guiding</div></li><li class="rq"><span class="id">rSys6</span><div>5 plants per row</div></li><li class="rq"><span class="id">rSys7</span><div>Water tank to feed for minimum of 1 week with full fill</div></li></ul><h5 class="rh">Sub-System: Mechanical</h5><div class="label">Main Mechanical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rMech1</span><div>Use of common hardware for ease of repair</div></li><li class="rq"><span class="id">rMech2</span><div>Valves to be normally closed to limit power draw, or allow water though when power loss</div></li><li class="rq"><span class="id">rMech3</span><div>Easy refill option</div></li><li class="rq"><span class="id">rMech4</span><div>Pod install/uninstall to be quick and easy</div></li></ul><div class="label">Future Requirements</div><ul class="list"><li class="rq"><span class="id">rMech5</span><div>Adjustable height for the plant row to accommodate different sized plants</div></li><li class="rq"><span class="id">rMech6</span><div>Look good</div></li></ul><h5 class="rh">Sub-System: Electrical</h5><div class="label">Main Electrical Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rElec1</span><div>12V power for valves</div></li><li class="rq"><span class="id">rElec2</span><div>12V power for pump</div></li><li class="rq"><span class="id">rElec3</span><div>3.3-12V power for Hygrometers</div></li><li class="rq"><span class="id">rElec4</span><div>5-24V for flow meter</div></li><li class="rq"><span class="id">rElec5</span><div>HMI<ul class="list" style="margin-top:8px"><li>Clock using 4 digit 7 segment display</li><li>LCD display for user interaction</li><li>D-pad or Analog stick for user control</li><li>2x buttons for user control</li></ul></div></li></ul><div class="label">Future Requirements</div><p class="faintp">None listed yet.</p><h5 class="rh">Sub-System: Software</h5><div class="label">Main Software Subsystem Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw1</span><div>Built in RUST</div></li><li class="rq"><span class="id">rSw2</span><div>Control row lights based on timer for prove out project</div></li><li class="rq"><span class="id">rSw3</span><div>Control loop from Hygrometer:<ul class="list" style="margin-top:8px"><li>Control pump for water flow</li><li>Control valves for individual plant pod control</li><li>Flow rate input for modeling and knowledge of water amount - removes need for valves at every row</li><li>Hygrometer input for soil humidity level</li></ul></div></li><li class="rq"><span class="id">rSw4</span><div>HMI:<ul class="list" style="margin-top:8px"><li>Settings are able to be saved</li><li>Select watering amount</li><li>Select lighting, in time</li><li>Current time shown</li><li>Selectable time of day to water</li></ul></div></li></ul><div class="label">Future Requirements:</div><ul class="list"><li class="rq"><span class="id">rSw5</span><div>Selectable profiles for the type of plant it is</div></li><li class="rq"><span class="id">rSw6</span><div>Control loop for lighting with sensor for lighting amount</div></li></ul>
-</section>
-            <section class="part" id="c0-regs-link">
-<h4>Requirements</h4>
-<p class="lead">The requirements are now in the Initiation phase, so they sit with the goals they come from.</p>
-<p style="margin-top: 16px"><a href="#c0-regs">Open the Requirements</a></p>
 </section>
             <section class="part" id="c0-abom">
             <h4>aBOM</h4>
@@ -863,6 +1100,7 @@ img.zoomable { cursor: zoom-in; }
                 <li class="entry has-img" id="j-2026-11-19"><div class="eb"><time datetime="2026-11-19">11/19/2026</time><h4>Electrical</h4><ul class="list"><li>HMI PCB failing, power issues, analog stick not cycling properly</li><li>Analog stick still contacting with case</li><li>Fixed<ul class="list" style="margin-top: 6px"><li>2 pins broken</li><li>2 solder joints bad</li><li>LED burned out while testing</li><li>Connector added for LED</li></ul></li><li>Put HMI enclosure together and melted shut. Considered complete for prove out section of project!</li><li>Added calibration to long-press menu, to place each sensor for each plant in a low and high humidity reading pot to calibrate it</li><li>Updated sensor logic to use new capacitive sensors - voltage at all time instead of for 100ms<ul class="list" style="margin-top: 6px"><li>Removed MOSFETs, and moved to 5V</li></ul></li><li>Updating wiring due to sensor presence logic</li><li>Analog stick has serious drift, so the relearn menu has added functionality to measure the static offsets and save them.<ul class="list" style="margin-top: 6px"><li>Turns out it was a wiring issue, but at least I have the logic now</li></ul></li><li>Tested moisture sensors with dry and wet plant pots to calibrate</li></ul></div><figure class="ef"><img src="journal-1119-calibration.jpg" width="722" height="959" alt="A dried out potted plant with a capacitive moisture sensor in the soil, wired to the HMI enclosure whose LCD shows the sensor readings, with the STM32 and breadboards behind." loading="lazy"></figure></li>
                 <li class="entry has-img" id="j-2026-11-20"><div class="eb"><time datetime="2026-11-20">11/20/2026</time><h4>Electrical</h4><ul class="list"><li>Electrical schematic for entire project being worked on in KiCad</li><li>Created final wiring harness for the soil moisture sensors</li></ul></div><figure class="ef"><img src="journal-1120-desk.jpg" width="1274" height="959" alt="A desk with two monitors showing code and the KiCad schematic, wire spools, a wiring harness and a multimeter in front, and a person working at the bench in the background." loading="lazy"></figure></li>
                 <li class="entry has-img" id="j-2026-11-21"><div class="eb"><time datetime="2026-11-21">11/21/2026</time><ul class="list" style="margin-top: 10px"><li>Electrical Schematic V1 completed</li><li>Created LED wiring harness</li><li>Control loop logic - Settling on PID (PI) for control using PWM for the motor control though the MOSFET, with intended testing of lower voltages based on the flow rate</li><li>New issue: joystick should be 3.3V not 5V. Protoboard created is only running the 5V, so I'll need to add 3.3 input and fix the soldered connections. Bummer<ul class="list" style="margin-top: 6px"><li>At least there is an open pin in the connector, since I'm using only 8 of the 9. Should be an easy fix</li></ul></li><li>Implemented initial PID control - calculates in the evaluate state, runs the pumps and valves in the Active state</li><li>Implemented states: Standby, Evaluate, Active - PreControl, Active - Flow Active, Slowdown, and Hold</li></ul></div><figure class="ef"><img src="journal-1121-full-schematic.png" width="1683" height="1185" alt="KiCad schematic of the entire plant wall project, V1: six plant pod blocks (R1P1 to R2P3) each with a grow light and valve driven through MOSFETs, the HMI, the STM32 Nucleo F446, the soil moisture sensor inputs, the power supply and the water reservoir with the pump and level sensor." loading="lazy"></figure></li>
+                <li class="entry has-img" id="j-2026-11-22"><div class="eb"><time datetime="2026-11-22">11/22/2026</time><h4>Electrical, Software, Testing</h4><ul class="list"><li>Rewired HMI PCB to add 3.3V wire</li><li>Added 9th pin to HMI harness - analog working predictably and consistently!</li><li>Added 100ohm resistors to the MOSFET circuits for the valves and motors as a precaution (and since I may be running PWM controls for one or the other)</li><li>Added flow rate sensor to diagram w/ pull up resistor</li><li>Started PCB protoboard creation for the main board, housing the STM32.</li><li>Added Claude code to VS Code, learned how to use it on the terminal, and set it to work with my GitHub</li><li>Used Claude to create initial unit tests for the system to run each committed change. Practicing building strong software fundamentals.</li></ul></div><figure class="ef"><img src="journal-1122-protoboards-2.gif" width="540" height="720" alt="Building the main board protoboards for the STM32: headers soldered on, the Nucleo seated on top, and the HMI harness wired to the boards." loading="lazy"><img src="journal-1122-desk.jpg" width="1274" height="959" alt="Overhead view of the desk during the build: the HMI enclosure and wiring harness, the two main board protoboards, a soldering iron, wire spools, crimpers and parts bins." loading="lazy"></figure></li>
               </ol>
             </section>
           </article>
@@ -871,14 +1109,14 @@ img.zoomable { cursor: zoom-in; }
             <span class="eyebrow">Phase 4</span>
             <h3>Monitoring & Control</h3>
             <p class="lead">Checking the work against the requirements.</p>
-            <p class="lead">Nothing here yet. Test results and checks against the requirements will be added here.</p>
+            <p class="lead">The requirements and their progress. Test results and checks against them will be added here.</p>
           </article>
 
           <article class="chapter" id="c0-close" data-chapter>
             <span class="eyebrow">Phase 5</span>
             <h3>Closure</h3>
             <p class="lead">Wrap-up, results and lessons learned.</p>
-            <p class="lead">Not started. The wrap-up, final results and lessons learned will be added here.</p>
+            <p style="margin-top: 20px">The summary and the roadblocks are at the top of this page: <a href="#c0-summary">Summary</a> · <a href="#c0-first">Roadblocks</a>.</p>
           </article>
         </div>
       </div>
@@ -923,10 +1161,10 @@ img.zoomable { cursor: zoom-in; }
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c1-init"><a href="#c1-init">Initiation</a><div class="sub"><a href="#c1-intro" data-sub="c1-intro">Intro</a><a href="#c1-idea" data-sub="c1-idea">The idea</a><a href="#c1-req" data-sub="c1-req">Requirements</a></div></li>
+            <li data-rail="c1-init"><a href="#c1-init">Initiation</a><div class="sub"><a href="#c1-intro" data-sub="c1-intro">Intro</a><a href="#c1-idea" data-sub="c1-idea">The idea</a></div></li>
             <li data-rail="c1-plan"><a href="#c1-plan">Planning</a><div class="sub"><a href="#c1-board" data-sub="c1-board">Kanban board</a><a href="#c1-mule" data-sub="c1-mule">The donor phone</a><a href="#c1-parts" data-sub="c1-parts">Parts and cost</a><a href="#c1-recovery" data-sub="c1-recovery">Recovery and references</a><a href="#c1-next" data-sub="c1-next">What is next</a></div></li>
             <li data-rail="c1-exec"><a href="#c1-exec">Execution</a><div class="sub"><a href="#c1-teardown" data-sub="c1-teardown">Teardown</a><a href="#c1-software" data-sub="c1-software">Outer screen software</a><a href="#c1-body" data-sub="c1-body">Body design</a></div></li>
-            <li data-rail="c1-mc"><a href="#c1-mc">Monitoring & Control</a></li>
+            <li data-rail="c1-mc"><a href="#c1-mc">Monitoring & Control</a><div class="sub"><a href="#c1-req" data-sub="c1-req">Requirements</a></div></li>
             <li data-rail="c1-close"><a href="#c1-close">Closure</a></li>
           </ol>
         </aside>
@@ -1323,10 +1561,10 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         <aside class="rail" aria-label="Project phases">
           <div class="rt">Phases</div>
           <ol>
-            <li data-rail="c2-init"><a href="#c2-init">Initiation</a><div class="sub"><a href="#c2-req" data-sub="c2-req">Requirements</a></div></li>
+            <li data-rail="c2-init"><a href="#c2-init">Initiation</a></li>
             <li data-rail="c2-plan"><a href="#c2-plan">Planning</a><div class="sub"><a href="#c2-board" data-sub="c2-board">Kanban board</a><a href="#c2-data" data-sub="c2-data">Base map data</a><a href="#c2-miss" data-sub="c2-miss">Missions</a><a href="#c2-dil" data-sub="c2-dil">Driver-in-the-loop plan</a></div></li>
             <li data-rail="c2-exec"><a href="#c2-exec">Execution</a><div class="sub"><a href="#c2-edit" data-sub="c2-edit">Editing the base map</a><a href="#c2-build" data-sub="c2-build">Terrain and environment</a><a href="#c2-spawn" data-sub="c2-spawn">Spawn points</a></div></li>
-            <li data-rail="c2-mc"><a href="#c2-mc">Monitoring & Control</a></li>
+            <li data-rail="c2-mc"><a href="#c2-mc">Monitoring & Control</a><div class="sub"><a href="#c2-req" data-sub="c2-req">Requirements</a></div></li>
             <li data-rail="c2-close"><a href="#c2-close">Closure</a></li>
           </ol>
         </aside>
@@ -1625,7 +1863,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
             <span class="eyebrow">Phase 4</span>
             <h3>Monitoring & Control</h3>
             <p class="lead">Checking the work against the requirements.</p>
-            <p class="lead">Nothing here yet. Test results and checks against the requirements will be added here.</p>
+            <p class="lead">The requirements and their progress. Test results and checks against them will be added here.</p>
           </article>
 
           <article class="chapter" id="c2-close" data-chapter>
@@ -1853,27 +2091,15 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
 
 <script>
 (function () {
-  /* requirements live in Initiation; Execution keeps a link to them */
-  var regs = document.getElementById('c0-regs'), goals = document.getElementById('c0-goals');
-  if (regs && goals) goals.parentNode.insertBefore(regs, goals.nextSibling);
+  /* requirements live in Monitoring & Control */
+  [['c0-regs', 'c0-mc'], ['c1-req', 'c1-mc'], ['c2-req', 'c2-mc']].forEach(function (m) {
+    var s = document.getElementById(m[0]), host = document.getElementById(m[1]);
+    if (s && host) host.appendChild(s);
+  });
+  /* resources close out Initiation */
+  var res = document.getElementById('c0-res'), initCh = document.getElementById('c0-init');
+  if (res && initCh) initCh.appendChild(res);
 
-  /* flip the process order: Closure first, Initiation last (phase numbers stay as they are) */
-  var conts = document.querySelectorAll('.content');
-  for (var q = 0; q < conts.length; q++) {
-    var chs = Array.prototype.filter.call(conts[q].children, function (x) { return x.hasAttribute('data-chapter'); });
-    if (chs.length < 2) continue;
-    var anchorNext = chs[chs.length - 1].nextSibling;
-    chs.forEach(function (x, k) { x._ord = k; });
-    chs.slice().reverse().forEach(function (x) { conts[q].insertBefore(x, anchorNext); });
-  }
-  var rails = document.querySelectorAll('.rail ol');
-  for (var r = 0; r < rails.length; r++) {
-    var lis = Array.prototype.filter.call(rails[r].children, function (x) { return x.hasAttribute('data-rail'); });
-    if (lis.length < 2) continue;
-    var aN = lis[lis.length - 1].nextSibling;
-    lis.forEach(function (x, k) { x._ord = k; });
-    lis.slice().reverse().forEach(function (x) { rails[r].insertBefore(x, aN); });
-  }
   function syncDone() {
     var view = document.querySelector('[data-view]:not([hidden])');
     if (!view) return;
@@ -1907,7 +2133,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
   function makeBar() {
     var el = document.createElement('div');
     el.className = 'pbar';
-    el.innerHTML = '<button type="button" class="pprev" aria-label="Previous page">&larr;</button><span class="pcount" aria-live="polite"></span><button type="button" class="pnext" aria-label="Next page">&rarr;</button>';
+    el.innerHTML = '<span class="pcount" aria-live="polite"></span>';
     return el;
   }
 
@@ -1918,17 +2144,22 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
     track.parentNode.insertBefore(pager, track);
     var wrap = document.createElement('div');
     wrap.className = 'pg-wrap';
-    var top = makeBar(), bottom = makeBar();
+    var top = makeBar();
     var edge = document.createElement('button');
     edge.type = 'button';
     edge.className = 'pedge';
     edge.setAttribute('aria-label', 'Next page');
     edge.innerHTML = '&rarr;';
+    var edgeL = document.createElement('button');
+    edgeL.type = 'button';
+    edgeL.className = 'pedge pedge-l';
+    edgeL.setAttribute('aria-label', 'Previous page');
+    edgeL.innerHTML = '&larr;';
     pager.appendChild(top);
     pager.appendChild(wrap);
     wrap.appendChild(track);
     wrap.appendChild(edge);
-    pager.appendChild(bottom);
+    wrap.appendChild(edgeL);
     P.pager = pager;
     track.classList.add('pg-track');
     track.tabIndex = 0;
@@ -1940,6 +2171,14 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       var h = pages[P.i].offsetHeight;
       if (h) track.style.height = h + 'px';
     }
+    function place() {
+      var r = wrap.getBoundingClientRect();
+      if (!r.height || r.bottom < 0 || r.top > window.innerHeight) return;
+      var h = edge.offsetHeight || 96;
+      var vt = Math.max(r.top, 100), vb = Math.min(r.bottom, window.innerHeight);
+      var y = Math.max(0, Math.min(r.height - h, (vt + vb) / 2 - r.top - h / 2));
+
+    }
     function paint() {
       var n = pages.length;
       pages.forEach(function (p, k) {
@@ -1948,19 +2187,17 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         if (!on) { var vs = p.querySelectorAll('video'); for (var v = 0; v < vs.length; v++) vs[v].pause(); }
       });
       var label = '<b>' + titleOf(pages[P.i]) + '</b>' + (P.i + 1) + ' / ' + n;
-      [top, bottom].forEach(function (b) {
-        b.querySelector('.pcount').innerHTML = label;
-        b.querySelector('.pprev').disabled = P.i === 0;
-        b.querySelector('.pnext').disabled = P.i === n - 1;
-      });
+      top.querySelector('.pcount').innerHTML = label;
       edge.hidden = P.i === n - 1;
+      edgeL.hidden = P.i === 0;
+      place();
       fit();
       syncRail();
     }
     function go(i, how) {
       i = Math.max(0, Math.min(pages.length - 1, i));
       P.i = i;
-      track.scrollTo({ left: pages[i].offsetLeft, behavior: how === 'smooth' && !reduce ? 'smooth' : 'instant' });
+      track.scrollTo({ left: pages[i].offsetLeft - pages[0].offsetLeft, behavior: how === 'smooth' && !reduce ? 'smooth' : 'instant' });
       paint();
     }
     function user(i) {
@@ -1974,15 +2211,14 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
       go(idx == null ? P.start : idx, 'instant');
       return true;
     }
-    P.start = pages.length && pages[0].classList.contains('entry') ? pages.length - 1 : 0;
+    P.start = 0;
+    if (pages.length && pages[0].classList.contains('entry')) track.classList.add('pg-both');
     P.go = go;
     P.init = init;
 
-    top.querySelector('.pprev').addEventListener('click', function () { user(P.i - 1); });
-    top.querySelector('.pnext').addEventListener('click', function () { user(P.i + 1); });
-    bottom.querySelector('.pprev').addEventListener('click', function () { user(P.i - 1); });
-    bottom.querySelector('.pnext').addEventListener('click', function () { user(P.i + 1); });
     edge.addEventListener('click', function () { user(P.i + 1); });
+    edgeL.addEventListener('click', function () { user(P.i - 1); });
+    P.place = place;
 
     track.addEventListener('click', function (e) {
       var pg = e.target.closest ? e.target.closest('.pg-page') : null;
@@ -2005,7 +2241,7 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
         sTick = false;
         var best = 0, bd = 1e9;
         for (var k = 0; k < pages.length; k++) {
-          var d = Math.abs(pages[k].offsetLeft - track.scrollLeft);
+          var d = Math.abs(pages[k].offsetLeft - pages[0].offsetLeft - track.scrollLeft);
           if (d < bd) { bd = d; best = k; }
         }
         if (best !== P.i) { P.i = best; paint(); }
@@ -2080,7 +2316,241 @@ for /f "tokens=2 delims=:" %P in ('adb shell pm list packages -3') do adb shell 
   }
   window.addEventListener('hashchange', openHash);
   window.addEventListener('scroll', function () { requestAnimationFrame(syncRail); }, { passive: true });
+  function placeAll() { for (var z = 0; z < pagers.length; z++) pagers[z].place(); }
+  window.addEventListener('scroll', function () { requestAnimationFrame(placeAll); }, { passive: true });
+  window.addEventListener('resize', placeAll);
   openHash();
+})();
+</script>
+
+<script>
+(function () {
+  /* learning path: date header */
+  var grid = document.querySelector('.lgrid');
+  if (grid) {
+    var from = +grid.getAttribute('data-from'), to = +grid.getAttribute('data-to');
+    var lh = document.createElement('div');
+    lh.className = 'lh'; lh.style.gridRow = '1'; lh.style.gridColumn = '1'; lh.textContent = 'Nov 2026';
+    grid.insertBefore(lh, grid.firstChild);
+    for (var d = from; d <= to; d++) {
+      var c = document.createElement('div');
+      c.className = 'ld'; c.style.gridRow = '1'; c.style.gridColumn = String(d); c.textContent = String(d);
+      grid.insertBefore(c, grid.children[1]);
+    }
+  }
+
+  /* journal: discipline tags (same color = same discipline) and a proportional day strip */
+  var DISC = [
+    ['sy', 'Systems', /requirements|system:/i],
+    ['sw', 'Software', /\bSW\b|software|rust|\(C[,)]/i],
+    ['ctl', 'Controls', /control/i],
+    ['el', 'Electrical', /electrical|pcb/i],
+    ['me', 'Mechanical', /mechanical|enclosure/i]
+  ];
+  var logs = document.querySelectorAll('ol.entries');
+  for (var l = 0; l < logs.length; l++) {
+    var ol = logs[l];
+    var ents = Array.prototype.filter.call(ol.children, function (x) { return x.classList.contains('entry'); });
+    if (!ents.length) continue;
+    var used = {};
+    var prim = [];
+    ents.forEach(function (en, k) {
+      var h = en.querySelector('h4'), txt = h ? h.textContent : '';
+      var hits = DISC.filter(function (x) { return x[2].test(txt); });
+      prim[k] = hits.length ? hits[0][0] : '';
+      var time = en.querySelector('time');
+      if (hits.length && time && !en.querySelector('.dtags')) {
+        var box = document.createElement('div');
+        box.className = 'dtags';
+        hits.forEach(function (x) {
+          used[x[0]] = x[1];
+          var s = document.createElement('span');
+          s.className = 'dtag d-' + x[0]; s.textContent = x[1];
+          box.appendChild(s);
+        });
+        time.insertAdjacentElement('afterend', box);
+      }
+    });
+    var pager = ol.closest('.pager');
+    if (!pager) continue;
+    var legend = document.createElement('div');
+    legend.className = 'dlegend';
+    DISC.forEach(function (x) {
+      if (!used[x[0]]) return;
+      var s = document.createElement('span');
+      s.className = 'dtag d-' + x[0]; s.textContent = x[1];
+      legend.appendChild(s);
+    });
+    pager.parentNode.insertBefore(legend, pager);
+    if (ents.length < 2) continue;
+
+    var times = ents.map(function (en) {
+      var m = /j-(\d+)-(\d+)-(\d+)/.exec(en.id || '');
+      return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN;
+    });
+    if (times.some(function (t) { return isNaN(t); })) continue;
+    var t0 = times[0], t1 = times[times.length - 1], span = Math.max(1, t1 - t0);
+    var strip = document.createElement('div');
+    strip.className = 'jstrip';
+    strip.innerHTML = '<div class="jline"></div><div class="jtrack"></div>';
+    var track = strip.querySelector('.jtrack');
+    var dots = ents.map(function (en, k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'jdot' + (prim[k] ? ' d-' + prim[k] : '');
+      b.style.left = ((times[k] - t0) / span * 100) + '%';
+      var tm = en.querySelector('time');
+      b.title = tm ? tm.textContent : '';
+      b.setAttribute('aria-label', 'Go to ' + b.title);
+      b.addEventListener('click', function () { if (en._P) en._P.go(en._P.pages.indexOf(en), 'smooth'); });
+      track.appendChild(b);
+      return b;
+    });
+    [[0, 'left'], [ents.length - 1, 'right']].forEach(function (x) {
+      var e = document.createElement('span');
+      e.className = 'jend'; e.style[x[1]] = '0';
+      var tm = ents[x[0]].querySelector('time');
+      e.textContent = tm ? tm.textContent.replace(/\/\d{4}$/, '') : '';
+      strip.appendChild(e);
+    });
+    var wrap = pager.querySelector('.pg-wrap');
+    pager.insertBefore(strip, wrap);
+    var sync = function () {
+      for (var k = 0; k < ents.length; k++) dots[k].classList.toggle('on', ents[k].classList.contains('on'));
+    };
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(sync);
+      ents.forEach(function (en) { mo.observe(en, { attributes: true, attributeFilter: ['class'] }); });
+    }
+    sync();
+  }
+})();
+</script>
+
+<script>
+(function () {
+  /* intro rail: highlight the block being read */
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-irail]'));
+  if (!items.length) return;
+  var grid = document.getElementById('c0-intro-top');
+  function sync() {
+    var view = grid && grid.closest('[data-view]');
+    if (!view || view.hidden) return;
+    var r = grid.getBoundingClientRect();
+    var inside = r.top <= 180 && r.bottom > 120;
+    var act = -1;
+    items.forEach(function (li, k) {
+      var el = document.getElementById(li.getAttribute('data-irail'));
+      if (el && el.getBoundingClientRect().top <= 180) act = k;
+    });
+    items.forEach(function (li, k) {
+      li.classList.toggle('active', inside && k === act);
+      li.classList.toggle('done', r.top <= 180 && (r.bottom <= 120 || k < act));
+    });
+  }
+  var tick = false;
+  function onS() { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; sync(); }); }
+  window.addEventListener('scroll', onS, { passive: true });
+  window.addEventListener('resize', onS);
+  window.addEventListener('hashchange', onS);
+  sync();
+})();
+</script>
+
+<script>
+(function () {
+  /* Requirement tracking. When the requirements are linked to GitHub, fill this in, for example:
+     'rSys1': { status: 'In progress', url: 'https://github.com/amirahmani/Plant_Wall/issues/19' }
+     status is 'Not started', 'In progress' or 'Verified'. */
+  var REQ = {};
+  var SYM = { 'Not started': ['○', ''], 'In progress': ['◐', 'st-ip'], 'Verified': ['●', 'st-ok'] };
+  ['c0-regs', 'c1-req', 'c2-req'].forEach(function (sid) {
+    var sec = document.getElementById(sid);
+    if (!sec) return;
+    var items = Array.prototype.filter.call(sec.querySelectorAll('li.rq, ul.reqs > li'), function (li) {
+      return li.querySelector(':scope > .id') && li.children[1];
+    });
+    if (!items.length) return;
+    var cnt = { 'Verified': 0, 'In progress': 0, 'Not started': 0, none: 0 };
+    items.forEach(function (li) {
+      var id = li.querySelector(':scope > .id').textContent.trim();
+      var info = REQ[id] || {};
+      var st = SYM[info.status] ? info.status : null;
+      cnt[st || 'none']++;
+      var box = document.createElement('span');
+      box.className = 'rtrack';
+      var chip = document.createElement('span');
+      chip.className = 'st' + (st ? ' ' + SYM[st][1] : '');
+      chip.textContent = st ? SYM[st][0] + ' ' + st : 'Status: not tracked yet';
+      box.appendChild(chip);
+      if (info.url) {
+        var a = document.createElement('a');
+        a.href = info.url; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = 'GitHub issue ↗';
+        box.appendChild(a);
+      } else {
+        var n = document.createElement('span');
+        n.textContent = 'GitHub: not linked yet';
+        box.appendChild(n);
+      }
+      li.children[1].appendChild(box);
+    });
+    var tot = items.length;
+    var pOk = cnt['Verified'] / tot * 100, pIp = cnt['In progress'] / tot * 100;
+    var prog = document.createElement('div');
+    prog.className = 'rprog';
+    prog.innerHTML = '<div class="rbar" role="img" aria-label="Requirement progress"><i class="b-ok" style="width:' + pOk + '%"></i><i class="b-ip" style="width:' + pIp + '%"></i></div>' +
+      '<div class="rtxt">Verified ' + cnt['Verified'] + ' / ' + tot + ' · In progress ' + cnt['In progress'] + ' · Not started ' + cnt['Not started'] + ' · Not tracked yet ' + cnt.none + '</div>' +
+      '<p>Status and GitHub links will be added when these requirements are linked to GitHub.</p>';
+    var h = sec.querySelector(':scope > h4');
+    if (h) h.insertAdjacentElement('afterend', prog);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  /* eBOM: running total above the table, recomputed from the Total column */
+  var tbl = document.querySelector('#c0-abom table.bomtable');
+  if (!tbl) return;
+  var cents = 0, rows = 0;
+  Array.prototype.forEach.call(tbl.querySelectorAll('tbody tr.main'), function (tr) {
+    var n = tr.querySelectorAll('td.n');
+    if (n.length < 3) return;
+    var v = parseFloat(n[2].textContent.replace(/[^0-9.\-]/g, ''));
+    if (!isNaN(v)) { cents += Math.round(v * 100); rows++; }
+  });
+  var txt = '$' + (cents / 100).toFixed(2);
+  var foot = tbl.querySelector('tfoot td.n');
+  if (foot) foot.textContent = txt;
+  var box = document.createElement('div');
+  box.className = 'bomtotal';
+  box.innerHTML = '<span class="k">Running total</span><span class="v">' + txt + '</span><span class="n">cost + tax, ' + rows + ' rows</span>';
+  var wrap = tbl.closest('.scroll-x');
+  if (wrap && wrap.parentNode) wrap.parentNode.insertBefore(box, wrap);
+})();
+</script>
+
+<script>
+(function () {
+  /* eBOM: running total above the table, recomputed from the Total column */
+  var tbl = document.querySelector('#c0-bom table.bomtable');
+  if (!tbl) return;
+  var cents = 0, rows = 0;
+  Array.prototype.forEach.call(tbl.querySelectorAll('tbody tr.main'), function (tr) {
+    var n = tr.querySelectorAll('td.n');
+    if (n.length < 3) return;
+    var v = parseFloat(n[2].textContent.replace(/[^0-9.\-]/g, ''));
+    if (!isNaN(v)) { cents += Math.round(v * 100); rows++; }
+  });
+  var txt = '$' + (cents / 100).toFixed(2);
+  var foot = tbl.querySelector('tfoot td.n');
+  if (foot) foot.textContent = txt;
+  var box = document.createElement('div');
+  box.className = 'bomtotal';
+  box.innerHTML = '<span class="k">Running total</span><span class="v">' + txt + '</span><span class="n">planned cost + tax, ' + rows + ' rows</span>';
+  var wrap = tbl.closest('.scroll-x');
+  if (wrap && wrap.parentNode) wrap.parentNode.insertBefore(box, wrap);
 })();
 </script>
 
